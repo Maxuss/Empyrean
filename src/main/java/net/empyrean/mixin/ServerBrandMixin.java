@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MinecraftServer.class)
 public class ServerBrandMixin {
-    @Inject(method = "getServerModName", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getServerModName", at = @At("RETURN"), cancellable = true, remap = false) // Not remapping since it is not obfuscated
     public void overrideServerModName(CallbackInfoReturnable<String> ret) {
         ret.setReturnValue("Macrocosm (Empyrean)");
     }
