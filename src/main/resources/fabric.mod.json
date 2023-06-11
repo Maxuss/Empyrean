@@ -5,11 +5,11 @@
 	"name": "Empyrean",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"Me!"
+		"maxusdev"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://empyrean.maxus.space",
+		"sources": "https://github.com/Maxuss/Empyrean"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/empyrean/icon.png",
@@ -46,7 +46,8 @@
 		"minecraft": "~1.20",
 		"java": ">=17",
 		"fabric-api": "*",
-		"fabric-language-kotlin": ">=1.8.22"
+		"fabric-language-kotlin": ">=1.8.22",
+		"owo-lib": ">=0.11.0+1.20"
 	},
 	"suggests": {
 		"another-mod": "*"
