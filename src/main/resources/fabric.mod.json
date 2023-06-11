@@ -17,19 +17,19 @@
 	"entrypoints": {
 		"main": [
 			{
-				"value": "net.empyrean.ExampleMod",
+				"value": "net.empyrean.EmpyreanMod",
 				"adapter": "kotlin"
 			}
 		],
 		"client": [
 			{
-				"value": "net.empyrean.ExampleModClient",
+				"value": "net.empyrean.EmpyreanModClient",
 				"adapter": "kotlin"
 			}
 		],
 		"fabric-datagen": [
 			{
-				"value": "net.empyrean.ExampleModDataGenerator",
+				"value": "net.empyrean.EmpyreanModDataGenerator",
 				"adapter": "kotlin"
 			}
 		]
