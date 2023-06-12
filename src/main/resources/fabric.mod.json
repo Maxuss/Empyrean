@@ -32,6 +32,9 @@
 				"value": "net.empyrean.EmpyreanModDataGenerator",
 				"adapter": "kotlin"
 			}
+		],
+		"cardinal-components-entity": [
+			"net.empyrean.components.EmpyreanComponents"
 		]
 	},
 	"mixins": [

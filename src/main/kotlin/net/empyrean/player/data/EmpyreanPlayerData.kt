@@ -6,4 +6,9 @@ import kotlinx.serialization.Serializable
 class EmpyreanPlayerData(
     var currentMana: Float
 ) {
+    companion object {
+        fun default() = EmpyreanPlayerData(
+            currentMana = 0f
+        )
+    }
 }

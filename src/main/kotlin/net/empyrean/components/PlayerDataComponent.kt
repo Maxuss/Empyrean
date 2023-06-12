@@ -4,7 +4,7 @@ import dev.onyxstudios.cca.api.v3.component.Component
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent
 import net.empyrean.nbt.decodeNbt
-import net.empyrean.nbt.encodeNbt
+import net.empyrean.nbt.encodeNbtTo
 import net.empyrean.network.decodePacket
 import net.empyrean.network.encodePacket
 import net.empyrean.player.data.EmpyreanPlayerData
@@ -15,18 +15,22 @@ import net.minecraft.world.entity.player.Player
 
 @Suppress("UnstableApiUsage")
 class PlayerDataComponent(private val provider: Player): PlayerComponent<Component>, AutoSyncedComponent {
-    private var playerData: EmpyreanPlayerData? = null
+    @Suppress("MemberVisibilityCanBePrivate")
+    var playerData: EmpyreanPlayerData = EmpyreanPlayerData.default()
 
     override fun readFromNbt(tag: CompoundTag) {
-        playerData = decodeNbt(tag.getCompound("Empyrean"))
+        if(tag.isEmpty)
+            return // migration support
+        playerData = decodeNbt(tag)
     }
 
     override fun writeToNbt(tag: CompoundTag) {
-        tag.put("Empyrean", encodeNbt(playerData))
+        encodeNbtTo(playerData, tag)
     }
 
     override fun writeSyncPacket(buf: FriendlyByteBuf, recipient: ServerPlayer?) {
-        encodePacket(this, buf)
+        println("WRITING SYNC PACKET")
+        encodePacket(playerData, buf)
     }
 
     override fun applySyncPacket(buf: FriendlyByteBuf) {

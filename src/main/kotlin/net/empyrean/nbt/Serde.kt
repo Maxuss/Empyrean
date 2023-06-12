@@ -25,12 +25,19 @@ fun <T> encodeNbt(serializer: SerializationStrategy<T>, value: T): CompoundTag {
     return encoder.out.finish()
 }
 
+fun <T> encodeNbtTo(serializer: SerializationStrategy<T>, value: T, out: CompoundTag) {
+    val encoder = NbtEncoder(AppendingCompoundWriter())
+    encoder.encodeSerializableValue(serializer, value)
+    encoder.out.finishInto(out)
+}
+
 fun <T> decodeNbt(deserializer: DeserializationStrategy<T>, from: CompoundTag): T {
     val decoder = NbtDecoder(from)
     return decoder.decodeSerializableValue(deserializer)
 }
 
 inline fun <reified T> encodeNbt(value: T): CompoundTag = encodeNbt(serializer(), value)
+inline fun <reified T> encodeNbtTo(value: T, to: CompoundTag) = encodeNbtTo(serializer(), value, to)
 
 inline fun <reified T> decodeNbt(from: CompoundTag): T = decodeNbt(serializer(), from)
 

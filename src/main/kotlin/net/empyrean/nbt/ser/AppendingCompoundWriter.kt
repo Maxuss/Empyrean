@@ -31,18 +31,22 @@ class AppendingCompoundWriter {
 
     fun finish(): CompoundTag {
         val cmp = CompoundTag()
+        finishInto(cmp)
+        return cmp
+    }
+
+    fun finishInto(out: CompoundTag) {
         for(entry in entries) {
             val tag = when(val entryValue = entry.value) {
                 is AppendingCompoundWriter -> entryValue.finish()
                 is AppendingListWriter -> {
-                    cmp.put(entry.key, entryValue.finish())
+                    out.put(entry.key, entryValue.finish())
                     continue
                 }
                 else -> NbtUtil.transformToNbt(entryValue ?: continue)
             } ?: continue
-            cmp.put(entry.key, tag)
+            out.put(entry.key, tag)
         }
-        return cmp
     }
 
     private data class CompoundEntry(val key: String, var value: Any?)
