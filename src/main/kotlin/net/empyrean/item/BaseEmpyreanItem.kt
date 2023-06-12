@@ -1,5 +1,6 @@
 package net.empyrean.item
 
+import net.empyrean.item.data.GenericItemData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
@@ -9,7 +10,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
-open class BaseEmpyreanItem(
+abstract class BaseEmpyreanItem(
     properties: FabricItemSettings,
 ): Item(properties) {
     protected fun pass(player: ServerPlayer): InteractionResultHolder<ItemStack> {
@@ -31,6 +32,8 @@ open class BaseEmpyreanItem(
     open fun rightClickOffHand(level: Level, player: ServerPlayer): InteractionResultHolder<ItemStack> {
         return InteractionResultHolder.pass(player.offhandItem)
     }
+
+    abstract fun defaultData(stack: ItemStack): GenericItemData
 
     final override fun use(
         level: Level,

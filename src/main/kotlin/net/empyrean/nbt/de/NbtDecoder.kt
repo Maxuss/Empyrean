@@ -1,4 +1,4 @@
-package net.empyrean.nbt.decode
+package net.empyrean.nbt.de
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.descriptors.SerialDescriptor

@@ -1,4 +1,4 @@
-package net.empyrean.nbt.encode
+package net.empyrean.nbt.ser
 
 import net.empyrean.nbt.NbtUtil
 import net.minecraft.nbt.CompoundTag

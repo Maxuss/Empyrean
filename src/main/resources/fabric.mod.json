@@ -51,5 +51,10 @@
 	},
 	"suggests": {
 		"another-mod": "*"
+	},
+	"custom": {
+		"cardinal-components": [
+			"empyrean:player_data"
+		]
 	}
 }

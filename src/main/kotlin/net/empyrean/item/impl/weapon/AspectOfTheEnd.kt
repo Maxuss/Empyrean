@@ -1,6 +1,7 @@
 package net.empyrean.item.impl.weapon
 
 import net.empyrean.item.BaseEmpyreanItem
+import net.empyrean.item.data.GenericItemData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
@@ -31,5 +32,9 @@ class AspectOfTheEnd: BaseEmpyreanItem(FabricItemSettings().fireproof().maxCount
     override fun rightClick(level: Level, player: ServerPlayer): InteractionResultHolder<ItemStack> {
         println("JUST RIGHT CLICKED")
         return super.rightClick(level, player)
+    }
+
+    override fun defaultData(stack: ItemStack): GenericItemData {
+        return GenericItemData(System.currentTimeMillis())
     }
 }

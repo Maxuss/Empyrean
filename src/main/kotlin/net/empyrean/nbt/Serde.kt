@@ -12,9 +12,9 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.serializer
-import net.empyrean.nbt.decode.NbtDecoder
-import net.empyrean.nbt.encode.AppendingCompoundWriter
-import net.empyrean.nbt.encode.NbtEncoder
+import net.empyrean.nbt.de.NbtDecoder
+import net.empyrean.nbt.ser.AppendingCompoundWriter
+import net.empyrean.nbt.ser.NbtEncoder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.resources.ResourceLocation
 import java.util.UUID

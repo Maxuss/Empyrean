@@ -16,7 +16,9 @@ base {
 
 repositories {
 	maven { url 'https://maven.wispforest.io' }
-	maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	maven { url 'https://ladysnake.jfrog.io/artifactory/mods' }
+	maven { url 'https://maven.terraformersmc.com/' }
 }
 
 loom {
@@ -53,7 +55,7 @@ sourceSets {
 	}
 }
 dependencies {
-	// To change the versions see the gradle.properties file
+	// Minecraft
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings loom.officialMojangMappings()
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
@@ -67,17 +69,19 @@ dependencies {
 	modImplementation include('org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.1')
 
 	// no adventure for 1.20 yet :(
-//	// adventure + minimessage
 //	modImplementation include("net.kyori:adventure-text-minimessage:4.14.0")
 //	modImplementation include("net.kyori:adventure-platform-fabric:5.8.0")
 
-	// Fabric API. This is technically optional, but you probably want it anyway.
+	// Trinkets
+	modImplementation "dev.emi:trinkets:${trinkets_version}"
+
+	// Cardinal Components
+	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_version}")
+	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cardinal_version}")
+
+	// Fabric
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
-	// Uncomment the following line to enable the deprecated Fabric API modules. 
-	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
-
-	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 }
 
 processResources {
