@@ -19,10 +19,12 @@ repositories {
 	maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	maven { url 'https://ladysnake.jfrog.io/artifactory/mods' }
 	maven { url 'https://maven.terraformersmc.com/' }
+	maven { url "https://maven.shedaniel.me/" }
 }
 
 loom {
-    splitEnvironmentSourceSets()
+	splitMinecraftJar()
+	splitEnvironmentSourceSets()
 
 	mods {
 		"empyrean" {
@@ -78,6 +80,12 @@ dependencies {
 	// Cardinal Components
 	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${project.cardinal_version}")
 	modImplementation include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cardinal_version}")
+
+	// Cloth config + Modmenu
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+		exclude group: 'net.fabricmc.fabric-api'
+	}
+	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
 
 	// Fabric
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"

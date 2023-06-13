@@ -3,6 +3,9 @@
   "package": "net.empyrean.mixin.client",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "IScreenAccessor",
+    "MainMenuScreenMixin",
+    "SplashManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

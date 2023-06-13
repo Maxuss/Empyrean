@@ -33,6 +33,9 @@
 				"adapter": "kotlin"
 			}
 		],
+		"modmenu": [
+			"net.empyrean.interop.ModMenuIntegration"
+		],
 		"cardinal-components-entity": [
 			"net.empyrean.components.EmpyreanComponents"
 		]

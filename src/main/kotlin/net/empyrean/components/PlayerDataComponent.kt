@@ -15,7 +15,6 @@ import net.minecraft.world.entity.player.Player
 
 @Suppress("UnstableApiUsage")
 class PlayerDataComponent(private val provider: Player): PlayerComponent<Component>, AutoSyncedComponent {
-    @Suppress("MemberVisibilityCanBePrivate")
     var playerData: EmpyreanPlayerData = EmpyreanPlayerData.default()
 
     override fun readFromNbt(tag: CompoundTag) {
@@ -29,7 +28,6 @@ class PlayerDataComponent(private val provider: Player): PlayerComponent<Compone
     }
 
     override fun writeSyncPacket(buf: FriendlyByteBuf, recipient: ServerPlayer?) {
-        println("WRITING SYNC PACKET")
         encodePacket(playerData, buf)
     }
 
