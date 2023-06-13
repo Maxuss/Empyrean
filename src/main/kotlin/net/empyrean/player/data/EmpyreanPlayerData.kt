@@ -1,14 +1,19 @@
 package net.empyrean.player.data
 
 import kotlinx.serialization.Serializable
+import net.empyrean.player.Stats
 
 @Serializable
-class EmpyreanPlayerData(
-    var currentMana: Float
+data class EmpyreanPlayerData(
+    var currentMana: Float = 100f,
+    var currentHealth: Float = 0f,
+    var statistics: Stats = Stats.empty()
 ) {
     companion object {
         fun default() = EmpyreanPlayerData(
-            currentMana = 0f
+            currentMana = 0f,
+            currentHealth = 100f,
+            statistics = Stats.empty()
         )
     }
 }

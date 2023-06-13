@@ -11,6 +11,7 @@ import net.empyrean.nbt.NbtUtil.getAnyList
 import net.empyrean.nbt.NbtUtil.inner
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
+import java.lang.Exception
 
 @OptIn(ExperimentalSerializationApi::class)
 data class NbtDecoder(private val reader: CompoundTag): AbstractDecoder() {
@@ -25,7 +26,7 @@ data class NbtDecoder(private val reader: CompoundTag): AbstractDecoder() {
     override fun decodeElementIndex(descriptor: SerialDescriptor): Int {
         if(nextIdx == descriptor.elementsCount)
             return CompositeDecoder.DECODE_DONE
-        return descriptor.getElementIndex(keys[nextIdx++])
+        return try { descriptor.getElementIndex(keys[nextIdx++]) } catch(e: Exception) { CompositeDecoder.DECODE_DONE }
     }
 
     override fun beginStructure(descriptor: SerialDescriptor): CompositeDecoder {

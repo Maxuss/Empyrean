@@ -15,7 +15,7 @@ class NbtEncoder(val out: AppendingCompoundWriter): AbstractEncoder(), Composite
     private var elementName: String? = null
 
     override fun encodeElement(descriptor: SerialDescriptor, index: Int): Boolean {
-        return when(descriptor.kind as StructureKind) {
+        return when(descriptor.kind) {
             StructureKind.CLASS, StructureKind.OBJECT, StructureKind.MAP -> {
                 elementName = descriptor.getElementName(index)
                 true
