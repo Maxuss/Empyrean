@@ -6,11 +6,14 @@
     "IScreenAccessor",
     "LogoRendererMixin",
     "MainMenuScreenMixin",
+    "MinecraftClientMixin",
     "SplashManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
+    "ClientComponentMixin",
+    "TextColorMixin"
   ]
 }

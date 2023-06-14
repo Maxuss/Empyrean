@@ -5,7 +5,9 @@
   "mixins": [
     "CommandContextAccessorMixin",
     "ItemStackMixin",
-    "ServerBrandMixin"
+    "ServerBrandMixin",
+    "StyleMixin",
+    "StyleSerializerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

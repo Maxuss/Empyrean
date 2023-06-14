@@ -58,6 +58,7 @@
 	"suggests": {
 		"another-mod": "*"
 	},
+	"accessWidener": "empyrean.accesswidener",
 	"custom": {
 		"cardinal-components": [
 			"empyrean:player_data"
