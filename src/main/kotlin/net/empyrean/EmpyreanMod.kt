@@ -15,8 +15,6 @@ object EmpyreanMod : ModInitializer {
 	val serverRandom = kotlin.random.Random(ThreadLocalRandom.current().nextInt())
 
 	override fun onInitialize() {
-		logger.info("Hello Fabric world!")
-
 		bootstrapItems()
 		bootstrapCommands()
 		bootstrapNetworking()
