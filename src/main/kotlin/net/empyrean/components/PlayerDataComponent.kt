@@ -17,15 +17,10 @@ import net.minecraft.world.entity.player.Player
 class PlayerDataComponent(private val provider: Player): PlayerComponent<Component>, AutoSyncedComponent {
     var playerData: EmpyreanPlayerData = EmpyreanPlayerData.default()
 
-    override fun shouldSyncWith(player: ServerPlayer?): Boolean {
-        return super.shouldSyncWith(player)
-    }
-
     override fun readFromNbt(tag: CompoundTag) {
         if(tag.isEmpty)
             return // migration support
         playerData = decodeNbt(tag)
-        println("DECODED DATA $playerData")
     }
 
     override fun writeToNbt(tag: CompoundTag) {
@@ -38,6 +33,5 @@ class PlayerDataComponent(private val provider: Player): PlayerComponent<Compone
 
     override fun applySyncPacket(buf: FriendlyByteBuf) {
         playerData = decodePacket(buf)
-        println("DECODED SYNC $playerData")
     }
 }

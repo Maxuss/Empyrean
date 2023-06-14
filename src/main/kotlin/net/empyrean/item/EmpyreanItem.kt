@@ -1,7 +1,10 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package net.empyrean.item
 
-import net.empyrean.item.data.GenericItemData
+import net.empyrean.item.data.ItemData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
+import net.minecraft.nbt.CompoundTag
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResultHolder
@@ -10,8 +13,8 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 
-abstract class BaseEmpyreanItem(
-    properties: FabricItemSettings,
+abstract class EmpyreanItem(
+    properties: FabricItemSettings
 ): Item(properties) {
     protected fun pass(player: ServerPlayer): InteractionResultHolder<ItemStack> {
         return InteractionResultHolder.pass(player.getItemInHand(InteractionHand.MAIN_HAND))
@@ -33,7 +36,7 @@ abstract class BaseEmpyreanItem(
         return InteractionResultHolder.pass(player.offhandItem)
     }
 
-    abstract fun defaultData(stack: ItemStack): GenericItemData
+    abstract fun data(stack: ItemStack): ItemData
 
     final override fun use(
         level: Level,
@@ -46,5 +49,12 @@ abstract class BaseEmpyreanItem(
             rightClick(level, player as ServerPlayer)
         else
             rightClickOffHand(level, player as ServerPlayer)
+    }
+
+    override fun verifyTagAfterLoad(compoundTag: CompoundTag) {
+        super.verifyTagAfterLoad(compoundTag)
+        if(!compoundTag.contains("empyrean")) {
+            compoundTag.put("empyrean", CompoundTag())
+        }
     }
 }

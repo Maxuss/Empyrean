@@ -1,7 +1,7 @@
 package net.empyrean.network
 
 import io.wispforest.owo.network.OwoNetChannel
-import net.empyrean.item.BaseEmpyreanItem
+import net.empyrean.item.EmpyreanItem
 import net.empyrean.network.packets.PacketEmpyreanJoin
 import net.empyrean.network.packets.serverbound.ServerboundLeftClickPacket
 import net.minecraft.resources.ResourceLocation
@@ -25,9 +25,9 @@ fun bootstrapNetworking() {
     // Left click handler
     EmpyreanNetworking.EMPYREAN_CHANNEL.registerServerbound(ServerboundLeftClickPacket::class.java) { _, access ->
         val stack = access.player.mainHandItem
-        if(stack == ItemStack.EMPTY || stack.item !is BaseEmpyreanItem)
+        if(stack == ItemStack.EMPTY || stack.item !is EmpyreanItem)
             return@registerServerbound
-        val empyreanItem = stack.item as BaseEmpyreanItem
+        val empyreanItem = stack.item as EmpyreanItem
         empyreanItem.leftClick(access.player.level(), access.player)
     }
 }

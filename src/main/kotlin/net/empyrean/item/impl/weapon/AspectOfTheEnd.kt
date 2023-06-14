@@ -1,7 +1,7 @@
 package net.empyrean.item.impl.weapon
 
-import net.empyrean.item.BaseEmpyreanItem
-import net.empyrean.item.data.GenericItemData
+import net.empyrean.item.EmpyreanItem
+import net.empyrean.item.data.ItemData
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
@@ -11,7 +11,7 @@ import net.minecraft.world.item.Rarity
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class AspectOfTheEnd: BaseEmpyreanItem(FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)) {
+class AspectOfTheEnd: EmpyreanItem(FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)) {
     override fun getName(itemStack: ItemStack): Component {
         return Component.literal("Aspect of the End")
     }
@@ -34,7 +34,7 @@ class AspectOfTheEnd: BaseEmpyreanItem(FabricItemSettings().fireproof().maxCount
         return super.rightClick(level, player)
     }
 
-    override fun defaultData(stack: ItemStack): GenericItemData {
-        return GenericItemData(System.currentTimeMillis())
+    override fun data(stack: ItemStack): ItemData {
+        return ItemData(stack)
     }
 }

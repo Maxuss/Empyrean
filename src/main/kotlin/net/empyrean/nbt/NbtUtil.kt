@@ -1,7 +1,9 @@
 package net.empyrean.nbt
 
+import kotlinx.serialization.serializer
 import net.minecraft.nbt.*
 import java.util.*
+import kotlin.reflect.KClass
 
 object NbtUtil {
     fun CompoundTag.getAnyList(key: String): List<Tag> {
@@ -54,4 +56,20 @@ object NbtUtil {
             else -> null
         }
     }
+
+    @JvmStatic
+    fun writeGenericAny(value: Any, to: CompoundTag) {
+        val serializer = serializer(value.javaClass)
+        encodeNbtTo(serializer, value, to)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    @JvmStatic
+    fun <T> readTyped(from: CompoundTag, klass: Class<T>): T {
+        val serializer = serializer(klass)
+        return decodeNbt(serializer, from) as T
+    }
+
+    @JvmStatic
+    fun <T: Any> readTyped(from: CompoundTag, klass: KClass<T>): T = readTyped(from, klass.java)
 }
