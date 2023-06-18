@@ -1,14 +1,15 @@
 package net.empyrean.gui.text
 
-import net.minecraft.ChatFormatting
+import net.empyrean.chat.SpecialFormatting
+import net.empyrean.chat.withEmpyreanStyle
 import net.minecraft.network.chat.Component
 
 object Splashes {
     @JvmStatic
-    val allSplashes = listOf<Any>(
+    val allSplashes = listOf(
         "Previously known as Macrocosm!",
         "Absolutely Macrocosmic!",
-        Component.literal("Even more colors!").withStyle(ChatFormatting.BOLD, ChatFormatting.GOLD),
+        Component.literal("Even more colors!").withEmpyreanStyle(SpecialFormatting.EMPYREAN_L_NAUTICAL),
         "Empyrical!",
         "uwu",
         "owo",

@@ -7,6 +7,6 @@ import net.minecraft.network.chat.Component
 
 fun testCommand() = command("empyrean") {
     "test" runs {
-        source.player?.sendSystemMessage(Component.literal("Hello, empyrean world!").withEmpyreanStyle(SpecialFormatting.EMPYRICAL_GLINT))
+        source.player?.sendSystemMessage(Component.literal("Hello, empyrean world!").withEmpyreanStyle(SpecialFormatting.EMPYREAN_L_NAUTICAL))
     }
 }

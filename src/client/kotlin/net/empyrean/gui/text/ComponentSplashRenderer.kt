@@ -8,7 +8,7 @@ import net.minecraft.client.gui.components.SplashRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.util.Mth
 
-class ComponentSplashRenderer(val message: Component): SplashRenderer("Uh oh!") {
+class ComponentSplashRenderer(private val message: Component): SplashRenderer("Uh oh!") {
     override fun render(guiGraphics: GuiGraphics, x: Int, font: Font, y: Int) {
         guiGraphics.pose().pushPose()
         guiGraphics.pose().translate(x.toFloat() / 2.0f + 123.0f, 69.0f, 0.0f)

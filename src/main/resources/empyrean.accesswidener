@@ -1,5 +1,17 @@
 accessWidener	v1	named
+
 extendable	class	net/minecraft/network/chat/TextColor
 extendable	method	net/minecraft/network/chat/TextColor	<init>	(I)V
 extendable	method	net/minecraft/network/chat/TextColor	<init>	(ILjava/lang/String;)V
 accessible	field	net/minecraft/network/chat/TextColor	name	Ljava/lang/String;
+
+accessible  method  net/minecraft/client/gui/Font  renderChar  (Lnet/minecraft/client/gui/font/glyphs/BakedGlyph;ZZFFFLorg/joml/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexConsumer;FFFFI)V
+accessible  method  net/minecraft/client/gui/Font  adjustColor  (I)I
+
+accessible  class   net/minecraft/client/gui/Font$StringRenderOutput
+accessible  field   net/minecraft/client/gui/Font$StringRenderOutput  x  F
+accessible  field   net/minecraft/client/gui/Font$StringRenderOutput  y  F
+accessible  field   net/minecraft/client/gui/Font$StringRenderOutput  a  F
+mutable  field   net/minecraft/client/gui/Font$StringRenderOutput  a  F
+
+accessible  method  net/minecraft/client/gui/GuiGraphics  innerBlit (Lnet/minecraft/resources/ResourceLocation;IIIIIFFFF)V

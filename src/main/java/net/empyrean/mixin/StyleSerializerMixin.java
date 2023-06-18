@@ -25,7 +25,8 @@ public abstract class StyleSerializerMixin {
         JsonObject obj = jsonElement.getAsJsonObject();
         SpecialFormatting special = obj.has("empyreanFormat") ? SpecialFormatting.values()[obj.get("empyreanFormat").getAsInt()] : SpecialFormatting.NONE;
         Style returnValue = cir.getReturnValue();
-        cir.setReturnValue(((EmpyreanStyle) returnValue).withSpecial(special));
+        Style ret = ((EmpyreanStyle) returnValue).withSpecial(special);
+        cir.setReturnValue(ret);
     }
 
     @Inject(

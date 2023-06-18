@@ -1,5 +1,7 @@
 package net.empyrean.item.impl.weapon
 
+import net.empyrean.chat.SpecialFormatting
+import net.empyrean.chat.withEmpyreanStyle
 import net.empyrean.item.EmpyreanItem
 import net.empyrean.item.data.ItemData
 import net.empyrean.player.mana
@@ -9,13 +11,12 @@ import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionResultHolder
 import net.minecraft.world.item.ItemStack
-import net.minecraft.world.item.Rarity
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class AspectOfTheEnd: EmpyreanItem(FabricItemSettings().fireproof().maxCount(1).rarity(Rarity.EPIC)) {
+class AspectOfTheEnd: EmpyreanItem(FabricItemSettings().fireproof().maxCount(1)) {
     override fun getName(itemStack: ItemStack): Component {
-        return Component.literal("Aspect of the End")
+        return Component.literal("Aspect of the End").withEmpyreanStyle(SpecialFormatting.EMPYREAN_L_NAUTICAL)
     }
 
     override fun appendHoverText(
