@@ -22,6 +22,8 @@ object BloomRenderer {
 
     @JvmStatic
     fun render(to: GuiGraphics) {
+        if(queue.isEmpty() || !active)
+            return
         Minecraft.getInstance().profiler.push("empyrean:textBloom")
         to.pose().pushPose()
         to.pose().translate(0f, 0f, -50f)
