@@ -6,7 +6,8 @@ enum class ItemKind {
     SHOVEL,
     WINGS,
 
+    MATERIAL,
     ;
 
-    val named: String = name.replace("_", " ")
+    val named: String get() = if(this == MATERIAL) "" else name.replace("_", " ")
 }

@@ -14,6 +14,7 @@ class EmpyreanModelGenerator(generator: FabricDataOutput): FabricModelProvider(g
 
     override fun generateItemModels(items: ItemModelGenerators) {
         items.generateFlatItem(EmpyreanItems.ASPECT_OF_THE_END, ModelTemplates.FLAT_HANDHELD_ITEM)
+        items.generateFlatItem(EmpyreanItems.COSMILIUM_INGOT, ModelTemplates.FLAT_ITEM)
     }
 
 }
