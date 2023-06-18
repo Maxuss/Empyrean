@@ -15,10 +15,16 @@ class OutlinedFontRenderer(
     override fun renderChar(data: EmpyreanEffectRenderer.EffectRenderPayload) {
         drawCharOutlined(
             Component.literal(data.charCode.toChar().toString()).visualOrderText,
-            data,
-            0.7f,
+            data, if(data.style.isBold) 1f else 0.7f,
             data.alpha
         )
+        if(data.style.isBold)
+            drawCharOutlined(
+                Component.literal(data.charCode.toChar().toString()).visualOrderText,
+                data.copy(x = data.x + data.glyphInfo.boldOffset * .8f),
+                1.1f,
+                data.alpha
+            )
     }
 
     @Suppress("SameParameterValue")
@@ -45,7 +51,7 @@ class OutlinedFontRenderer(
                     val bl = style.isBold
                     stringRenderOutput.x = xTmp + j.toFloat() * data.glyphInfo.shadowOffset * outlineWidthMul
                     stringRenderOutput.y = data.y + k.toFloat() * data.glyphInfo.shadowOffset * outlineWidthMul
-                    xTmp += data.glyphInfo.getAdvance(bl)
+                    xTmp += data.glyphInfo.getAdvance(bl) * 2f
                     stringRenderOutput.accept(l, style.withColor(i), code)
                 }
             }

@@ -8,6 +8,7 @@
     "LogoRendererMixin",
     "MainMenuScreenMixin",
     "MinecraftClientMixin",
+    "TooltipRenderUtilMixin",
     "SplashManagerMixin",
     "StringRenderOutputMixin",
     "TextRendererMixin"

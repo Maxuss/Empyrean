@@ -17,11 +17,11 @@ class CrystalSparkleParticle(
     -1
 ) {
     override val r: Float
-        get() = FastColor.ARGB32.red(EmpyreanColors.NAUTICAL.value) / 255f
+        get() = FastColor.ARGB32.red(EmpyreanColors.STARLIKE.value) / 255f
     override val g: Float
-        get() = FastColor.ARGB32.green(EmpyreanColors.NAUTICAL.value) / 255f
+        get() = FastColor.ARGB32.green(EmpyreanColors.STARLIKE.value) / 255f
     override val b: Float
-        get() = FastColor.ARGB32.blue(EmpyreanColors.NAUTICAL.value) / 255f
+        get() = FastColor.ARGB32.blue(EmpyreanColors.STARLIKE.value) / 255f
 
     override val alpha: Float
         get() =

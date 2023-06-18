@@ -11,7 +11,8 @@ enum class SpecialFormatting(
     val drawOutlined: Boolean = false
 ) {
     NONE,
-    EMPYREAN_L_NAUTICAL(EmpyreanColors.NAUTICAL, EmpyreanColors.NAUTICAL, true) // Empyrean Lerping color Nautical
+    EMPYREAN_L_STARLIKE(EmpyreanColors.STARLIKE, EmpyreanColors.STARLIKE, true), // Empyrean Lerping color Nautical
+    EMPYREAN_L_EXPERT(EmpyreanColors.EXPERT, EmpyreanColors.EXPERT, false)
     ;
 
     fun merge(with: SpecialFormatting): SpecialFormatting {
@@ -19,12 +20,11 @@ enum class SpecialFormatting(
     }
 
     companion object {
-        @Suppress("KotlinConstantConditions")
         fun fromColor(color: EmpyreanColor): SpecialFormatting {
-            if(color is TextColor) {
+            if(color is LerpingColor) {
+                return valueOf("EMPYREAN_L_${color.lerpName}")
+            } else if(color is TextColor) {
                 return NONE
-            } else if(color is LerpingColor) {
-                return valueOf("EMPYREAN_L_${color.name}")
             }
             return NONE
         }

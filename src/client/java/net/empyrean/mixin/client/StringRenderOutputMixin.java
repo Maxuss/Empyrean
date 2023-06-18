@@ -5,7 +5,10 @@ import net.empyrean.chat.EmpyreanStyle;
 import net.empyrean.chat.SpecialFormatting;
 import net.empyrean.render.effects.EmpyreanEffectRenderer;
 import net.empyrean.render.effects.OutlinedFontRenderer;
+import net.empyrean.util.text.ARGBColor;
 import net.empyrean.util.text.Text;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.font.FontSet;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -34,6 +37,14 @@ public class StringRenderOutputMixin {
 
     @Shadow @Final
     MultiBufferSource bufferSource;
+
+    @Shadow @Final private Font.DisplayMode mode;
+
+    @Shadow @Final private int packedLightCoords;
+
+    @Shadow @Final private boolean dropShadow;
+
+    @Shadow @Final private float dimFactor;
 
     @Inject(
             method = "accept",
@@ -72,8 +83,30 @@ public class StringRenderOutputMixin {
                 .renderChar(new EmpyreanEffectRenderer.EffectRenderPayload(
                         x, y, fontSet, style, charCode, glyphInfo, bakedGlyph, baseColor, pose, bufferSource, alpha
                 ));
+            } else {
+                int color = special.getSelfColor().getColorValue();
+                ARGBColor extracted = Text.extractARGB(color);
+                Minecraft.getInstance().font.renderChar(
+                        bakedGlyph,
+                        style.isBold(), style.isItalic(),
+                        style.isBold() ? glyphInfo.getBoldOffset() : 0f,
+                        x + shadowOffset, y + shadowOffset,
+                        pose, bufferSource.getBuffer(bakedGlyph.renderType(mode)),
+                        (extracted.getRed() / 255f) * dimFactor, (extracted.getGreen() / 255f) * dimFactor, (extracted.getBlue() / 255f) * dimFactor, alpha * dimFactor,
+                        packedLightCoords
+                );
+                if(dropShadow)
+                    Minecraft.getInstance().font.renderChar(
+                            bakedGlyph,
+                            style.isBold(), style.isItalic(),
+                            style.isBold() ? glyphInfo.getBoldOffset() : 0f,
+                            x + shadowOffset, y + shadowOffset,
+                            pose, bufferSource.getBuffer(bakedGlyph.renderType(mode)),
+                            (extracted.getRed() / 255f) * dimFactor, (extracted.getGreen() / 255f) * dimFactor, (extracted.getBlue() / 255f) * dimFactor, alpha * dimFactor,
+                            packedLightCoords
+                    );
             }
-            float advance = glyphInfo.getAdvance();
+            float advance = glyphInfo.getAdvance(isBold);
             x += advance;
             cir.setReturnValue(true);
         }

@@ -7,7 +7,7 @@ import net.minecraft.network.chat.TextColor
 import net.minecraft.util.Mth
 
 open class LerpingColor(
-    val name: String,
+    val lerpName: String,
     private val colors: ImmutableList<Int>,
     private val duration: Float = 20f
 ): TextColor(colors[0]), EmpyreanColor, Ticking {
@@ -53,7 +53,7 @@ open class LerpingColor(
     }
 
     override fun serialize(): String {
-        return "<E:L:$name" // <E -> empyrean color prefix; L - lerping color; name -> registry index
+        return "<E:L:$lerpName" // <E -> empyrean color prefix; L - lerping color; name -> registry index
     }
 
     companion object {

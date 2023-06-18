@@ -23,7 +23,7 @@ fun bootstrapClientEvents() {
         val empyrean = style as EmpyreanStyle
         if(empyrean.specialFormat == SpecialFormatting.NONE)
             return@register
-        if(empyrean.specialFormat == SpecialFormatting.EMPYREAN_L_NAUTICAL) {
+        if(empyrean.specialFormat == SpecialFormatting.EMPYREAN_L_STARLIKE) {
             if(EmpyreanModClient.clientRandom.nextFloat() <= 0.002f) {
                 ParticleEngine2D.spawn(CrystalSparkleParticle(rd.x - (rd.xOffset * 2f), rd.y))
             }

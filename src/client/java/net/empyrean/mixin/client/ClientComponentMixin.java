@@ -22,8 +22,8 @@ public abstract class ClientComponentMixin {
         if(styleHolder.getSpecialFormat() == SpecialFormatting.NONE)
             return;
         /* no-op */
-        if (styleHolder.getSpecialFormat() == SpecialFormatting.EMPYREAN_L_NAUTICAL) {
-            cir.setReturnValue(EmpyreanColors.NAUTICAL);
+        if (styleHolder.getSpecialFormat() == SpecialFormatting.EMPYREAN_L_STARLIKE) {
+            cir.setReturnValue(EmpyreanColors.STARLIKE);
         }
     }
 }

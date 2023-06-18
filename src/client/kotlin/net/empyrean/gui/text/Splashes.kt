@@ -9,7 +9,7 @@ object Splashes {
     val allSplashes = listOf(
         "Previously known as Macrocosm!",
         "Absolutely Macrocosmic!",
-        Component.literal("Even more colors!").withEmpyreanStyle(SpecialFormatting.EMPYREAN_L_NAUTICAL),
+        Component.literal("Even more colors!").withEmpyreanStyle(SpecialFormatting.EMPYREAN_L_STARLIKE),
         "Empyrical!",
         "uwu",
         "owo",

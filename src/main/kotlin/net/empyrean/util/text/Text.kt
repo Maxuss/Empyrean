@@ -28,9 +28,9 @@ object Text {
     @JvmStatic
     fun extractARGB(from: Int): ARGBColor {
         val alpha = ARGB32.alpha(from)
-        val red = ARGB32.alpha(from)
-        val green = ARGB32.alpha(from)
-        val blue = ARGB32.alpha(from)
+        val red = ARGB32.red(from)
+        val green = ARGB32.green(from)
+        val blue = ARGB32.blue(from)
         return ARGBColor(alpha, red, green, blue)
     }
 
