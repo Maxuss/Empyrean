@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Style.class)
-public abstract class ClientComponentMixin {
+public abstract class StyleMixin {
     @Inject(
             method = "getColor",
             at = @At(value = "RETURN"),

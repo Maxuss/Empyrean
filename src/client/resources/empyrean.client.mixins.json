@@ -6,7 +6,8 @@
     "GameRendererMixin",
     "IScreenAccessor",
     "MinecraftClientMixin",
-    "effects.PlayerInventoryMixin",
+    "effects.EffectRenderingScreenMixin",
+    "effects.EffectsGuiMixin",
     "item.TooltipRenderUtilMixin",
     "menu.LogoRendererMixin",
     "menu.MainMenuScreenMixin",
@@ -18,7 +19,7 @@
     "defaultRequire": 1
   },
   "mixins": [
-    "ClientComponentMixin",
+    "StyleMixin",
     "text.TextColorMixin"
   ]
 }

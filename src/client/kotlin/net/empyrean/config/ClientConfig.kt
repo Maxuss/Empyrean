@@ -6,7 +6,7 @@ object ClientConfig: ConfigProvider() {
     @JvmStatic
     val compactEffectDisplay: Boolean by cfg()
     @JvmStatic
-    val alwaysDisplayEffects: Boolean by cfg()
+    val displayEffectLength: Boolean by cfg()
     @JvmStatic
     val enableSingleplayer: Boolean by cfg()
 
@@ -14,7 +14,7 @@ object ClientConfig: ConfigProvider() {
         category("stable") {
             group("effects") {
                 boolean("compactEffectDisplay", true)
-                boolean("alwaysDisplayEffects", false)
+                boolean("displayEffectLength", true)
             }
         }
         category("experimental") {

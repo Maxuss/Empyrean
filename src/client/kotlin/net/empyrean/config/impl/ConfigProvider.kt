@@ -46,6 +46,14 @@ abstract class ConfigProvider {
 
         val data: HashMap<String, PropertyData> = Json.Default.decodeFromString(serializer(), file.readText())
         values = HashMap(data.toList().associate { it.first to it.second.value })
+        categories.forEach {
+            it.groups.forEach { grp ->
+                grp.properties.forEach { prop ->
+                    if(!values.containsKey(prop.name))
+                        values[prop.name] = prop.defaultValue!!
+                }
+            }
+        }
     }
 
     protected fun saveDefault() {
