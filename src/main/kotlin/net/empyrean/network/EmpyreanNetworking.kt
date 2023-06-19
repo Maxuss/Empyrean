@@ -3,6 +3,7 @@ package net.empyrean.network
 import io.wispforest.owo.network.OwoNetChannel
 import net.empyrean.item.EmpyreanItem
 import net.empyrean.network.packets.PacketEmpyreanJoin
+import net.empyrean.network.packets.clientbound.ClientboundStatusMessagePacket
 import net.empyrean.network.packets.serverbound.ServerboundLeftClickPacket
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.ItemStack
@@ -30,4 +31,7 @@ fun bootstrapNetworking() {
         val empyreanItem = stack.item as EmpyreanItem
         empyreanItem.leftClick(access.player.level(), access.player)
     }
+
+    // Status message handler
+    EmpyreanNetworking.EMPYREAN_CHANNEL.registerClientboundDeferred(ClientboundStatusMessagePacket::class.java)
 }

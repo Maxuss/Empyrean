@@ -12,6 +12,7 @@
     "menu.LogoRendererMixin",
     "menu.MainMenuScreenMixin",
     "menu.SplashManagerMixin",
+    "text.GuiStatusMessageMixin",
     "text.StringRenderOutputMixin",
     "text.TextRendererMixin"
   ],

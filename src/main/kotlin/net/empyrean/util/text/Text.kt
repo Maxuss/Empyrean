@@ -1,8 +1,11 @@
 package net.empyrean.util.text
 
 import net.empyrean.gui.text.color.EmpyreanColor
+import net.empyrean.network.EmpyreanNetworking
+import net.empyrean.network.packets.clientbound.ClientboundStatusMessagePacket
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.util.FastColor.ARGB32
 import net.minecraft.util.Mth
 import kotlin.math.roundToInt
@@ -58,3 +61,7 @@ data class ARGBColor(
 )
 
 val Component.mutable: MutableComponent get() = this as MutableComponent
+
+fun ServerPlayer.sendStatusMessage(message: Component, tickDelay: Int = 2) {
+    EmpyreanNetworking.EMPYREAN_CHANNEL.serverHandle(this).send(ClientboundStatusMessagePacket(message, tickDelay))
+}
