@@ -1,6 +1,6 @@
 package net.empyrean.mixin.client;
 
-import net.empyrean.EmpyreanModClient;
+import net.empyrean.config.ClientConfig;
 import net.empyrean.gui.button.DisabledButton;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
@@ -23,7 +23,7 @@ public class MainMenuScreenMixin {
             )
     )
     private GuiEventListener disableSingleplayerButton(TitleScreen instance, GuiEventListener guiEventListener) {
-        if(EmpyreanModClient.getConfig().doNotTouchEnablesSinglePlayer) {
+        if(ClientConfig.getEnableSingleplayer()) {
             ((IScreenAccessor) instance).callAddRenderableWidget((Button) guiEventListener);
             return guiEventListener;
         }

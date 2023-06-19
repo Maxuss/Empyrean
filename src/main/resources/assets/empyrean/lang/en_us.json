@@ -1,4 +1,22 @@
 {
+  "config.empyrean.category.stable": "Stable Options",
+  "config.empyrean.category.stable.description": "Contains stable tested options for Empyrean",
+  "config.empyrean.category.experimental": "Experimental Options",
+  "config.empyrean.category.experimental.description": "Contains experimental/untested options for Empyrean",
+
+  "config.empyrean.group.effects": "Effects",
+  "config.empyrean.group.effects.tooltip": "Different options related to Empyrean effects. This is related to vanilla effects, not VFX.",
+  "config.empyrean.option.compactEffectDisplay": "Compact effect display",
+  "config.empyrean.option.compactEffectDisplay.tooltip": "Renders effects in inventory more compactly to leave space for more effects.",
+  "config.empyrean.option.alwaysDisplayEffects": "Always display effects",
+  "config.empyrean.option.alwaysDisplayEffects.tooltip": "Always display effects, even outside of inventory.",
+
+  "config.empyrean.group.expSingleplayer": "Singleplayer",
+  "config.empyrean.group.expSingleplayer.tooltip": "Different options related to singleplayer for Empyrean. Highly experimental.",
+  "config.empyrean.option.enableSingleplayer": "Enable singleplayer",
+  "config.empyrean.option.enableSingleplayer.tooltip": "Allows to play Empyrean in singleplayer",
+
+
   "item.empyrean.aspect_of_the_end": "Aspect of the End",
   "item.empyrean.cosmilium_ingot": "Cosmilium Ingot"
 }

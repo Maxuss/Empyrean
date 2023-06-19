@@ -1,7 +1,5 @@
 package net.empyrean
 
-import me.shedaniel.autoconfig.AutoConfig
-import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer
 import net.empyrean.config.ClientConfig
 import net.empyrean.event.client.bootstrapClientEvents
 import net.empyrean.network.client.bootstrapClientNetworking
@@ -11,17 +9,14 @@ import kotlin.random.Random
 
 object EmpyreanModClient : ClientModInitializer {
 	@JvmStatic
-	val config: ClientConfig get() = AutoConfig.getConfigHolder(ClientConfig::class.java).config
-	@JvmStatic
 	val clientRandom: Random = Random(Util.getNanos())
 
 	const val MODID = "empyrean"
 
 	override fun onInitializeClient() {
+		ClientConfig.init()
+
 		bootstrapClientNetworking()
 		bootstrapClientEvents()
-
-		// register config
-		AutoConfig.register(ClientConfig::class.java) { cfg, cfgClass -> Toml4jConfigSerializer(cfg, cfgClass) }
 	}
 }
