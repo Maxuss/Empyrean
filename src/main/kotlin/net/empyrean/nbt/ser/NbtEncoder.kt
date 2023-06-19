@@ -10,16 +10,17 @@ import kotlinx.serialization.modules.SerializersModule
 import java.util.*
 
 @OptIn(ExperimentalSerializationApi::class)
-class NbtEncoder(val out: AppendingCompoundWriter): AbstractEncoder(), CompositeEncoder {
+class NbtEncoder(val out: AppendingCompoundWriter) : AbstractEncoder(), CompositeEncoder {
     override val serializersModule: SerializersModule = EmptySerializersModule()
     private var elementName: String? = null
 
     override fun encodeElement(descriptor: SerialDescriptor, index: Int): Boolean {
-        return when(descriptor.kind) {
+        return when (descriptor.kind) {
             StructureKind.CLASS, StructureKind.OBJECT, StructureKind.MAP -> {
                 elementName = descriptor.getElementName(index)
                 true
             }
+
             else -> true
         }
     }
@@ -30,24 +31,27 @@ class NbtEncoder(val out: AppendingCompoundWriter): AbstractEncoder(), Composite
     }
 
     override fun beginStructure(descriptor: SerialDescriptor): CompositeEncoder {
-        when(descriptor.kind) {
+        when (descriptor.kind) {
             StructureKind.CLASS, StructureKind.OBJECT, StructureKind.MAP -> {
-                if(elementName == null) // we are at the beginning probably
+                if (elementName == null) // we are at the beginning probably
                     return this
                 out.beginEntry(elementName!!)
                 val ref = AppendingCompoundWriter()
                 out.writeEntryValue(ref)
                 return NbtEncoder(ref)
             }
+
             StructureKind.LIST -> {
-                if(elementName == null) // we are at the beginning probably?
+                if (elementName == null) // we are at the beginning probably?
                     return this
                 out.beginEntry(elementName!!)
                 val ref = AppendingListWriter()
                 out.writeEntryValue(ref)
                 return NbtListEncoder(ref)
             }
-            else -> { /* no-op */ }
+
+            else -> { /* no-op */
+            }
         }
         return this
     }
@@ -81,7 +85,7 @@ class NbtEncoder(val out: AppendingCompoundWriter): AbstractEncoder(), Composite
     }
 
     override fun encodeValue(value: Any) {
-        if(value is UUID) {
+        if (value is UUID) {
             this.beginEncodingValue(value)
         } else {
             return
@@ -106,7 +110,7 @@ class NbtEncoder(val out: AppendingCompoundWriter): AbstractEncoder(), Composite
 }
 
 @OptIn(ExperimentalSerializationApi::class)
-class NbtListEncoder(private val writer: AppendingListWriter): AbstractEncoder() {
+class NbtListEncoder(private val writer: AppendingListWriter) : AbstractEncoder() {
     override val serializersModule: SerializersModule
         get() = EmptySerializersModule()
 

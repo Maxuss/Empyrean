@@ -19,7 +19,7 @@ data class ScheduledValueTask<V>(private val future: ScheduledFuture<V>) {
         return future[time.inWholeMilliseconds, TimeUnit.MILLISECONDS]
     }
 
-    fun await(): V{
+    fun await(): V {
         return future.get()
     }
 }

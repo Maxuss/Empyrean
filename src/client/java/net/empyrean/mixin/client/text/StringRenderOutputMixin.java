@@ -32,19 +32,27 @@ public class StringRenderOutputMixin {
 
     @Shadow
     public float y;
-
-    @Shadow @Final private Matrix4f pose;
-
-    @Shadow @Final
+    @Shadow
+    @Final
     MultiBufferSource bufferSource;
+    @Shadow
+    @Final
+    private Matrix4f pose;
+    @Shadow
+    @Final
+    private Font.DisplayMode mode;
 
-    @Shadow @Final private Font.DisplayMode mode;
+    @Shadow
+    @Final
+    private int packedLightCoords;
 
-    @Shadow @Final private int packedLightCoords;
+    @Shadow
+    @Final
+    private boolean dropShadow;
 
-    @Shadow @Final private boolean dropShadow;
-
-    @Shadow @Final private float dimFactor;
+    @Shadow
+    @Final
+    private float dimFactor;
 
     @Inject(
             method = "accept",
@@ -73,16 +81,16 @@ public class StringRenderOutputMixin {
             float shadowOffset) {
         EmpyreanStyle empyrean = (EmpyreanStyle) style;
         SpecialFormatting special = empyrean.getSpecialFormat();
-        if(special != SpecialFormatting.NONE) {
+        if (special != SpecialFormatting.NONE) {
             // Injecting custom Empyrean character rendering here
-            if(special.getDrawOutlined()) {
+            if (special.getDrawOutlined()) {
                 new OutlinedFontRenderer(
                         Objects.requireNonNull(style.getColor()),
                         TextColor.fromRgb(Text.multiplyColor(special.getSelfColor().getColorValue(), 0.06f, false))
                 ) // prev. 0x071138
-                .renderChar(new EmpyreanEffectRenderer.EffectRenderPayload(
-                        x, y, fontSet, style, charCode, glyphInfo, bakedGlyph, baseColor, pose, bufferSource, alpha
-                ));
+                        .renderChar(new EmpyreanEffectRenderer.EffectRenderPayload(
+                                x, y, fontSet, style, charCode, glyphInfo, bakedGlyph, baseColor, pose, bufferSource, alpha
+                        ));
             } else {
                 int color = special.getSelfColor().getColorValue();
                 ARGBColor extracted = Text.extractARGB(color);
@@ -95,7 +103,7 @@ public class StringRenderOutputMixin {
                         (extracted.getRed() / 255f) * dimFactor, (extracted.getGreen() / 255f) * dimFactor, (extracted.getBlue() / 255f) * dimFactor, alpha * dimFactor,
                         packedLightCoords
                 );
-                if(dropShadow)
+                if (dropShadow)
                     Minecraft.getInstance().font.renderChar(
                             bakedGlyph,
                             style.isBold(), style.isItalic(),

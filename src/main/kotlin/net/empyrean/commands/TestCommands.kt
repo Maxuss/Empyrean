@@ -9,7 +9,9 @@ import net.minecraft.world.effect.MobEffectInstance
 
 fun testCommand() = command("empyrean") {
     "test" runs {
-        source.player?.sendSystemMessage(Component.literal("Hello, empyrean world!").withEmpyreanStyle(SpecialFormatting.EMPYREAN_L_STARLIKE))
+        source.player?.sendSystemMessage(
+            Component.literal("Hello, empyrean world!").withEmpyreanStyle(SpecialFormatting.EMPYREAN_L_STARLIKE)
+        )
     }
     "effects" runs {
         BuiltInRegistries.MOB_EFFECT.forEach { effect ->

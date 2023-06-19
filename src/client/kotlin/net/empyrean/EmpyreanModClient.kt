@@ -8,15 +8,15 @@ import net.minecraft.Util
 import kotlin.random.Random
 
 object EmpyreanModClient : ClientModInitializer {
-	@JvmStatic
-	val clientRandom: Random = Random(Util.getNanos())
+    @JvmStatic
+    val clientRandom: Random = Random(Util.getNanos())
 
-	const val MODID = "empyrean"
+    const val MODID = "empyrean"
 
-	override fun onInitializeClient() {
-		ClientConfig.init()
+    override fun onInitializeClient() {
+        ClientConfig.init()
 
-		bootstrapClientNetworking()
-		bootstrapClientEvents()
-	}
+        bootstrapClientNetworking()
+        bootstrapClientEvents()
+    }
 }

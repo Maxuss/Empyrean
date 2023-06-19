@@ -15,11 +15,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Style.class)
 public abstract class StyleMixin implements EmpyreanStyle {
-    @Shadow public abstract Style withBold(@Nullable Boolean bool);
-
-    @Shadow @Final @Nullable Boolean bold;
-
+    @Shadow
+    @Final
+    @Nullable Boolean bold;
     private SpecialFormatting empyreanFormatting = SpecialFormatting.NONE;
+
+    @Shadow
+    public abstract Style withBold(@Nullable Boolean bool);
 
     @NotNull
     @Override

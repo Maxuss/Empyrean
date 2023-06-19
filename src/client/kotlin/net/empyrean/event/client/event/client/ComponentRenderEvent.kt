@@ -1,5 +1,6 @@
 package net.empyrean.event.client.event.client
 
+import net.empyrean.event.client.event.client.ComponentRenderEvent.Callback
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
 import net.minecraft.client.gui.Font
@@ -15,7 +16,7 @@ object ComponentRenderEvent {
         Callback::class.java
     ) { callbacks ->
         Callback { style, charCode, rd ->
-            for(callback in callbacks) {
+            for (callback in callbacks) {
                 callback.accept(style, charCode, rd)
             }
         }
@@ -26,7 +27,7 @@ object ComponentRenderEvent {
         Callback::class.java
     ) { callbacks ->
         Callback { style, charCode, rd ->
-            for(callback in callbacks) {
+            for (callback in callbacks) {
                 callback.accept(style, charCode, rd)
             }
         }

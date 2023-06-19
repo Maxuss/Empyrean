@@ -47,7 +47,7 @@ public abstract class EffectRenderingScreenMixin {
             TextureAtlasSprite textureAtlasSprite = mobEffectTextureManager.get(mobEffect);
             guiGraphics.blit(x + 7, y + 7, 0, 18, 18, textureAtlasSprite);
             y += height;
-            if(y >= topY + 166) {
+            if (y >= topY + 166) {
                 // we have reached the bottom of the screen
                 // shift x forward
                 y = topY;
@@ -66,10 +66,10 @@ public abstract class EffectRenderingScreenMixin {
         int tmpIdx = 0;
         for (MobEffectInstance ignored : iterable) {
             guiGraphics.blit(INVENTORY_LOCATION, x, y, 0, 198, 32, 32);
-            if(isMouseAround(x, y, 32, 32, mouseX, mouseY))
+            if (isMouseAround(x, y, 32, 32, mouseX, mouseY))
                 hoveredIdx = tmpIdx;
             y += height;
-            if(y >= topY + 166) {
+            if (y >= topY + 166) {
                 // we have reached the bottom of the screen
                 // shift x forward
                 y = topY;
@@ -88,7 +88,7 @@ public abstract class EffectRenderingScreenMixin {
             Component component2 = EffectUtil.formatDuration(effect);
             guiGraphics.drawString(Minecraft.getInstance().font, component2, x + 8, y + 22, 0xFFFFFF);
             y += height;
-            if(y >= topY + 166) {
+            if (y >= topY + 166) {
                 // shifting x
                 y = topY;
                 x += 34;
@@ -107,7 +107,7 @@ public abstract class EffectRenderingScreenMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, CallbackInfo ci, int k, int l, Collection<MobEffectInstance> collection, boolean bl, int m) {
-        if(!ClientConfig.getCompactEffectDisplay())
+        if (!ClientConfig.getCompactEffectDisplay())
             return;
 
         List<MobEffectInstance> iterable = Ordering.natural().sortedCopy(collection);
@@ -116,7 +116,7 @@ public abstract class EffectRenderingScreenMixin {
         renderEffectIcons(guiGraphics, k, m, iterable);
         renderTooltips(guiGraphics, k, m, iterable);
 
-        if(hovered != -1) {
+        if (hovered != -1) {
             MobEffectInstance hoveredEffect = ImmutableList.copyOf(iterable).get(hovered);
             guiGraphics.renderTooltip(
                     Minecraft.getInstance().font,

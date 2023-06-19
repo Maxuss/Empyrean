@@ -1,6 +1,8 @@
 package net.empyrean.util.entity
 
-import net.empyrean.util.pos.*
+import net.empyrean.util.pos.BlockIterator
+import net.empyrean.util.pos.block
+import net.empyrean.util.pos.pos
 import net.empyrean.util.text.Text
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.phys.Vec3

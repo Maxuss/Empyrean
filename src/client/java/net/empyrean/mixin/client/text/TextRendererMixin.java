@@ -36,12 +36,12 @@ public abstract class TextRendererMixin implements IFontAccessor {
     )
     public void callPreRenderEvent(FormattedCharSequence formattedCharSequence, float f, float g, int i, boolean bl, Matrix4f matrix4f, MultiBufferSource multiBufferSource, Font.DisplayMode displayMode, int j, int k, CallbackInfoReturnable<Integer> cir) {
         // Rendering bloom effect
-        float[] bloomTotalLength = new float[] { 0 };
-        int[] empColor = new int[] { -1 };
+        float[] bloomTotalLength = new float[]{0};
+        int[] empColor = new int[]{-1};
 
         formattedCharSequence.accept((unused1, style, charCode) -> {
             EmpyreanStyle empyrean = (EmpyreanStyle) style;
-            if(empyrean.getSpecialFormat() != SpecialFormatting.NONE) {
+            if (empyrean.getSpecialFormat() != SpecialFormatting.NONE) {
                 GlyphInfo info = this.getFontSet(style.getFont()).getGlyphInfo(charCode, true);
                 bloomTotalLength[0] = bloomTotalLength[0] + info.getAdvance();
                 empColor[0] = empyrean.getSpecialFormat().getBloomColor() == null ? -1 : empyrean.getSpecialFormat().getBloomColor().getAltValue();
@@ -49,7 +49,7 @@ public abstract class TextRendererMixin implements IFontAccessor {
             return true;
         });
 
-        if(empColor[0] != -1) {
+        if (empColor[0] != -1) {
             float spriteWidth = bloomTotalLength[0];
             BloomRenderer.enqueue(new BakedBloom(empColor[0], (int) spriteWidth, (int) f, (int) g));
         }
@@ -58,7 +58,7 @@ public abstract class TextRendererMixin implements IFontAccessor {
         formattedCharSequence.accept((unused1, style, charCode) -> {
             GlyphInfo info = this.getFontSet(style.getFont()).getGlyphInfo(charCode, true);
             EmpyreanStyle empyrean = (EmpyreanStyle) style;
-            if(empyrean.getSpecialFormat() != SpecialFormatting.NONE) {
+            if (empyrean.getSpecialFormat() != SpecialFormatting.NONE) {
                 ComponentRenderEvent.PRE.invoker().accept(style, charCode, new ComponentRenderEvent.RenderData(totalOffset.floatValue(), f + (float) totalOffset.get(), g, bl, matrix4f, multiBufferSource, displayMode, (Font) (Object) this, this.getFontSet(style.getFont())));
             }
             totalOffset.addAndGet(info.getAdvance());
@@ -75,7 +75,7 @@ public abstract class TextRendererMixin implements IFontAccessor {
         formattedCharSequence.accept((unused1, style, charCode) -> {
             GlyphInfo info = this.getFontSet(style.getFont()).getGlyphInfo(charCode, true);
             EmpyreanStyle empyrean = (EmpyreanStyle) style;
-            if(empyrean.getSpecialFormat() != SpecialFormatting.NONE) {
+            if (empyrean.getSpecialFormat() != SpecialFormatting.NONE) {
                 ComponentRenderEvent.POST.invoker().accept(style, charCode, new ComponentRenderEvent.RenderData(totalOffset.floatValue(), f + (float) totalOffset.get(), g, bl, matrix4f, multiBufferSource, displayMode, (Font) (Object) this, this.getFontSet(style.getFont())));
             }
             totalOffset.addAndGet(info.getAdvance());

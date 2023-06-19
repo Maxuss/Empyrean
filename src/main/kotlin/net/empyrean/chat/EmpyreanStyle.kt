@@ -9,5 +9,8 @@ interface EmpyreanStyle {
     val specialFormat: SpecialFormatting
 }
 
-fun MutableComponent.withEmpyreanStyle(spec: SpecialFormatting): MutableComponent = this.withStyle { (style as EmpyreanStyle).withSpecial(spec) }
-fun MutableComponent.withColor(color: EmpyreanColor): MutableComponent = this.withEmpyreanStyle(SpecialFormatting.fromColor(color))
+fun MutableComponent.withEmpyreanStyle(spec: SpecialFormatting): MutableComponent =
+    this.withStyle { (style as EmpyreanStyle).withSpecial(spec) }
+
+fun MutableComponent.withColor(color: EmpyreanColor): MutableComponent =
+    this.withEmpyreanStyle(SpecialFormatting.fromColor(color))

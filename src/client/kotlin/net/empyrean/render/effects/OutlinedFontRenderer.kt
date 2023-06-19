@@ -11,14 +11,14 @@ import net.minecraft.util.FormattedCharSink
 class OutlinedFontRenderer(
     private val outlineColor: TextColor,
     private val innerColor: TextColor = TextColor.fromRgb(0x14012b)
-): EmpyreanEffectRenderer {
+) : EmpyreanEffectRenderer {
     override fun renderChar(data: EmpyreanEffectRenderer.EffectRenderPayload) {
         drawCharOutlined(
             Component.literal(data.charCode.toChar().toString()).visualOrderText,
-            data, if(data.style.isBold) 1f else 0.7f,
+            data, if (data.style.isBold) 1f else 0.7f,
             data.alpha
         )
-        if(data.style.isBold)
+        if (data.style.isBold)
             drawCharOutlined(
                 Component.literal(data.charCode.toChar().toString()).visualOrderText,
                 data.copy(x = data.x + data.glyphInfo.boldOffset * .8f),
@@ -28,11 +28,25 @@ class OutlinedFontRenderer(
     }
 
     @Suppress("SameParameterValue")
-    private fun drawCharOutlined(text: FormattedCharSequence, data: EmpyreanEffectRenderer.EffectRenderPayload, outlineWidthMul: Float, alpha: Float) {
+    private fun drawCharOutlined(
+        text: FormattedCharSequence,
+        data: EmpyreanEffectRenderer.EffectRenderPayload,
+        outlineWidthMul: Float,
+        alpha: Float
+    ) {
         val i = Font.adjustColor(outlineColor.value)
 
         // Drawing shadow first
-        val shadowSRO = Minecraft.getInstance().font.StringRenderOutput(data.bufferSource, data.x + 0.25f, data.y + 0.25f, i, true, data.pose, Font.DisplayMode.SEE_THROUGH, 0xA0A0A0)
+        val shadowSRO = Minecraft.getInstance().font.StringRenderOutput(
+            data.bufferSource,
+            data.x + 0.25f,
+            data.y + 0.25f,
+            i,
+            true,
+            data.pose,
+            Font.DisplayMode.SEE_THROUGH,
+            0xA0A0A0
+        )
         shadowSRO.a = alpha * 0.5f
         text.accept { l: Int, style: Style, code: Int ->
             shadowSRO.accept(l, style.withColor(i), code)
@@ -40,8 +54,16 @@ class OutlinedFontRenderer(
         shadowSRO.finish(0, data.x + 0.25f)
 
         // Drawing the outline
-        val stringRenderOutput = Minecraft.getInstance().font.
-            StringRenderOutput(data.bufferSource, 0.0f, 0.0f, i, false, data.pose, Font.DisplayMode.NORMAL,  0xFFFFFF)
+        val stringRenderOutput = Minecraft.getInstance().font.StringRenderOutput(
+            data.bufferSource,
+            0.0f,
+            0.0f,
+            i,
+            false,
+            data.pose,
+            Font.DisplayMode.NORMAL,
+            0xFFFFFF
+        )
         stringRenderOutput.a = alpha
         for (j in -1..1) {
             for (k in -1..1) {

@@ -7,7 +7,7 @@ import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
 import net.minecraft.data.models.model.ModelTemplates
 
-class EmpyreanModelGenerator(generator: FabricDataOutput): FabricModelProvider(generator) {
+class EmpyreanModelGenerator(generator: FabricDataOutput) : FabricModelProvider(generator) {
     override fun generateBlockStateModels(blocks: BlockModelGenerators) {
         // no block state models for now
     }

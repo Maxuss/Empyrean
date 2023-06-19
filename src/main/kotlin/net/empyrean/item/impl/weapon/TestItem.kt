@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class TestItem: EmpyreanItem(FabricItemSettings().fireproof(), ItemRarity.STARLIKE, ItemKind.MATERIAL) {
+class TestItem : EmpyreanItem(FabricItemSettings().fireproof(), ItemRarity.STARLIKE, ItemKind.MATERIAL) {
     override fun data(stack: ItemStack): ItemData {
         return ItemData(stack)
     }
@@ -20,6 +20,9 @@ class TestItem: EmpyreanItem(FabricItemSettings().fireproof(), ItemRarity.STARLI
     override fun tooltip(itemStack: ItemStack, level: Level?, list: MutableList<Component>, tooltipFlag: TooltipFlag) {
         list.add(Component.literal("Material").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
         list.add(Component.empty())
-        list.add(Component.literal("Can be used to craft Cosmilium gear").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
+        list.add(
+            Component.literal("Can be used to craft Cosmilium gear")
+                .withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY))
+        )
     }
 }

@@ -27,8 +27,8 @@ open class ItemDataSchema(internal val bound: ItemStack) {
 
     fun validate() {
         val inTag = bound.getOrCreateTagElement("empyrean")
-        for(prop in properties) {
-            if(inTag.contains(prop.name))
+        for (prop in properties) {
+            if (inTag.contains(prop.name))
                 prop.load(inTag)
             else
                 prop.saveDefault(inTag)
@@ -40,10 +40,11 @@ class SchemaProperty<T>(
     internal val name: String,
     private val serializer: KSerializer<T>,
     private val default: T,
-    private var currentData: T?) {
+    private var currentData: T?
+) {
     fun saveDefault(to: CompoundTag) {
         val encoded = encodeNbt(serializer, default)
-        if(encoded.contains("_value")) {
+        if (encoded.contains("_value")) {
             to.put(name, encoded["_value"]!!)
         } else {
             to.put(name, encoded)
@@ -52,7 +53,7 @@ class SchemaProperty<T>(
 
     fun encode(to: CompoundTag, value: T) {
         val encoded = encodeNbt(serializer, value)
-        if(encoded.contains("_value")) {
+        if (encoded.contains("_value")) {
             to.put(name, encoded["_value"]!!)
         } else {
             to.put(name, encoded)
@@ -62,7 +63,7 @@ class SchemaProperty<T>(
     @Suppress("UNCHECKED_CAST")
     fun load(from: CompoundTag): T? {
         val tag = from[name] ?: return null
-        return if(tag is CompoundTag) {
+        return if (tag is CompoundTag) {
             decodeNbt(serializer, tag.getCompound(name))
         } else {
             tag.inner() as? T
@@ -70,7 +71,7 @@ class SchemaProperty<T>(
     }
 
     operator fun getValue(self: ItemDataSchema, prop: KProperty<*>): T {
-        if(currentData != null)
+        if (currentData != null)
             return currentData!!
         val nullableData = load(self.bound.getOrCreateTagElement("empyrean"))
         currentData = nullableData

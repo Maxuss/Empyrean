@@ -1,5 +1,7 @@
 package net.empyrean.event.client.event.client
 
+import net.empyrean.event.client.event.client.RenderTickEvent.End
+import net.empyrean.event.client.event.client.RenderTickEvent.Start
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
 
@@ -9,7 +11,7 @@ object RenderTickEvent {
         Start::class.java
     ) { callbacks ->
         Start { timer ->
-            for(callback in callbacks) {
+            for (callback in callbacks) {
                 callback.onStart(timer)
             }
         }
@@ -20,7 +22,7 @@ object RenderTickEvent {
         End::class.java
     ) { callbacks ->
         End {
-            for(callback in callbacks) {
+            for (callback in callbacks) {
                 callback.invoke()
             }
         }

@@ -16,9 +16,9 @@ class EmpyreanTextPostRender(
     val bufferSource: MultiBufferSource,
     val displayMode: Font.DisplayMode,
     val font: Font
-): FormattedCharSink {
+) : FormattedCharSink {
     override fun accept(color: Int, style: Style, charCode: Int): Boolean {
-        if((style as EmpyreanStyle).specialFormat == SpecialFormatting.NONE)
+        if ((style as EmpyreanStyle).specialFormat == SpecialFormatting.NONE)
             return true
         val fs = (font as IFontAccessor).fontSet(style.font)
         val consumer = bufferSource.getBuffer(fs.getGlyph(charCode).renderType(displayMode))

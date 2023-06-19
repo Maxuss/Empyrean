@@ -31,7 +31,7 @@ public class EffectsGuiMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
     public void renderEffects(GuiGraphics guiGraphics, CallbackInfo ci, Collection<?> collection, int i, int j, MobEffectTextureManager mobEffectTextureManager, List<Runnable> list, Iterator<?> var7, MobEffectInstance mobEffectInstance, MobEffect mobEffect, int k, int l, float f, TextureAtlasSprite textureAtlasSprite, int n, int o, float g) {
-        if(!ClientConfig.getDisplayEffectLength())
+        if (!ClientConfig.getDisplayEffectLength())
             return; // turned off by client
         list.remove(list.size() - 1); // removing previously submitted task
         list.add(() -> {

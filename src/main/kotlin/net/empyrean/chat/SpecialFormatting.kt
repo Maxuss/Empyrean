@@ -16,14 +16,14 @@ enum class SpecialFormatting(
     ;
 
     fun merge(with: SpecialFormatting): SpecialFormatting {
-        return if(with == NONE) this else with
+        return if (with == NONE) this else with
     }
 
     companion object {
         fun fromColor(color: EmpyreanColor): SpecialFormatting {
-            if(color is LerpingColor) {
+            if (color is LerpingColor) {
                 return valueOf("EMPYREAN_L_${color.lerpName}")
-            } else if(color is TextColor) {
+            } else if (color is TextColor) {
                 return NONE
             }
             return NONE

@@ -17,7 +17,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin implements EmpyreanItemStack {
-    @Shadow @Final @Nullable private Item item;
+    @Shadow
+    @Final
+    @Nullable
+    private Item item;
     private ItemData empyreanData = null;
 
     @Nullable
@@ -28,7 +31,7 @@ public abstract class ItemStackMixin implements EmpyreanItemStack {
 
     @Inject(method = "<init>(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
     private void nbtCtorInjector(CompoundTag compoundTag, CallbackInfo ci) {
-        if(item instanceof EmpyreanItem empyrean) {
+        if (item instanceof EmpyreanItem empyrean) {
             this.empyreanData = empyrean.data((ItemStack) (Object) this);
             this.empyreanData.validate();
         }
@@ -36,7 +39,7 @@ public abstract class ItemStackMixin implements EmpyreanItemStack {
 
     @Inject(method = "<init>(Lnet/minecraft/world/level/ItemLike;I)V", at = @At("TAIL"))
     private void itemCtorInjector(ItemLike itemLike, int i, CallbackInfo ci) {
-        if(item instanceof EmpyreanItem empyrean) {
+        if (item instanceof EmpyreanItem empyrean) {
             this.empyreanData = empyrean.data((ItemStack) (Object) this);
             this.empyreanData.validate();
         }

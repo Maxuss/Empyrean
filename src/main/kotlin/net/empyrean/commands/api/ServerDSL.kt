@@ -32,7 +32,7 @@ typealias KCommand<SRC> = CommandContext<SRC>.() -> Unit // non-int return type 
 
 typealias Arg<SRC, A> = EmpyreanArgBuilder<SRC, A>
 
-class EmpyreanCommandException(msg: String): CommandRuntimeException(Component.literal(msg))
+class EmpyreanCommandException(msg: String) : CommandRuntimeException(Component.literal(msg))
 
 class EmpyreanArgBuilder<SRC, A : ArgumentBuilder<SRC, *>>(var arg: A) :
     ArgumentBuilder<SRC, EmpyreanArgBuilder<SRC, A>>() {
@@ -50,7 +50,8 @@ class EmpyreanArgBuilder<SRC, A : ArgumentBuilder<SRC, *>>(var arg: A) :
      * Specifies a literal argument.
      */
     fun literal(word: String, func: ArgDsl<SRC, LiteralArgumentBuilder<SRC>> = {}): LiteralArgumentBuilder<SRC> {
-        val newArg = EmpyreanArgBuilder<SRC, LiteralArgumentBuilder<SRC>>(LiteralArgumentBuilder.literal(word)).apply(func)
+        val newArg =
+            EmpyreanArgBuilder<SRC, LiteralArgumentBuilder<SRC>>(LiteralArgumentBuilder.literal(word)).apply(func)
         newArg.finalize()
         subArgs.add(newArg)
         return newArg.arg
@@ -61,7 +62,11 @@ class EmpyreanArgBuilder<SRC, A : ArgumentBuilder<SRC, *>>(var arg: A) :
         return super.requires(requirement)
     }
 
-    fun withRequirement(pred: SRC.() -> Boolean, newArg: ArgumentBuilder<SRC, *>, func: ArgDsl<SRC, ArgumentBuilder<SRC, *>>) {
+    fun withRequirement(
+        pred: SRC.() -> Boolean,
+        newArg: ArgumentBuilder<SRC, *>,
+        func: ArgDsl<SRC, ArgumentBuilder<SRC, *>>
+    ) {
         val built = EmpyreanArgBuilder(newArg).apply {
             arg.requires(pred)
         }.apply(func)
@@ -78,7 +83,12 @@ class EmpyreanArgBuilder<SRC, A : ArgumentBuilder<SRC, *>>(var arg: A) :
         items: SuggestionProvider<SRC>? = null,
         func: ArgDslTyped<SRC, ARG> = {}
     ): RequiredArgumentBuilder<SRC, ARG> {
-        val req = EmpyreanArgBuilder<SRC, RequiredArgumentBuilder<SRC, ARG>>(RequiredArgumentBuilder.argument(word, type)).apply {
+        val req = EmpyreanArgBuilder<SRC, RequiredArgumentBuilder<SRC, ARG>>(
+            RequiredArgumentBuilder.argument(
+                word,
+                type
+            )
+        ).apply {
             func { getArgument(this@apply.arg.name, ARG::class.java) }
         }
 
@@ -108,7 +118,12 @@ class EmpyreanArgBuilder<SRC, A : ArgumentBuilder<SRC, *>>(var arg: A) :
     fun argFloat(
         word: String, range: ClosedFloatingPointRange<Float>? = null,
         items: SuggestionProvider<SRC>? = null, func: ArgDslTyped<SRC, Float> = {}
-    ) = argument(if (range != null) FloatArgumentType.floatArg(range.start, range.endInclusive) else FloatArgumentType.floatArg(), word, items, func)
+    ) = argument(
+        if (range != null) FloatArgumentType.floatArg(
+            range.start,
+            range.endInclusive
+        ) else FloatArgumentType.floatArg(), word, items, func
+    )
 
     fun argIdentifier(
         word: String, items: SuggestionProvider<SRC>? = null, func: ArgDslTyped<SRC, ResourceLocation> = {}
@@ -117,7 +132,12 @@ class EmpyreanArgBuilder<SRC, A : ArgumentBuilder<SRC, *>>(var arg: A) :
     fun argInt(
         word: String, range: IntRange? = null,
         items: SuggestionProvider<SRC>? = null, func: ArgDslTyped<SRC, Int> = {}
-    ) = argument(if (range != null) IntegerArgumentType.integer(range.first, range.last) else IntegerArgumentType.integer(), word, items, func)
+    ) = argument(
+        if (range != null) IntegerArgumentType.integer(
+            range.first,
+            range.last
+        ) else IntegerArgumentType.integer(), word, items, func
+    )
 
     fun argIntRange(
         word: String, items: SuggestionProvider<SRC>? = null, func: ArgDslTyped<SRC, MinMaxBounds.Ints> = {}
@@ -191,8 +211,7 @@ class EmpyreanArgBuilder<SRC, A : ArgumentBuilder<SRC, *>>(var arg: A) :
 
     // this runs (required and literal variants)
 
-    inline infix fun <reified ARG> EmpyreanArgBuilder<SRC, RequiredArgumentBuilder<SRC, ARG>>
-            .runs(noinline cmd: CommandContext<SRC>.(it: CommandContext<SRC>.() -> ARG) -> Unit) {
+    inline infix fun <reified ARG> EmpyreanArgBuilder<SRC, RequiredArgumentBuilder<SRC, ARG>>.runs(noinline cmd: CommandContext<SRC>.(it: CommandContext<SRC>.() -> ARG) -> Unit) {
         arg.runs(cmd)
     }
 
@@ -253,7 +272,10 @@ class EmpyreanArgBuilder<SRC, A : ArgumentBuilder<SRC, *>>(var arg: A) :
 }
 
 @Environment(EnvType.SERVER)
-inline fun command(name: String, initializer: EmpyreanArgBuilder<CommandSourceStack, LiteralArgumentBuilder<CommandSourceStack>>.() -> Unit): LiteralArgumentBuilder<CommandSourceStack> {
+inline fun command(
+    name: String,
+    initializer: EmpyreanArgBuilder<CommandSourceStack, LiteralArgumentBuilder<CommandSourceStack>>.() -> Unit
+): LiteralArgumentBuilder<CommandSourceStack> {
     val command = EmpyreanArgBuilder(LiteralArgumentBuilder.literal<CommandSourceStack>(name))
     command.initializer()
     command.finalize()
@@ -268,7 +290,10 @@ fun <SRC : SharedSuggestionProvider> Arg<SRC, *>.suggests(func: (CommandContext<
     }
 }
 
-fun <SRC: SharedSuggestionProvider> Arg<SRC, *>.suggests(forArg: String, func: (CommandContext<SRC>) -> List<Any>): SuggestionProvider<SRC> {
+fun <SRC : SharedSuggestionProvider> Arg<SRC, *>.suggests(
+    forArg: String,
+    func: (CommandContext<SRC>) -> List<Any>
+): SuggestionProvider<SRC> {
     return SuggestionProvider<SRC> { ctx, builder ->
         val accessor = ctx as CommandContextAccessorMixin
         val arg = accessor.arguments[forArg]?.toString() ?: ""

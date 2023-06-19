@@ -41,7 +41,7 @@ object Text {
         val newR = (r * by).roundToInt()
         val newG = (g * by).roundToInt()
         val newB = (b * by).roundToInt()
-        val newA = if(affectsAlpha) (a * by).roundToInt() else a
+        val newA = if (affectsAlpha) (a * by).roundToInt() else a
         return combineARGB(newA, newR, newG, newB)
     }
 

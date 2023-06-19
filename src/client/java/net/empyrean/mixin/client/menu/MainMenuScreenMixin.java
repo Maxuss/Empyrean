@@ -24,7 +24,7 @@ public class MainMenuScreenMixin {
             )
     )
     private GuiEventListener disableSingleplayerButton(TitleScreen instance, GuiEventListener guiEventListener) {
-        if(ClientConfig.getEnableSingleplayer()) {
+        if (ClientConfig.getEnableSingleplayer()) {
             ((IScreenAccessor) instance).callAddRenderableWidget((Button) guiEventListener);
             return guiEventListener;
         }

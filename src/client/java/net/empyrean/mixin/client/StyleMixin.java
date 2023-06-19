@@ -19,7 +19,7 @@ public abstract class StyleMixin {
     )
     public void injectSpecialColor(CallbackInfoReturnable<TextColor> cir) {
         EmpyreanStyle styleHolder = (EmpyreanStyle) this;
-        if(styleHolder.getSpecialFormat() == SpecialFormatting.NONE)
+        if (styleHolder.getSpecialFormat() == SpecialFormatting.NONE)
             return;
         /* no-op */
         if (styleHolder.getSpecialFormat() == SpecialFormatting.EMPYREAN_L_STARLIKE) {

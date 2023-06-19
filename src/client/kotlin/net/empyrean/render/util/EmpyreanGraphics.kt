@@ -21,7 +21,8 @@ fun GuiGraphics.drawTexture(
     r: Float = 1f,
     g: Float = 1f,
     b: Float = 1f,
-    alpha: Float = 0f) {
+    alpha: Float = 0f
+) {
     RenderSystem.setShaderColor(r, g, b, alpha)
     this.innerBlit(
         texture,
@@ -30,7 +31,7 @@ fun GuiGraphics.drawTexture(
         y,
         y + height,
         z,
-        (u + 0.0f) / textureWidth.toFloat   (),
+        (u + 0.0f) / textureWidth.toFloat(),
         (u + width.toFloat()) / textureWidth.toFloat(),
         (v + 0.0f) / textureHeight.toFloat(),
         (v + height.toFloat()) / textureHeight.toFloat(),

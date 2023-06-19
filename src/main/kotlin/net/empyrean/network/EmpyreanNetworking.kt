@@ -25,7 +25,7 @@ fun bootstrapNetworking() {
     // Left click handler
     EmpyreanNetworking.EMPYREAN_CHANNEL.registerServerbound(ServerboundLeftClickPacket::class.java) { _, access ->
         val stack = access.player.mainHandItem
-        if(stack == ItemStack.EMPTY || stack.item !is EmpyreanItem)
+        if (stack == ItemStack.EMPTY || stack.item !is EmpyreanItem)
             return@registerServerbound
         val empyreanItem = stack.item as EmpyreanItem
         empyreanItem.leftClick(access.player.level(), access.player)

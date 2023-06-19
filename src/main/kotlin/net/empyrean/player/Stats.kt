@@ -28,7 +28,8 @@ enum class PlayerStat(
     ;
 }
 
-@JvmInline @Serializable(with = StatsSerializer::class)
+@JvmInline
+@Serializable(with = StatsSerializer::class)
 value class Stats(val inner: EnumMap<PlayerStat, Float>) {
     companion object {
         fun empty() = Stats(EnumMap(PlayerStat.values().associateWith { it.defaultValue }))
@@ -36,27 +37,37 @@ value class Stats(val inner: EnumMap<PlayerStat, Float>) {
 
     var health: Float
         get() = inner.getOrPut(PlayerStat.HEALTH) { PlayerStat.HEALTH.defaultValue }
-        set(v) { inner[PlayerStat.HEALTH] = v }
+        set(v) {
+            inner[PlayerStat.HEALTH] = v
+        }
 
     var intel: Float
         get() = inner.getOrPut(PlayerStat.INTELLIGENCE) { PlayerStat.INTELLIGENCE.defaultValue }
-        set(v) { inner[PlayerStat.INTELLIGENCE] = v }
+        set(v) {
+            inner[PlayerStat.INTELLIGENCE] = v
+        }
 
     var defense: Float
         get() = inner.getOrPut(PlayerStat.DEFENSE) { PlayerStat.DEFENSE.defaultValue }
-        set(v) { inner[PlayerStat.DEFENSE] = v }
+        set(v) {
+            inner[PlayerStat.DEFENSE] = v
+        }
 
     var strength: Float
         get() = inner.getOrPut(PlayerStat.STRENGTH) { PlayerStat.STRENGTH.defaultValue }
-        set(v) { inner[PlayerStat.STRENGTH] = v }
+        set(v) {
+            inner[PlayerStat.STRENGTH] = v
+        }
 
     var damage: Float
         get() = inner.getOrPut(PlayerStat.BASE_DAMAGE) { PlayerStat.BASE_DAMAGE.defaultValue }
-        set(v) { inner[PlayerStat.BASE_DAMAGE] = v }
+        set(v) {
+            inner[PlayerStat.BASE_DAMAGE] = v
+        }
 }
 
 @OptIn(ExperimentalSerializationApi::class)
-object StatsSerializer: KSerializer<Stats> {
+object StatsSerializer : KSerializer<Stats> {
     override val descriptor: SerialDescriptor
         get() = buildClassSerialDescriptor("net.empyrean.player.Stats") {
             PlayerStat.values().forEach {
@@ -68,9 +79,9 @@ object StatsSerializer: KSerializer<Stats> {
         val outMap = EnumMap<PlayerStat, Float>(PlayerStat::class.java)
         decoder.decodeStructure(descriptor) {
             val expectedSize = PlayerStat.values().size
-            for(single in 0 until expectedSize) {
+            for (single in 0 until expectedSize) {
                 val idx = decodeElementIndex(descriptor)
-                if(idx == CompositeDecoder.DECODE_DONE)
+                if (idx == CompositeDecoder.DECODE_DONE)
                     break
                 val stat = PlayerStat.values()[idx]
                 val value = decodeFloatElement(descriptor, idx)

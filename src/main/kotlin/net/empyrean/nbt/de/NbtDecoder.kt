@@ -11,10 +11,9 @@ import net.empyrean.nbt.NbtUtil.getAnyList
 import net.empyrean.nbt.NbtUtil.inner
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
-import java.lang.Exception
 
 @OptIn(ExperimentalSerializationApi::class)
-data class NbtDecoder(private val reader: CompoundTag): AbstractDecoder() {
+data class NbtDecoder(private val reader: CompoundTag) : AbstractDecoder() {
     private val keys = reader.allKeys.toList()
     private var nextIdx = 0
     private val idx get() = nextIdx - 1
@@ -24,16 +23,20 @@ data class NbtDecoder(private val reader: CompoundTag): AbstractDecoder() {
         get() = EmptySerializersModule()
 
     override fun decodeElementIndex(descriptor: SerialDescriptor): Int {
-        if(nextIdx == descriptor.elementsCount)
+        if (nextIdx == descriptor.elementsCount)
             return CompositeDecoder.DECODE_DONE
-        return try { descriptor.getElementIndex(keys[nextIdx++]) } catch(e: Exception) { CompositeDecoder.DECODE_DONE }
+        return try {
+            descriptor.getElementIndex(keys[nextIdx++])
+        } catch (e: Exception) {
+            CompositeDecoder.DECODE_DONE
+        }
     }
 
     override fun beginStructure(descriptor: SerialDescriptor): CompositeDecoder {
-        return if(descriptor.kind == StructureKind.LIST) {
+        return if (descriptor.kind == StructureKind.LIST) {
             DecodeList(this, reader.getAnyList(keys[idx]))
         } else {
-            if(idx == -1) this else NbtDecoder(reader.getCompound(keys[idx]))
+            if (idx == -1) this else NbtDecoder(reader.getCompound(keys[idx]))
         }
     }
 
@@ -79,7 +82,7 @@ data class NbtDecoder(private val reader: CompoundTag): AbstractDecoder() {
 }
 
 @OptIn(ExperimentalSerializationApi::class)
-class DecodeList(private val parent: NbtDecoder, private val list: List<Tag>): AbstractDecoder() {
+class DecodeList(private val parent: NbtDecoder, private val list: List<Tag>) : AbstractDecoder() {
     private var idx = 0
 
     override val serializersModule: SerializersModule

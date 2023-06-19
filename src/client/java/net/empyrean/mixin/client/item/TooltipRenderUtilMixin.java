@@ -24,16 +24,16 @@ public class TooltipRenderUtilMixin {
     )
     private static void renderEmpyreanTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, int z, int providedStartColor, int providedEndColor, CallbackInfo ci) {
         Screen screen = Minecraft.getInstance().screen;
-        if(!(screen instanceof AbstractContainerScreen<?> containerScreen))
+        if (!(screen instanceof AbstractContainerScreen<?> containerScreen))
             return;
         Slot hovered = containerScreen.hoveredSlot;
-        if(hovered == null) // we are probably inside hover event? really weird
+        if (hovered == null) // we are probably inside hover event? really weird
             return;
         ItemStack containerStack = hovered.getItem();
-        if(containerStack.isEmpty()) // how is it possible? catching edge case though
+        if (containerStack.isEmpty()) // how is it possible? catching edge case though
             return;
 
-        if(containerStack.getItem() instanceof EmpyreanItem empyrean) {
+        if (containerStack.getItem() instanceof EmpyreanItem empyrean) {
             // we can use special colors!
             ItemRarity rarity = empyrean.getItemRarity();
             int beginColor = ((EmpyreanColor) rarity.getColor()).getAltValue();

@@ -28,7 +28,7 @@ public abstract class MinecraftClientMixin {
             at = @At(
                     value = "INVOKE_STRING",
                     target = "Lnet/minecraft/util/profiling/ProfilerFiller;popPush(Ljava/lang/String;)V",
-                    args = { "ldc=gameRenderer" }),
+                    args = {"ldc=gameRenderer"}),
             require = 1
     )
     public void runTick(boolean tickWorld, CallbackInfo ci) {

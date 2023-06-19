@@ -17,11 +17,11 @@ class BidiTicker(
     }
 
     fun tick(): Float {
-        currentValue = if(currentDirection == Direction.INC) currentValue + step else currentValue - step
-        if(currentValue < min) {
+        currentValue = if (currentDirection == Direction.INC) currentValue + step else currentValue - step
+        if (currentValue < min) {
             currentValue = min
             currentDirection = Direction.INC
-        } else if(currentValue > max) {
+        } else if (currentValue > max) {
             currentValue = max
             currentDirection = Direction.DEC
         }

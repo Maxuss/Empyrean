@@ -21,11 +21,15 @@ class AppendingCompoundWriter {
     }
 
     fun lastCompound(): AppendingCompoundWriter {
-        return entries.lastOrNull { val value = it.value; value != null && value is AppendingCompoundWriter && !value.closed }?.value as? AppendingCompoundWriter ?: this
+        return entries.lastOrNull {
+            val value = it.value; value != null && value is AppendingCompoundWriter && !value.closed
+        }?.value as? AppendingCompoundWriter ?: this
     }
 
     fun closeLastCompound() {
-        val last = entries.lastOrNull { val value = it.value; value != null && value is AppendingCompoundWriter && !value.closed }?.value as? AppendingCompoundWriter ?: return
+        val last = entries.lastOrNull {
+            val value = it.value; value != null && value is AppendingCompoundWriter && !value.closed
+        }?.value as? AppendingCompoundWriter ?: return
         last.closed = true
     }
 
@@ -36,13 +40,14 @@ class AppendingCompoundWriter {
     }
 
     fun finishInto(out: CompoundTag) {
-        for(entry in entries) {
-            val tag = when(val entryValue = entry.value) {
+        for (entry in entries) {
+            val tag = when (val entryValue = entry.value) {
                 is AppendingCompoundWriter -> entryValue.finish()
                 is AppendingListWriter -> {
                     out.put(entry.key, entryValue.finish())
                     continue
                 }
+
                 else -> NbtUtil.transformToNbt(entryValue ?: continue)
             } ?: continue
             out.put(entry.key, tag)

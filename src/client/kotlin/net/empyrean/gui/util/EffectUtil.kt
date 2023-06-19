@@ -13,10 +13,10 @@ import kotlin.math.roundToInt
 object EffectUtil {
     @JvmStatic
     fun formatDuration(effect: MobEffectInstance): Component {
-        if(effect.isInfiniteDuration)
+        if (effect.isInfiniteDuration)
             return Component.translatable("effect.duration.infinite")
         val seconds = effect.duration / 20f
-        return if(seconds > 120) {
+        return if (seconds > 120) {
             val minutes = seconds / 60f
             Component.literal("${minutes.roundToInt()}m")
         } else {
@@ -27,10 +27,19 @@ object EffectUtil {
     @JvmStatic
     fun buildTooltip(effect: MobEffectInstance): List<FormattedCharSequence> {
         val list = mutableListOf<FormattedCharSequence>()
-        list.add(Component.translatable(effect.descriptionId).append(CommonComponents.SPACE).append(Component.translatable("enchantment.level.${effect.amplifier + 1}")).visualOrderText)
-        val split = Minecraft.getInstance().font.split(Component.translatable("${effect.descriptionId}.description"), 200)
+        list.add(
+            Component.translatable(effect.descriptionId).append(CommonComponents.SPACE)
+                .append(Component.translatable("enchantment.level.${effect.amplifier + 1}")).visualOrderText
+        )
+        val split =
+            Minecraft.getInstance().font.split(Component.translatable("${effect.descriptionId}.description"), 200)
         list.addAll(split)
-        list.add(MobEffectUtil.formatDuration(effect, 1f).mutable.withStyle(Style.EMPTY.withColor(0x8e8e8e)).visualOrderText)
+        list.add(
+            MobEffectUtil.formatDuration(
+                effect,
+                1f
+            ).mutable.withStyle(Style.EMPTY.withColor(0x8e8e8e)).visualOrderText
+        )
         return list
     }
 }

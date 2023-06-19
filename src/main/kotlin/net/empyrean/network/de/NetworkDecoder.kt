@@ -9,14 +9,14 @@ import kotlinx.serialization.modules.SerializersModule
 import net.minecraft.network.FriendlyByteBuf
 
 @OptIn(ExperimentalSerializationApi::class)
-class NetworkDecoder(private val reader: FriendlyByteBuf): AbstractDecoder() {
+class NetworkDecoder(private val reader: FriendlyByteBuf) : AbstractDecoder() {
     private var idx = 0
 
     override val serializersModule: SerializersModule
         get() = EmptySerializersModule()
 
     override fun decodeElementIndex(descriptor: SerialDescriptor): Int {
-        if(idx == descriptor.elementsCount)
+        if (idx == descriptor.elementsCount)
             return CompositeDecoder.DECODE_DONE
         return idx++
     }

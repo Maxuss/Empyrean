@@ -35,10 +35,10 @@ public abstract class StyleSerializerMixin {
     )
     public void injectEmpyreanStyling(Style style, Type type, JsonSerializationContext ctx, CallbackInfoReturnable<JsonElement> cir) {
         JsonElement returnValue = cir.getReturnValue();
-        if(returnValue == null)
+        if (returnValue == null)
             return;
         SpecialFormatting special = ((EmpyreanStyle) style).getSpecialFormat();
-        if(special != SpecialFormatting.NONE) {
+        if (special != SpecialFormatting.NONE) {
             JsonObject obj = returnValue.getAsJsonObject();
             obj.addProperty("empyreanFormat", special.ordinal());
         }

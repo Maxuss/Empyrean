@@ -9,5 +9,5 @@ enum class ItemKind {
     MATERIAL,
     ;
 
-    val named: String get() = if(this == MATERIAL) "" else name.replace("_", " ")
+    val named: String get() = if (this == MATERIAL) "" else name.replace("_", " ")
 }

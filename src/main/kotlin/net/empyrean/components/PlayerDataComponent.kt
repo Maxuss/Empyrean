@@ -14,11 +14,11 @@ import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.player.Player
 
 @Suppress("UnstableApiUsage")
-class PlayerDataComponent(private val provider: Player): PlayerComponent<Component>, AutoSyncedComponent {
+class PlayerDataComponent(private val provider: Player) : PlayerComponent<Component>, AutoSyncedComponent {
     var playerData: EmpyreanPlayerData = EmpyreanPlayerData.default()
 
     override fun readFromNbt(tag: CompoundTag) {
-        if(tag.isEmpty)
+        if (tag.isEmpty)
             return // migration support
         playerData = decodeNbt(tag)
     }

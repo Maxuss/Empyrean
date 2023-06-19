@@ -10,13 +10,13 @@ open class LerpingColor(
     val lerpName: String,
     private val colors: ImmutableList<Int>,
     private val duration: Float = 20f
-): TextColor(colors[0]), EmpyreanColor, Ticking {
+) : TextColor(colors[0]), EmpyreanColor, Ticking {
     private var tick: Float = 0f
     private var idx: Int = 0
 
     override fun tick() {
         tick += 1f
-        if(tick >= duration) {
+        if (tick >= duration) {
             idx = (idx + 1) % colors.size
             tick = 0f
         }

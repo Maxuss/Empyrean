@@ -11,14 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(TextColor.class)
 public abstract class TextColorMixin implements EmpyreanColor {
-    @Shadow public abstract int getValue();
-
     private static final String EMPYREAN_COLOR_PREFIX = "<E";
-
-    @Override
-    public int getColorValue() {
-        return ((TextColor) (Object) this).getValue();
-    }
 
     @Inject(
             method = "parseColor",
@@ -26,12 +19,20 @@ public abstract class TextColorMixin implements EmpyreanColor {
             cancellable = true
     )
     private static void injectEmpyreanColorDecoder(String hexString, CallbackInfoReturnable<TextColor> cir) {
-        if(hexString.startsWith(EMPYREAN_COLOR_PREFIX)) {
+        if (hexString.startsWith(EMPYREAN_COLOR_PREFIX)) {
             String operated = hexString.substring(2);
-            if(operated.startsWith(":L")) {
+            if (operated.startsWith(":L")) {
                 cir.setReturnValue(LerpingColor.parse(operated.substring(3)));
             }
         }
+    }
+
+    @Shadow
+    public abstract int getValue();
+
+    @Override
+    public int getColorValue() {
+        return ((TextColor) (Object) this).getValue();
     }
 
     @Override

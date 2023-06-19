@@ -39,7 +39,7 @@ abstract class ConfigProvider {
 
     protected fun load() {
         val file = FabricLoader.getInstance().configDir.resolve("empyrean.json").toFile()
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.createNewFile()
             return
         }
@@ -49,7 +49,7 @@ abstract class ConfigProvider {
         categories.forEach {
             it.groups.forEach { grp ->
                 grp.properties.forEach { prop ->
-                    if(!values.containsKey(prop.name))
+                    if (!values.containsKey(prop.name))
                         values[prop.name] = prop.defaultValue!!
                 }
             }
@@ -58,7 +58,7 @@ abstract class ConfigProvider {
 
     protected fun saveDefault() {
         val file = FabricLoader.getInstance().configDir.resolve("empyrean.json").toFile()
-        if(file.exists()) {
+        if (file.exists()) {
             return
         }
 
@@ -67,7 +67,7 @@ abstract class ConfigProvider {
 
     private fun save() {
         val file = FabricLoader.getInstance().configDir.resolve("empyrean.json").toFile()
-        if(!file.exists())
+        if (!file.exists())
             file.createNewFile()
         val properties = values.toList().associate { it.first to PropertyData(it.second.javaClass.name, it.second) }
         file.writeText(json.encodeToString(serializer(), properties))
@@ -76,17 +76,17 @@ abstract class ConfigProvider {
     fun screen(parent: Screen?): Screen {
         var builder = YetAnotherConfigLib.createBuilder()
             .title(Component.translatable("config.empyrean.title"))
-        for(category in categories) {
+        for (category in categories) {
             var ctg = ConfigCategory
                 .createBuilder()
                 .name(Component.translatable("config.empyrean.category.${category.name}"))
                 .tooltip(Component.translatable("config.empyrean.category.${category.name}.description"))
-            for(group in category.groups) {
+            for (group in category.groups) {
                 var grp = OptionGroup
                     .createBuilder()
                     .name(Component.translatable("config.empyrean.group.${group.name}"))
                     .description(OptionDescription.of(Component.translatable("config.empyrean.group.${group.name}.tooltip")))
-                for(prop in group.properties) {
+                for (prop in group.properties) {
                     grp = grp.option(prop.createYaclProperty())
                 }
                 ctg = ctg.group(grp.build())
@@ -118,7 +118,12 @@ data class Group(
     val name: String,
     val properties: ImmutableList<ConfigProperty<*>>
 )
-data class GroupBuilder(val selfConfig: ConfigProvider, val name: String, val properties: MutableList<ConfigProperty<*>>) {
+
+data class GroupBuilder(
+    val selfConfig: ConfigProvider,
+    val name: String,
+    val properties: MutableList<ConfigProperty<*>>
+) {
     fun boolean(name: String, default: Boolean) {
         val prop = BooleanProperty(selfConfig, name, default)
         properties.add(prop)
@@ -130,14 +135,17 @@ data class GroupBuilder(val selfConfig: ConfigProvider, val name: String, val pr
     }
 }
 
-class BooleanProperty(config: ConfigProvider, name: String, default: Boolean): ConfigProperty<Boolean>(config, name, default) {
+class BooleanProperty(config: ConfigProvider, name: String, default: Boolean) :
+    ConfigProperty<Boolean>(config, name, default) {
     override fun createYaclProperty(): Option<*> {
         return Option
             .createBuilder<Boolean>()
             .name(Component.translatable("config.empyrean.option.$name"))
-            .description(OptionDescription.of(
-                Component.translatable("config.empyrean.option.$name.tooltip")
-            ))
+            .description(
+                OptionDescription.of(
+                    Component.translatable("config.empyrean.option.$name.tooltip")
+                )
+            )
             .binding(defaultValue, { config.values[name] as Boolean }, { config.values[name] = it })
             .controller(TickBoxControllerBuilder::create)
             .build()
@@ -155,7 +163,7 @@ abstract class ConfigProperty<T>(
 @Serializable(with = PropertySerializer::class)
 data class PropertyData(val klass: String, val value: Any)
 
-object PropertySerializer: KSerializer<PropertyData> {
+object PropertySerializer : KSerializer<PropertyData> {
     override val descriptor: SerialDescriptor
         get() = buildClassSerialDescriptor("PropertyData") {
             element("\$class", serialDescriptor<String>())
@@ -165,7 +173,7 @@ object PropertySerializer: KSerializer<PropertyData> {
     @OptIn(ExperimentalSerializationApi::class)
     override fun deserialize(decoder: Decoder): PropertyData {
         return decoder.decodeStructure(descriptor) {
-            if(decodeSequentially()) {
+            if (decodeSequentially()) {
                 val classDesc = Class.forName(decodeStringElement(descriptor, 0))
                 val de = serializer(classDesc)
                 val value = decodeSerializableElement(descriptor, 0, de)

@@ -25,7 +25,7 @@ abstract class EmpyreanItem(
     properties: FabricItemSettings,
     val itemRarity: ItemRarity,
     val itemKind: ItemKind
-): Item(properties) {
+) : Item(properties) {
     open fun tooltip(
         itemStack: ItemStack,
         level: Level?,
@@ -44,7 +44,10 @@ abstract class EmpyreanItem(
         tooltip(stack, level, tooltipComponents, isAdvanced)
         tooltipComponents.add(Component.empty())
         val color = itemRarity.color as EmpyreanColor
-        tooltipComponents.add(Component.literal("${itemRarity.named} ${itemKind.named}").withStyle(Style.EMPTY.withBold(true)).withColor(color))
+        tooltipComponents.add(
+            Component.literal("${itemRarity.named} ${itemKind.named}").withStyle(Style.EMPTY.withBold(true))
+                .withColor(color)
+        )
     }
 
     override fun getName(stack: ItemStack): Component {
@@ -78,9 +81,9 @@ abstract class EmpyreanItem(
         player: Player,
         interactionHand: InteractionHand
     ): InteractionResultHolder<ItemStack> {
-        if(level.isClientSide) // only handling clicks on server
+        if (level.isClientSide) // only handling clicks on server
             return InteractionResultHolder.pass(player.getItemInHand(interactionHand))
-        return if(interactionHand == InteractionHand.MAIN_HAND)
+        return if (interactionHand == InteractionHand.MAIN_HAND)
             rightClick(level, player as ServerPlayer)
         else
             rightClickOffHand(level, player as ServerPlayer)
@@ -88,7 +91,7 @@ abstract class EmpyreanItem(
 
     override fun verifyTagAfterLoad(compoundTag: CompoundTag) {
         super.verifyTagAfterLoad(compoundTag)
-        if(!compoundTag.contains("empyrean")) {
+        if (!compoundTag.contains("empyrean")) {
             compoundTag.put("empyrean", CompoundTag())
         }
     }

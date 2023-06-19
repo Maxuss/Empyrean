@@ -10,7 +10,7 @@ import kotlinx.serialization.modules.SerializersModule
 import net.minecraft.network.FriendlyByteBuf
 
 @OptIn(ExperimentalSerializationApi::class)
-class NetworkEncoder(val out: FriendlyByteBuf): AbstractEncoder() {
+class NetworkEncoder(val out: FriendlyByteBuf) : AbstractEncoder() {
     override val serializersModule: SerializersModule
         get() = EmptySerializersModule()
 
@@ -65,11 +65,12 @@ class NetworkEncoder(val out: FriendlyByteBuf): AbstractEncoder() {
     }
 
     override fun beginStructure(descriptor: SerialDescriptor): CompositeEncoder {
-        return when(descriptor.kind) {
+        return when (descriptor.kind) {
             StructureKind.MAP -> {
                 out.writeVarInt(descriptor.elementsCount)
                 this
             }
+
             else -> this
         }
     }

@@ -2,22 +2,18 @@
 
 package net.empyrean.nbt
 
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationStrategy
+import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.serializer
 import net.empyrean.nbt.de.NbtDecoder
 import net.empyrean.nbt.ser.AppendingCompoundWriter
 import net.empyrean.nbt.ser.NbtEncoder
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.resources.ResourceLocation
-import java.util.UUID
+import java.util.*
 
 fun <T> encodeNbt(serializer: SerializationStrategy<T>, value: T): CompoundTag {
     val encoder = NbtEncoder(AppendingCompoundWriter())
@@ -44,7 +40,7 @@ inline fun <reified T> decodeNbt(from: CompoundTag): T = decodeNbt(serializer(),
 typealias Identifier = @Serializable(with = ResourceLocationSer::class) ResourceLocation
 typealias SerId = @Serializable(with = UUIDSer::class) UUID
 
-object ResourceLocationSer: KSerializer<ResourceLocation> {
+object ResourceLocationSer : KSerializer<ResourceLocation> {
     override val descriptor: SerialDescriptor
         get() = PrimitiveSerialDescriptor("ResourceLocation", PrimitiveKind.STRING)
 
@@ -57,7 +53,7 @@ object ResourceLocationSer: KSerializer<ResourceLocation> {
     }
 }
 
-object UUIDSer: KSerializer<UUID> {
+object UUIDSer : KSerializer<UUID> {
     override val descriptor: SerialDescriptor
         get() = PrimitiveSerialDescriptor("UUID", PrimitiveKind.STRING)
 

@@ -25,7 +25,7 @@ public class GameRendererMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
     public void doRenderParticles(float partialTicks, long nanoTime, boolean renderLevel, CallbackInfo ci, int i, int j, Window window, Matrix4f matrix, PoseStack poseStack, GuiGraphics guiGraphics) {
-        if(!renderLevel) // we do not draw particles outside of level
+        if (!renderLevel) // we do not draw particles outside of level
             return;
         ParticleEngine2D.render(guiGraphics, partialTicks);
         BloomRenderer.render(guiGraphics);

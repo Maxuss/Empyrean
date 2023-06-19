@@ -10,14 +10,14 @@ import java.util.concurrent.ThreadLocalRandom
 
 object EmpyreanMod : ModInitializer {
     private val logger = LoggerFactory.getLogger("empyrean")
-	const val modId: String = "empyrean"
+    const val modId: String = "empyrean"
 
-	val serverRandom = kotlin.random.Random(ThreadLocalRandom.current().nextInt())
+    val serverRandom = kotlin.random.Random(ThreadLocalRandom.current().nextInt())
 
-	override fun onInitialize() {
-		bootstrapItems()
-		bootstrapCommands()
-		bootstrapNetworking()
-		bootstrapEvents()
-	}
+    override fun onInitialize() {
+        bootstrapItems()
+        bootstrapCommands()
+        bootstrapNetworking()
+        bootstrapEvents()
+    }
 }

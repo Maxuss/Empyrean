@@ -10,7 +10,7 @@ object ParticleEngine2D {
 
     @JvmStatic
     fun tick() {
-        if(active)
+        if (active)
             particles.removeIf {
                 it.tick()
                 !it.isAlive
@@ -19,7 +19,7 @@ object ParticleEngine2D {
 
     @JvmStatic
     fun render(graphics: GuiGraphics, partialTicks: Float) {
-        if(particles.isEmpty() || !active) // don't render if there's nothing to render or if the game is paused
+        if (particles.isEmpty() || !active) // don't render if there's nothing to render or if the game is paused
             return
         Minecraft.getInstance().profiler.push("empyrean:particle2d") // Profiling
 
@@ -39,7 +39,7 @@ object ParticleEngine2D {
 
     @JvmStatic
     fun spawn(particle: Particle2D) {
-        if(active)
+        if (active)
             particles.add(particle)
     }
 }

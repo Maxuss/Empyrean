@@ -9,7 +9,7 @@ import kotlin.math.max
 class CrystalSparkleParticle(
     x: Float,
     y: Float
-): Particle2D(
+) : Particle2D(
     10, // 10 ticks
     x, y,
     ResourceLocation(EmpyreanModClient.MODID, "textures/gui/particles/crystal_sparkle.png"),
@@ -25,7 +25,7 @@ class CrystalSparkleParticle(
 
     override val alpha: Float
         get() =
-            if(age > lifetime / 2) {
+            if (age > lifetime / 2) {
                 // we should be fading out
                 max(0f, 1f - (age.toFloat() / lifetime.toFloat()))
             } else {

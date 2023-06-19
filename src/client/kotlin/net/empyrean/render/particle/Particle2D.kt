@@ -44,7 +44,22 @@ abstract class Particle2D(
         val x = Mth.lerp(partialTick, xo, x)
         val y = Mth.lerp(partialTick, yo, y)
 
-        graphics.drawTexture(sprite, x.roundToInt(), y.roundToInt(), 0f, 0f, spriteWidth, spriteHeight, spriteWidth, spriteHeight, z, r, g, b, alpha)
+        graphics.drawTexture(
+            sprite,
+            x.roundToInt(),
+            y.roundToInt(),
+            0f,
+            0f,
+            spriteWidth,
+            spriteHeight,
+            spriteWidth,
+            spriteHeight,
+            z,
+            r,
+            g,
+            b,
+            alpha
+        )
     }
 
     companion object {

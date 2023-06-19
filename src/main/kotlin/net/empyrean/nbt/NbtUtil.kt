@@ -11,7 +11,7 @@ object NbtUtil {
     }
 
     fun Tag.inner(): Any {
-        return when(this) {
+        return when (this) {
             is NumericTag -> asNumber
             is StringTag -> asString
             is ListTag -> map { inner() }
@@ -21,7 +21,7 @@ object NbtUtil {
     }
 
     fun <T> CompoundTag.putValue(key: String, value: T) {
-        when(value) {
+        when (value) {
             is Byte -> putByte(key, value)
             is Short -> putShort(key, value)
             is Int -> putInt(key, value)
@@ -38,7 +38,7 @@ object NbtUtil {
     }
 
     fun <T> transformToNbt(tag: T): Tag? {
-        return when(tag) {
+        return when (tag) {
             is Tag -> tag
             is Boolean -> ByteTag.valueOf(tag)
             is Short -> ShortTag.valueOf(tag)
@@ -53,6 +53,7 @@ object NbtUtil {
                 listTag.addAll(tag.map { each -> transformToNbt(each ?: return@map null) }.filterNotNull())
                 listTag
             }
+
             else -> null
         }
     }
@@ -71,5 +72,5 @@ object NbtUtil {
     }
 
     @JvmStatic
-    fun <T: Any> readTyped(from: CompoundTag, klass: KClass<T>): T = readTyped(from, klass.java)
+    fun <T : Any> readTyped(from: CompoundTag, klass: KClass<T>): T = readTyped(from, klass.java)
 }

@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class AspectOfTheEnd: EmpyreanItem(FabricItemSettings().fireproof().maxCount(1), ItemRarity.STARLIKE, ItemKind.SWORD) {
+class AspectOfTheEnd : EmpyreanItem(FabricItemSettings().fireproof().maxCount(1), ItemRarity.STARLIKE, ItemKind.SWORD) {
     override fun tooltip(
         itemStack: ItemStack,
         level: Level?,

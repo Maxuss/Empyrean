@@ -11,6 +11,7 @@ enum class PlayerRank(val prefix: Component) {
     ADMIN(Component.literal("[ADMIN]").withStyle(Style.EMPTY.withColor(0x752ef7)));
 
     fun formatChatMessage(player: ServerPlayer, msg: Component): Component {
-        return prefix.plainCopy().append(Component.literal(" ")).append(player.name).append(Component.literal(": ")).append(msg)
+        return prefix.plainCopy().append(Component.literal(" ")).append(player.name).append(Component.literal(": "))
+            .append(msg)
     }
 }

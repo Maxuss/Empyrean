@@ -11,18 +11,19 @@ import kotlin.math.roundToInt
 
 object BloomRenderer {
     private val queue: MutableList<BakedBloom> = mutableListOf()
+
     @Volatile
     private var active: Boolean = !Minecraft.getInstance().isPaused
 
     @JvmStatic
     fun enqueue(effect: BakedBloom) {
-        if(active)
+        if (active)
             queue.add(effect)
     }
 
     @JvmStatic
     fun render(to: GuiGraphics) {
-        if(queue.isEmpty() || !active)
+        if (queue.isEmpty() || !active)
             return
         Minecraft.getInstance().profiler.push("empyrean:textBloom")
         to.pose().pushPose()
@@ -30,7 +31,7 @@ object BloomRenderer {
         RenderSystem.enableBlend()
         RenderSystem.disableDepthTest()
 
-        for(each in queue) {
+        for (each in queue) {
             renderSingle(each, to)
         }
         queue.clear()
