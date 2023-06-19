@@ -17,6 +17,9 @@ mutable  field   net/minecraft/client/gui/Font$StringRenderOutput  a  F
 accessible  method  net/minecraft/client/gui/GuiGraphics  innerBlit (Lnet/minecraft/resources/ResourceLocation;IIIIIFFFF)V
 
 accessible  field  net/minecraft/client/gui/screens/inventory/AbstractContainerScreen  hoveredSlot  Lnet/minecraft/world/inventory/Slot;
+accessible  field  net/minecraft/client/gui/screens/inventory/AbstractContainerScreen  topPos I
+accessible  method  net/minecraft/client/gui/screens/inventory/AbstractContainerScreen  isHovering (IIIIDD)Z
 
 accessible  method  net/minecraft/client/gui/screens/inventory/tooltip/TooltipRenderUtil  renderHorizontalLine  (Lnet/minecraft/client/gui/GuiGraphics;IIIII)V
 accessible  method  net/minecraft/client/gui/screens/inventory/tooltip/TooltipRenderUtil  renderVerticalLineGradient  (Lnet/minecraft/client/gui/GuiGraphics;IIIIII)V
+

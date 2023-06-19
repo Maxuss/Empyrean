@@ -1,4 +1,4 @@
-package net.empyrean.mixin.client;
+package net.empyrean.mixin.client.menu;
 
 import net.empyrean.gui.text.ComponentSplashRenderer;
 import net.empyrean.gui.text.Splashes;

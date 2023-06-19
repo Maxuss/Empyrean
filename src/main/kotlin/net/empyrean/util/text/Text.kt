@@ -2,6 +2,7 @@ package net.empyrean.util.text
 
 import net.empyrean.gui.text.color.EmpyreanColor
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.MutableComponent
 import net.minecraft.util.FastColor.ARGB32
 import net.minecraft.util.Mth
 import kotlin.math.roundToInt
@@ -55,3 +56,5 @@ data class ARGBColor(
     val green: Int,
     val blue: Int
 )
+
+val Component.mutable: MutableComponent get() = this as MutableComponent

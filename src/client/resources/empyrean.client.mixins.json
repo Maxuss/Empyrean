@@ -5,19 +5,20 @@
   "client": [
     "GameRendererMixin",
     "IScreenAccessor",
-    "LogoRendererMixin",
-    "MainMenuScreenMixin",
     "MinecraftClientMixin",
-    "TooltipRenderUtilMixin",
-    "SplashManagerMixin",
-    "StringRenderOutputMixin",
-    "TextRendererMixin"
+    "effects.PlayerInventoryMixin",
+    "item.TooltipRenderUtilMixin",
+    "menu.LogoRendererMixin",
+    "menu.MainMenuScreenMixin",
+    "menu.SplashManagerMixin",
+    "text.StringRenderOutputMixin",
+    "text.TextRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
     "ClientComponentMixin",
-    "TextColorMixin"
+    "text.TextColorMixin"
   ]
 }

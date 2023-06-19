@@ -1,4 +1,4 @@
-package net.empyrean.mixin.client;
+package net.empyrean.mixin.client.item;
 
 import net.empyrean.gui.text.color.EmpyreanColor;
 import net.empyrean.item.EmpyreanItem;

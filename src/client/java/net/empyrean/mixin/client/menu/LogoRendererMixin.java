@@ -1,4 +1,4 @@
-package net.empyrean.mixin.client;
+package net.empyrean.mixin.client.menu;
 
 import net.empyrean.gui.util.EmpyreanResources;
 import net.minecraft.client.gui.GuiGraphics;

@@ -1,4 +1,4 @@
-package net.empyrean.mixin.client;
+package net.empyrean.mixin.client.text;
 
 import com.google.common.util.concurrent.AtomicDouble;
 import com.mojang.blaze3d.font.GlyphInfo;

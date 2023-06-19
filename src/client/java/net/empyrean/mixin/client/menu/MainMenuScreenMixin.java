@@ -1,7 +1,8 @@
-package net.empyrean.mixin.client;
+package net.empyrean.mixin.client.menu;
 
 import net.empyrean.config.ClientConfig;
 import net.empyrean.gui.button.DisabledButton;
+import net.empyrean.mixin.client.IScreenAccessor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;

@@ -1,4 +1,4 @@
-package net.empyrean.mixin.client;
+package net.empyrean.mixin.client.text;
 
 import net.minecraft.network.chat.TextColor;
 import org.spongepowered.asm.mixin.Mixin;
