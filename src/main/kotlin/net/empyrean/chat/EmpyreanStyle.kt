@@ -12,5 +12,10 @@ interface EmpyreanStyle {
 fun MutableComponent.withEmpyreanStyle(spec: SpecialFormatting): MutableComponent =
     this.withStyle { (style as EmpyreanStyle).withSpecial(spec) }
 
-fun MutableComponent.withColor(color: EmpyreanColor): MutableComponent =
-    this.withEmpyreanStyle(SpecialFormatting.fromColor(color))
+fun MutableComponent.withColor(color: EmpyreanColor): MutableComponent {
+    val spec = SpecialFormatting.fromColor(color)
+    return if(spec == SpecialFormatting.NONE)
+        this.withStyle { it.withColor(color.colorValue) }
+    else
+        this.withEmpyreanStyle(spec)
+}

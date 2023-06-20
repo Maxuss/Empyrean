@@ -6,7 +6,6 @@ import net.empyrean.item.data.ItemData
 import net.empyrean.item.kind.ItemKind
 import net.empyrean.item.rarity.ItemRarity
 import net.minecraft.network.chat.Component
-import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.Style
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
@@ -39,7 +38,7 @@ interface EmpyreanItem {
         }
 
         fun getName(self: EmpyreanItem, stack: ItemStack): Component {
-            return (stack.item.getName(stack) as MutableComponent).withColor(self.itemRarity.color as EmpyreanColor)
+            return Component.translatable(stack.item.descriptionId).withColor(self.itemRarity.color as EmpyreanColor)
         }
     }
 }

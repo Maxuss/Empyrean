@@ -1,3 +1,6 @@
 {
-  "icon": "empyrean:gui/slots/wings"
+  "icon": "empyrean:gui/slots/wings",
+  "tooltip_predicates": [
+    "trinkets:none"
+  ]
 }

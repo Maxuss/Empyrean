@@ -1,5 +1,6 @@
 package net.empyrean.item.impl.wings
 
+import com.google.common.collect.ImmutableList
 import dev.emi.trinkets.api.SlotReference
 import dev.emi.trinkets.api.TrinketItem
 import net.empyrean.item.EmpyreanItem
@@ -9,10 +10,17 @@ import net.empyrean.item.kind.ItemKind
 import net.empyrean.item.rarity.ItemRarity
 import net.empyrean.movement.wings.GlidingEntity
 import net.empyrean.movement.wings.WingUtil
+import net.empyrean.util.text.Text
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.Style
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.TooltipFlag
+import net.minecraft.world.level.Level
 import net.minecraft.world.phys.Vec3
+import java.util.*
 
 
 open class EmpyreanWings(
@@ -22,6 +30,15 @@ open class EmpyreanWings(
 ): TrinketItem(settings), EmpyreanItem, DelegatedTrinketRenderer {
     override val rendererClassName: String = "net.empyrean.render.item.WingTrinketRenderer"
     override val itemKind: ItemKind = ItemKind.WINGS
+
+    override fun tooltip(stack: ItemStack, level: Level?, list: MutableList<Component>, isAdvanced: TooltipFlag) {
+        list.add(Text.of("Equippable"))
+        list.addAll(wingData.stringify())
+    }
+
+    override fun getName(stack: ItemStack): Component {
+        return EmpyreanItem.getName(this, stack)
+    }
 
     override fun data(stack: ItemStack): ItemData {
         return ItemData(stack)
@@ -63,6 +80,15 @@ open class EmpyreanWings(
             }
         }
     }
+
+    override fun appendHoverText(
+        stack: ItemStack,
+        level: Level?,
+        tooltipComponents: MutableList<Component>,
+        isAdvanced: TooltipFlag
+    ) {
+        EmpyreanItem.appendHoverText(this, stack, level, tooltipComponents, isAdvanced)
+    }
 }
 
 data class WingProperties(
@@ -94,4 +120,50 @@ data class WingProperties(
      * Descending speed multiplier (player is gliding after finishing using wings)
      */
     val descendSpeed: Float = 1f
-)
+) {
+    internal fun stringify(): List<Component> {
+        val flyHeightString = "${flightHeightModifierNameMap.floorEntry(flyHeight).value} maximum height"
+        val flyDurationString = "${flightDurationModifierNameMap.floorEntry(flyDuration).value} flight time"
+        val avgSpeed = (horizontalSpeed + verticalSpeed) / 2f
+        val flySpeedString = "${speedModifierNameMap.floorEntry(avgSpeed).value} horizontal speed"
+        val flyAccelerationString = "${speedModifierNameMap.floorEntry((ascensionSpeed + descendSpeed) / 2f).value} vertical speed"
+        return ImmutableList.of(
+            Component.literal(flyDurationString).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)),
+            Component.literal(flyHeightString).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)),
+            Component.literal(flySpeedString).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)),
+            Component.literal(flyAccelerationString).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))
+        )
+    }
+
+    companion object {
+        private val speedModifierNameMap: TreeMap<Float, String> = TreeMap(mapOf(
+            0f to "Horrible",
+            0.2f to "Snail-like",
+            0.4f to "Slow",
+            0.7f to "Moderate",
+            1.1f to "Great",
+            1.3f to "Amazing",
+            1.6f to "Insane",
+            1.9f to "Ludicrous"
+        ))
+        private val flightHeightModifierNameMap: TreeMap<Float, String> = TreeMap(mapOf(
+            10f to "Nonexistent",
+            20f to "Low",
+            50f to "Moderate",
+            90f to "Great",
+            130f to "Insane",
+            190f to "Empyrical"
+        ))
+        private val flightDurationModifierNameMap: TreeMap<Float, String> = TreeMap(mapOf(
+            20f to "Microscopic",
+            50f to "Very low",
+            90f to "Low",
+            150f to "Average",
+            190f to "Above average",
+            240f to "Great",
+            290f to "Amazing",
+            360f to "Colossal",
+            500f to "Empyrical"
+        ))
+    }
+}
