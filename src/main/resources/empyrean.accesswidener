@@ -23,3 +23,4 @@ accessible  method  net/minecraft/client/gui/screens/inventory/AbstractContainer
 accessible  method  net/minecraft/client/gui/screens/inventory/tooltip/TooltipRenderUtil  renderHorizontalLine  (Lnet/minecraft/client/gui/GuiGraphics;IIIII)V
 accessible  method  net/minecraft/client/gui/screens/inventory/tooltip/TooltipRenderUtil  renderVerticalLineGradient  (Lnet/minecraft/client/gui/GuiGraphics;IIIIII)V
 
+accessible  field  net/minecraft/world/entity/Entity  wasTouchingWater Z

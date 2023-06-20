@@ -4,11 +4,13 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "CommandContextAccessorMixin",
-    "ItemStackMixin",
     "ServerBrandMixin",
-    "StyleMixin",
-    "StyleSerializerMixin",
-    "TextColorMixin"
+    "item.ItemStackMixin",
+    "movement.EntityPitchMixin",
+    "movement.PlayerGlideMixin",
+    "text.StyleMixin",
+    "text.StyleSerializerMixin",
+    "text.TextColorMixin"
   ],
   "injectors": {
     "defaultRequire": 1

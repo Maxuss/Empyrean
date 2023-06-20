@@ -5,7 +5,7 @@ import com.mojang.blaze3d.font.GlyphInfo;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.empyrean.chat.EmpyreanStyle;
 import net.empyrean.chat.SpecialFormatting;
-import net.empyrean.event.client.event.client.ComponentRenderEvent;
+import net.empyrean.event.client.ComponentRenderEvent;
 import net.empyrean.render.IFontAccessor;
 import net.empyrean.render.effects.BakedBloom;
 import net.empyrean.render.effects.BloomRenderer;

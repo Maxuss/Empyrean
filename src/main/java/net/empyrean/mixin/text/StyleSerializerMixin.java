@@ -1,4 +1,4 @@
-package net.empyrean.mixin;
+package net.empyrean.mixin.text;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;

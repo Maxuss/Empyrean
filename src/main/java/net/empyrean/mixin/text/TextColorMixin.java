@@ -1,4 +1,4 @@
-package net.empyrean.mixin;
+package net.empyrean.mixin.text;
 
 import net.empyrean.gui.text.color.EmpyreanColor;
 import net.empyrean.gui.text.color.LerpingColor;

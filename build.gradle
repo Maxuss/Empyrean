@@ -24,7 +24,6 @@ repositories {
 }
 
 loom {
-	splitMinecraftJar()
 	splitEnvironmentSourceSets()
 	accessWidenerPath = file("src/main/resources/empyrean.accesswidener")
 

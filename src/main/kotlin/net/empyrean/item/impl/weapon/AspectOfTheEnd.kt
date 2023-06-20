@@ -1,6 +1,6 @@
 package net.empyrean.item.impl.weapon
 
-import net.empyrean.item.EmpyreanItem
+import net.empyrean.item.AbstractEmpyreanItem
 import net.empyrean.item.data.ItemData
 import net.empyrean.item.kind.ItemKind
 import net.empyrean.item.rarity.ItemRarity
@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class AspectOfTheEnd : EmpyreanItem(FabricItemSettings().fireproof().maxCount(1), ItemRarity.STARLIKE, ItemKind.SWORD) {
+class AspectOfTheEnd : AbstractEmpyreanItem(FabricItemSettings().fireproof().maxCount(1), ItemRarity.STARLIKE, ItemKind.SWORD) {
     override fun tooltip(
         itemStack: ItemStack,
         level: Level?,

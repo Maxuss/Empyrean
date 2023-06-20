@@ -3,8 +3,6 @@ package net.empyrean.event.client
 import net.empyrean.EmpyreanModClient
 import net.empyrean.chat.EmpyreanStyle
 import net.empyrean.chat.SpecialFormatting
-import net.empyrean.event.client.event.client.ComponentRenderEvent
-import net.empyrean.event.client.event.client.RenderTickEvent
 import net.empyrean.gui.text.StatusMessageRenderer
 import net.empyrean.gui.text.color.EmpyreanColors
 import net.empyrean.network.EmpyreanNetworking

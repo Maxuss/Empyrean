@@ -1,6 +1,6 @@
 package net.empyrean.item.impl.weapon
 
-import net.empyrean.item.EmpyreanItem
+import net.empyrean.item.AbstractEmpyreanItem
 import net.empyrean.item.data.ItemData
 import net.empyrean.item.kind.ItemKind
 import net.empyrean.item.rarity.ItemRarity
@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class TestItem : EmpyreanItem(FabricItemSettings().fireproof(), ItemRarity.STARLIKE, ItemKind.MATERIAL) {
+class TestItem : AbstractEmpyreanItem(FabricItemSettings().fireproof(), ItemRarity.STARLIKE, ItemKind.MATERIAL) {
     override fun data(stack: ItemStack): ItemData {
         return ItemData(stack)
     }

@@ -1,7 +1,7 @@
-package net.empyrean.event.client.event.client
+package net.empyrean.event.client
 
-import net.empyrean.event.client.event.client.RenderTickEvent.End
-import net.empyrean.event.client.event.client.RenderTickEvent.Start
+import net.empyrean.event.client.RenderTickEvent.End
+import net.empyrean.event.client.RenderTickEvent.Start
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
 

@@ -1,6 +1,6 @@
 package net.empyrean.mixin.client;
 
-import net.empyrean.event.client.event.client.RenderTickEvent;
+import net.empyrean.event.client.RenderTickEvent;
 import net.empyrean.render.particle.ParticleEngine2D;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Timer;

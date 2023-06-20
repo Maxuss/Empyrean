@@ -1,4 +1,4 @@
-package net.empyrean.mixin;
+package net.empyrean.mixin.text;
 
 import net.empyrean.chat.EmpyreanStyle;
 import net.empyrean.chat.SpecialFormatting;

@@ -1,6 +1,6 @@
-package net.empyrean.event.client.event.client
+package net.empyrean.event.client
 
-import net.empyrean.event.client.event.client.ComponentRenderEvent.Callback
+import net.empyrean.event.client.ComponentRenderEvent.Callback
 import net.fabricmc.fabric.api.event.Event
 import net.fabricmc.fabric.api.event.EventFactory
 import net.minecraft.client.gui.Font

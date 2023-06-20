@@ -1,4 +1,4 @@
-package net.empyrean.mixin;
+package net.empyrean.mixin.item;
 
 import net.empyrean.item.EmpyreanItem;
 import net.empyrean.item.EmpyreanItemStack;

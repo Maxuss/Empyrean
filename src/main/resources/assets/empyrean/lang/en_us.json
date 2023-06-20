@@ -13,8 +13,13 @@
   "config.empyrean.group.expSingleplayer.tooltip": "Different options related to singleplayer for Empyrean. Highly experimental.",
   "config.empyrean.option.enableSingleplayer": "Enable singleplayer",
   "config.empyrean.option.enableSingleplayer.tooltip": "Allows to play Empyrean in singleplayer",
+
+
   "item.empyrean.aspect_of_the_end": "Aspect of the End",
   "item.empyrean.cosmilium_ingot": "Cosmilium Ingot",
+  "item.empyrean.fledgling_wings": "Fledgling Wings",
+
+
   "effect.minecraft.speed.description": "Movement speed increased",
   "effect.minecraft.slowness.description": "Movement speed decreased",
   "effect.minecraft.haste.description": "Digging speed increased vastly",
@@ -45,5 +50,8 @@
   "effect.minecraft.slow_falling.description": "Fall speed decreased",
   "effect.minecraft.conduit_power.description": "Conduit transports you nautical energy",
   "effect.minecraft.dolphins_grace.description": "Underwater movement speed increased",
-  "effect.minecraft.bad_omen.description": "You are feeling ominous presence watching you from away..."
+  "effect.minecraft.bad_omen.description": "You are feeling ominous presence watching you from away...",
+
+
+  "trinkets.slot.chest.wings": "Wings"
 }

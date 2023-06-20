@@ -2,6 +2,7 @@ package net.empyrean
 
 import net.empyrean.config.ClientConfig
 import net.empyrean.event.client.bootstrapClientEvents
+import net.empyrean.item.client.bootstrapClientItems
 import net.empyrean.network.client.bootstrapClientNetworking
 import net.fabricmc.api.ClientModInitializer
 import net.minecraft.Util
@@ -18,5 +19,6 @@ object EmpyreanModClient : ClientModInitializer {
 
         bootstrapClientNetworking()
         bootstrapClientEvents()
+        bootstrapClientItems()
     }
 }
