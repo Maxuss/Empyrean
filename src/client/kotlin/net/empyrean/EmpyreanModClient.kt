@@ -4,6 +4,7 @@ import net.empyrean.config.ClientConfig
 import net.empyrean.event.client.bootstrapClientEvents
 import net.empyrean.item.client.bootstrapClientItems
 import net.empyrean.network.client.bootstrapClientNetworking
+import net.empyrean.registry.client.bootstrapClientRegistries
 import net.fabricmc.api.ClientModInitializer
 import net.minecraft.Util
 import kotlin.random.Random
@@ -20,5 +21,6 @@ object EmpyreanModClient : ClientModInitializer {
         bootstrapClientNetworking()
         bootstrapClientEvents()
         bootstrapClientItems()
+        bootstrapClientRegistries()
     }
 }
