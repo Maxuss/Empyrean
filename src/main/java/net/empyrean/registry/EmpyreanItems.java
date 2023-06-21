@@ -3,6 +3,7 @@ package net.empyrean.registry;
 import io.wispforest.owo.registration.reflect.ItemRegistryContainer;
 import net.empyrean.item.impl.weapon.AspectOfTheEnd;
 import net.empyrean.item.impl.weapon.TestItem;
+import net.empyrean.item.impl.wings.AngelWings;
 import net.empyrean.item.impl.wings.FledglingWings;
 import net.empyrean.item.impl.wings.InsaneWings;
 import net.minecraft.world.item.Item;
@@ -14,4 +15,5 @@ public class EmpyreanItems implements ItemRegistryContainer {
     public static final Item COSMILIUM_INGOT = new TestItem();
     public static final Item FLEDGLING_WINGS = new FledglingWings();
     public static final Item INSANE_WINGS = new InsaneWings();
+    public static final Item ANGEL_WINGS = new AngelWings();
 }

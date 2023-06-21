@@ -17,6 +17,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer
 import net.minecraft.client.renderer.entity.RenderLayerParent
 import net.minecraft.client.renderer.entity.layers.RenderLayer
 import net.minecraft.client.renderer.texture.OverlayTexture
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.entity.player.Player
@@ -56,8 +57,9 @@ class WingFeatureRenderer<T: LivingEntity, M: EntityModel<T>>(parent: RenderLaye
 //                        val g2 = secondaryColour[1]
 //                        val b2 = secondaryColour[2]
                         val wingModel = baseModel
-                        val layer1 = ResourceLocation(EmpyreanModClient.MODID, "textures/entity/featheredd_wings.png")
-                        val layer2 = ResourceLocation(EmpyreanModClient.MODID, "textures/entity/featheredd_wings_2.png")
+                        val key = BuiltInRegistries.ITEM.getKey(item).path
+                        val layer1 = ResourceLocation(EmpyreanModClient.MODID, "textures/entity/$key.png")
+                        val layer2 = ResourceLocation(EmpyreanModClient.MODID, "textures/entity/${key}_2.png")
                         poses.pushPose()
                         poses.translate(0.0, 0.0, 0.125)
                             this.parentModel

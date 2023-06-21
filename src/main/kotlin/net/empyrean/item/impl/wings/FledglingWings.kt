@@ -15,6 +15,20 @@ class FledglingWings: EmpyreanWings(
         descendSpeed = 1.5f
     ))
 
+class AngelWings: EmpyreanWings(
+    FabricItemSettings().maxCount(1),
+    ItemRarity.EPIC,
+    WingProperties(
+        90f,
+        300f,
+        0.7f,
+        0.6f,
+        ascensionSpeed = 0.7f,
+        descendSpeed = 2.5f,
+        diveSpeed = 0.8f
+    )
+)
+
 class InsaneWings: EmpyreanWings(
     FabricItemSettings().maxCount(1),
     ItemRarity.EXPERT,

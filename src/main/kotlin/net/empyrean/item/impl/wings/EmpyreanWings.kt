@@ -139,7 +139,7 @@ data class WingProperties(
         private val speedModifierNameMap: TreeMap<Float, String> = TreeMap(mapOf(
             0f to "Horrible",
             0.2f to "Snail-like",
-            0.4f to "Slow",
+            0.4f to "Low",
             0.7f to "Moderate",
             1.1f to "Great",
             1.3f to "Amazing",
@@ -157,13 +157,13 @@ data class WingProperties(
         private val flightDurationModifierNameMap: TreeMap<Float, String> = TreeMap(mapOf(
             20f to "Microscopic",
             50f to "Very low",
-            90f to "Low",
-            150f to "Average",
-            190f to "Above average",
-            240f to "Great",
-            290f to "Amazing",
-            360f to "Colossal",
-            500f to "Empyrical"
+            100f to "Low",
+            180f to "Average",
+            230f to "Above average",
+            300f to "Great",
+            390f to "Amazing",
+            490f to "Colossal",
+            800f to "Empyrical"
         ))
     }
 }
