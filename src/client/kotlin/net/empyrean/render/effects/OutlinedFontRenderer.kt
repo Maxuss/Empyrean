@@ -13,6 +13,7 @@ class OutlinedFontRenderer(
     private val innerColor: TextColor = TextColor.fromRgb(0x14012b)
 ) : EmpyreanEffectRenderer {
     override fun renderChar(data: EmpyreanEffectRenderer.EffectRenderPayload) {
+
         drawCharOutlined(
             Component.literal(data.charCode.toChar().toString()).visualOrderText,
             data, if (data.style.isBold) 1f else 0.7f,

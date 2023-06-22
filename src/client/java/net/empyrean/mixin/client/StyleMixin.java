@@ -2,7 +2,6 @@ package net.empyrean.mixin.client;
 
 import net.empyrean.chat.EmpyreanStyle;
 import net.empyrean.chat.SpecialFormatting;
-import net.empyrean.gui.text.color.EmpyreanColors;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,9 +20,8 @@ public abstract class StyleMixin {
         EmpyreanStyle styleHolder = (EmpyreanStyle) this;
         if (styleHolder.getSpecialFormat() == SpecialFormatting.NONE)
             return;
-        /* no-op */
-        if (styleHolder.getSpecialFormat() == SpecialFormatting.EMPYREAN_L_STARLIKE) {
-            cir.setReturnValue(EmpyreanColors.STARLIKE);
-        }
+        SpecialFormatting format = styleHolder.getSpecialFormat();
+        if(format.getSelfColor() != null)
+            cir.setReturnValue((TextColor) format.getSelfColor());
     }
 }

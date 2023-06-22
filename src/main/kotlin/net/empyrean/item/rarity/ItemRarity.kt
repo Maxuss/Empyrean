@@ -14,7 +14,8 @@ enum class ItemRarity(
     RELIC(TextColor.fromRgb(0x77E537)),
 
     STARLIKE(EmpyreanColors.STARLIKE),
-    EXPERT(EmpyreanColors.EXPERT)
+    EXPERT(EmpyreanColors.EXPERT),
+    SMOLDERING(EmpyreanColors.CINDER)
 
     ;
 

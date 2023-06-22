@@ -17,6 +17,7 @@ class EmpyreanModelGenerator(generator: FabricDataOutput) : FabricModelProvider(
         items.generateFlatItem(EmpyreanItems.COSMILIUM_INGOT, ModelTemplates.FLAT_ITEM)
         items.generateFlatItem(EmpyreanItems.FLEDGLING_WINGS, ModelTemplates.FLAT_ITEM)
         items.generateFlatItem(EmpyreanItems.ANGEL_WINGS, ModelTemplates.FLAT_ITEM)
+        items.generateFlatItem(EmpyreanItems.PRECURSOR_ASHES, ModelTemplates.FLAT_ITEM)
     }
 
 }

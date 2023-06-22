@@ -16,6 +16,20 @@ object EmpyreanColors {
         )
     )
 
+    @JvmField
+    val CINDER = addColor(
+        "CINDER", LerpingColor(
+            "CINDER", ImmutableList.of(
+                0xf9531b,
+                0xf91b1b,
+                0xf9831b,
+                0xf2d974,
+                0xe85422
+            ), 100f
+        )
+    )
+
+    @JvmField
     val EXPERT = addColor(
         "EXPERT", LerpingColor(
             "EXPERT", ImmutableList.of(

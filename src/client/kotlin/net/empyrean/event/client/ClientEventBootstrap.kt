@@ -8,6 +8,7 @@ import net.empyrean.gui.text.color.EmpyreanColors
 import net.empyrean.network.EmpyreanNetworking
 import net.empyrean.network.packets.serverbound.ServerboundLeftClickPacket
 import net.empyrean.render.particle.CrystalSparkleParticle
+import net.empyrean.render.particle.OutlinedParticle
 import net.empyrean.render.particle.ParticleEngine2D
 import net.empyrean.util.general.Ticking
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
@@ -26,6 +27,10 @@ fun bootstrapClientEvents() {
         if (empyrean.specialFormat == SpecialFormatting.EMPYREAN_L_STARLIKE) {
             if (EmpyreanModClient.clientRandom.nextFloat() <= 0.002f) {
                 ParticleEngine2D.spawn(CrystalSparkleParticle(rd.x - (rd.xOffset * 2f), rd.y))
+            }
+        } else if(empyrean.specialFormat == SpecialFormatting.EMPYREAN_L_CINDER) {
+            if(EmpyreanModClient.clientRandom.nextFloat() <= 0.001f) {
+                ParticleEngine2D.spawn(OutlinedParticle(rd.x - (rd.xOffset * 2f), rd.y - 10))
             }
         }
     }

@@ -14,12 +14,12 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class AspectOfTheEnd : AbstractEmpyreanItem(FabricItemSettings().fireproof().maxCount(1), ItemRarity.STARLIKE, ItemKind.SWORD) {
+class AspectOfTheEnd : AbstractEmpyreanItem(FabricItemSettings().fireproof().maxCount(1), ItemRarity.SMOLDERING, ItemKind.SWORD) {
     override fun tooltip(
-        itemStack: ItemStack,
+        stack: ItemStack,
         level: Level?,
         list: MutableList<Component>,
-        tooltipFlag: TooltipFlag
+        isAdvanced: TooltipFlag
     ) {
         list.add(Component.literal("This is AOTE"))
     }
