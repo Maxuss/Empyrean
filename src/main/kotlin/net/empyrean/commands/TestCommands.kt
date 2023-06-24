@@ -3,8 +3,12 @@ package net.empyrean.commands
 import net.empyrean.chat.SpecialFormatting
 import net.empyrean.chat.withEmpyreanStyle
 import net.empyrean.commands.api.command
+import net.empyrean.commands.api.suggests
+import net.empyrean.game.GameManager
+import net.empyrean.game.state.ProgressionState
 import net.empyrean.network.EmpyreanNetworking
 import net.empyrean.network.packets.clientbound.ClientboundStatusMessagePacket
+import net.empyrean.util.pos.pos
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
@@ -27,5 +31,21 @@ fun testCommand() = command("empyrean") {
             .send(ClientboundStatusMessagePacket(
                 Component.literal("This is going to be a horrible night...").withStyle(Style.EMPTY.withColor(0xc91c33)), 2
             ))
+    }
+}
+
+fun oreCommand() = command("ore") {
+    argIdentifier("ore") runs { oreId ->
+        val player = source.playerOrException
+        player.level().getChunkAt(player.position().pos).findBlocks({ BuiltInRegistries.BLOCK.getKey(it.block) == oreId() }) { pos, block ->
+            player.sendSystemMessage(Component.literal("$pos $block"))
+        }
+    }
+}
+
+fun gameStateCommand() = command("gameState") {
+    val suggestion = suggests("state") { ProgressionState.values().map(ProgressionState::toString) }
+    argString("state", suggestion) runs {
+        GameManager.gameData.progressionState = ProgressionState.valueOf(it())
     }
 }

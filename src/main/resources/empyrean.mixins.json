@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "CommandContextAccessorMixin",
+    "RuleTestTypeMixin",
     "ServerBrandMixin",
     "item.ItemEntityMixin",
     "item.ItemStackMixin",
