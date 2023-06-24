@@ -5,6 +5,7 @@
   "mixins": [
     "CommandContextAccessorMixin",
     "ServerBrandMixin",
+    "item.ItemEntityMixin",
     "item.ItemStackMixin",
     "movement.EntityPitchMixin",
     "movement.PlayerGlideMixin",

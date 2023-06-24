@@ -7,6 +7,7 @@ import net.empyrean.item.EmpyreanItem
 import net.empyrean.item.data.ItemData
 import net.empyrean.item.impl.trinket.DelegatedTrinketRenderer
 import net.empyrean.item.kind.ItemKind
+import net.empyrean.item.properties.EmpyreanItemProperties
 import net.empyrean.item.rarity.ItemRarity
 import net.empyrean.movement.wings.GlidingEntity
 import net.empyrean.movement.wings.WingUtil
@@ -26,7 +27,8 @@ import java.util.*
 open class EmpyreanWings(
     settings: Properties,
     override val itemRarity: ItemRarity,
-    val wingData: WingProperties
+    val wingData: WingProperties,
+    override val empyreanProperties: EmpyreanItemProperties = EmpyreanItemProperties()
 ): TrinketItem(settings), EmpyreanItem, DelegatedTrinketRenderer {
     override val rendererClassName: String = "net.empyrean.render.item.WingTrinketRenderer"
     override val itemKind: ItemKind = ItemKind.WINGS

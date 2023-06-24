@@ -1,5 +1,6 @@
 package net.empyrean
 
+import net.empyrean.block.bootstrapBlocks
 import net.empyrean.commands.bootstrapCommands
 import net.empyrean.events.bootstrapEvents
 import net.empyrean.item.bootstrapItems
@@ -16,6 +17,7 @@ object EmpyreanMod : ModInitializer {
 
     override fun onInitialize() {
         bootstrapItems()
+        bootstrapBlocks()
         bootstrapCommands()
         bootstrapNetworking()
         bootstrapEvents()

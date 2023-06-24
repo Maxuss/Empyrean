@@ -15,11 +15,16 @@
   "config.empyrean.option.enableSingleplayer.tooltip": "Allows to play Empyrean in singleplayer",
 
 
+  "block.empyrean.geyserite_ore": "Geyserite Ore",
+
+
   "item.empyrean.aspect_of_the_end": "Aspect of the End",
   "item.empyrean.cosmilium_ingot": "Cosmilium Ingot",
   "item.empyrean.fledgling_wings": "Fledgling Wings",
   "item.empyrean.angel_wings": "Angel Wings",
   "item.empyrean.precursor_ashes": "Precursor's Ashes",
+  "item.empyrean.raw_geyserite": "Raw Geyserite",
+
 
   "effect.minecraft.speed.description": "Movement speed increased",
   "effect.minecraft.slowness.description": "Movement speed decreased",

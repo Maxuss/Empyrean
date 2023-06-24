@@ -7,6 +7,7 @@ enum class ItemKind {
     WINGS,
 
     MATERIAL,
+    MINERAL
     ;
 
     val named: String get() = if (this == MATERIAL) "" else name.replace("_", " ")

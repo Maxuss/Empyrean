@@ -32,7 +32,10 @@ public abstract class ItemStackMixin implements EmpyreanItemStack {
     @Inject(method = "<init>(Lnet/minecraft/nbt/CompoundTag;)V", at = @At("TAIL"))
     private void nbtCtorInjector(CompoundTag compoundTag, CallbackInfo ci) {
         if (item instanceof EmpyreanItem empyrean) {
-            this.empyreanData = empyrean.data((ItemStack) (Object) this);
+            ItemData nullableData = empyrean.data((ItemStack) (Object) this);
+            if(nullableData == null)
+                return;
+            this.empyreanData = nullableData;
             this.empyreanData.validate();
         }
     }
@@ -40,7 +43,10 @@ public abstract class ItemStackMixin implements EmpyreanItemStack {
     @Inject(method = "<init>(Lnet/minecraft/world/level/ItemLike;I)V", at = @At("TAIL"))
     private void itemCtorInjector(ItemLike itemLike, int i, CallbackInfo ci) {
         if (item instanceof EmpyreanItem empyrean) {
-            this.empyreanData = empyrean.data((ItemStack) (Object) this);
+            ItemData nullableData = empyrean.data((ItemStack) (Object) this);
+            if(nullableData == null)
+                return;
+            this.empyreanData = nullableData;
             this.empyreanData.validate();
         }
     }

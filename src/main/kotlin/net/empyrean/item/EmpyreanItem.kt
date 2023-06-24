@@ -4,7 +4,10 @@ import net.empyrean.chat.withColor
 import net.empyrean.gui.text.color.EmpyreanColor
 import net.empyrean.item.data.ItemData
 import net.empyrean.item.kind.ItemKind
+import net.empyrean.item.properties.EmpyreanItemProperties
 import net.empyrean.item.rarity.ItemRarity
+import net.empyrean.tag.EmpyreanTags
+import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.Style
 import net.minecraft.world.item.ItemStack
@@ -14,8 +17,9 @@ import net.minecraft.world.level.Level
 interface EmpyreanItem {
     val itemRarity: ItemRarity
     val itemKind: ItemKind
+    val empyreanProperties: EmpyreanItemProperties
 
-    fun data(stack: ItemStack): ItemData
+    fun data(stack: ItemStack): ItemData?
     fun tooltip(stack: ItemStack, level: Level?, list: MutableList<Component>, isAdvanced: TooltipFlag) {
         // no additional tooltip by default
     }
@@ -28,6 +32,8 @@ interface EmpyreanItem {
             tooltipComponents: MutableList<Component>,
             isAdvanced: TooltipFlag
         ) {
+            if(stack.`is`(EmpyreanTags.VOLATILE))
+                tooltipComponents.add(Component.literal("Volatile").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
             self.tooltip(stack, level, tooltipComponents, isAdvanced)
             tooltipComponents.add(Component.empty())
             val color = self.itemRarity.color as EmpyreanColor

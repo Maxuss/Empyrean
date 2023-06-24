@@ -1,5 +1,6 @@
 package net.empyrean.datagen
 
+import net.empyrean.block.EmpyreanBlocks
 import net.empyrean.registry.EmpyreanItems
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
@@ -9,7 +10,7 @@ import net.minecraft.data.models.model.ModelTemplates
 
 class EmpyreanModelGenerator(generator: FabricDataOutput) : FabricModelProvider(generator) {
     override fun generateBlockStateModels(blocks: BlockModelGenerators) {
-        // no block state models for now
+        blocks.createTrivialCube(EmpyreanBlocks.GEYSERITE_ORE)
     }
 
     override fun generateItemModels(items: ItemModelGenerators) {
@@ -18,6 +19,6 @@ class EmpyreanModelGenerator(generator: FabricDataOutput) : FabricModelProvider(
         items.generateFlatItem(EmpyreanItems.FLEDGLING_WINGS, ModelTemplates.FLAT_ITEM)
         items.generateFlatItem(EmpyreanItems.ANGEL_WINGS, ModelTemplates.FLAT_ITEM)
         items.generateFlatItem(EmpyreanItems.PRECURSOR_ASHES, ModelTemplates.FLAT_ITEM)
+        items.generateFlatItem(EmpyreanItems.RAW_GEYSERITE, ModelTemplates.FLAT_ITEM)
     }
-
 }

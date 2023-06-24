@@ -24,6 +24,10 @@ public class EmpyreanItems implements ItemRegistryContainer {
     public static final Item ANGEL_WINGS = new AngelWings();
     // </editor-fold>
 
+    // <editor-fold desc="Raw Materials">
+    public static final Item RAW_GEYSERITE = new MaterialItem(new FabricItemSettings(), ItemRarity.RARE);
+    // </editor-fold>
+
     // <editor-fold desc="Materials">
     public static final Item COSMILIUM_INGOT = new MaterialItem(new FabricItemSettings(), ItemRarity.STARLIKE);
     public static final Item PRECURSOR_ASHES = new MaterialItem(new FabricItemSettings().fireproof(), ItemRarity.SMOLDERING);

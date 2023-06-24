@@ -3,6 +3,7 @@
 package net.empyrean.item
 
 import net.empyrean.item.kind.ItemKind
+import net.empyrean.item.properties.EmpyreanItemProperties
 import net.empyrean.item.rarity.ItemRarity
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 import net.minecraft.nbt.CompoundTag
@@ -19,7 +20,8 @@ import net.minecraft.world.level.Level
 abstract class AbstractEmpyreanItem(
     properties: FabricItemSettings,
     override val itemRarity: ItemRarity,
-    override val itemKind: ItemKind
+    override val itemKind: ItemKind,
+    override val empyreanProperties: EmpyreanItemProperties = EmpyreanItemProperties()
 ) : Item(properties), EmpyreanItem {
     override fun tooltip(
         stack: ItemStack,
