@@ -11,9 +11,12 @@ import net.minecraft.util.Mth
 import kotlin.math.roundToInt
 
 object Text {
-    // TODO: replace with minimessage
+    // TODO: replace with minimessage?
     @JvmStatic
     fun of(msg: String) = Component.literal(msg)
+
+    @JvmStatic
+    fun translate(key: String) = Component.translatable(key)
 
     @JvmStatic
     fun combineARGB(a: Number, r: Number, g: Number, b: Number): Int {

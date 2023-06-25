@@ -22,6 +22,6 @@ class MaterialItem(properties: FabricItemSettings, rarity: ItemRarity, empyreanP
     }
 
     override fun tooltip(stack: ItemStack, level: Level?, list: MutableList<Component>, isAdvanced: TooltipFlag) {
-        list.add(Text.of("Material").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
+        list.add(Text.translate("tag.empyrean.material").withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)))
     }
 }

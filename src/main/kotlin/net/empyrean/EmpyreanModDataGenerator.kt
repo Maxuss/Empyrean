@@ -1,6 +1,7 @@
 package net.empyrean
 
 import net.empyrean.datagen.*
+import net.empyrean.datagen.language.EmpyreanLangGenerator
 import net.empyrean.datagen.trinkets.TrinketsTagGenerator
 import net.empyrean.datagen.worldgen.EmpyreanWorldGenerator
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
@@ -14,6 +15,7 @@ object EmpyreanModDataGenerator : DataGeneratorEntrypoint {
         val pack = fabricDataGenerator.createPack()
         pack.addProvider { generator -> EmpyreanModelGenerator(generator as FabricDataOutput) }
         pack.addProvider { generator -> EmpyreanBlockLootGenerator(generator as FabricDataOutput) }
+        pack.addProvider { generator -> EmpyreanLangGenerator(generator as FabricDataOutput) }
         pack.addProvider { generator, backingRegistry -> EmpyreanBlockTagGenerator(generator as FabricDataOutput, backingRegistry) }
         pack.addProvider { generator, backingRegistry -> EmpyreanItemTagGenerator(generator as FabricDataOutput, backingRegistry) }
         pack.addProvider { generator, backingRegistry -> EmpyreanWorldGenerator(generator as FabricDataOutput, backingRegistry) }
