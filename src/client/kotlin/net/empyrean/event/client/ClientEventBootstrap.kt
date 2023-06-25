@@ -3,8 +3,11 @@ package net.empyrean.event.client
 import net.empyrean.EmpyreanModClient
 import net.empyrean.chat.EmpyreanStyle
 import net.empyrean.chat.SpecialFormatting
+import net.empyrean.events.EmpyreanTooltipEvent
 import net.empyrean.gui.text.StatusMessageRenderer
 import net.empyrean.gui.text.color.EmpyreanColors
+import net.empyrean.item.EmpyreanItem.Companion.appendComparisonText
+import net.empyrean.item.EmpyreanItem.Companion.appendStats
 import net.empyrean.network.EmpyreanNetworking
 import net.empyrean.network.packets.serverbound.ServerboundLeftClickPacket
 import net.empyrean.render.particle.CrystalSparkleParticle
@@ -13,6 +16,8 @@ import net.empyrean.render.particle.ParticleEngine2D
 import net.empyrean.util.general.Ticking
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
 import net.fabricmc.fabric.api.event.client.player.ClientPreAttackCallback
+import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.screens.Screen
 
 fun bootstrapClientEvents() {
     ClientPreAttackCallback.EVENT.register { _, _, clickCount ->
@@ -39,5 +44,15 @@ fun bootstrapClientEvents() {
     }
     ClientTickEvents.END_CLIENT_TICK.register {
         StatusMessageRenderer.tick()
+    }
+    EmpyreanTooltipEvent.CLIENT_ADD_STATS.register { selfStats, _, _, list ->
+        val player = Minecraft.getInstance().player
+        if(!Screen.hasShiftDown() || player?.mainHandItem?.isEmpty == true)
+            appendStats(selfStats, list)
+        else {
+            val selectedItem = player!!.mainHandItem
+            if (selectedItem.isEmpty) return@register
+            appendComparisonText(selectedItem, selfStats, list)
+        }
     }
 }

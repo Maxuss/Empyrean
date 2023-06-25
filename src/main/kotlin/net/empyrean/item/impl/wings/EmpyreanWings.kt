@@ -34,8 +34,8 @@ open class EmpyreanWings(
     override val itemKind: ItemKind = ItemKind.WINGS
 
     override fun tooltip(stack: ItemStack, level: Level?, list: MutableList<Component>, isAdvanced: TooltipFlag) {
-        list.add(Text.of("Equippable"))
-        list.addAll(wingData.stringify())
+        list.add(Text.of("☄ Wings:").withStyle(ChatFormatting.DARK_GRAY))
+        list.addAll(wingData.stringify().map { Component.literal(" > ").append(it) })
     }
 
     override fun getName(stack: ItemStack): Component {
@@ -90,6 +90,7 @@ open class EmpyreanWings(
         isAdvanced: TooltipFlag
     ) {
         EmpyreanItem.appendHoverText(this, stack, level, tooltipComponents, isAdvanced)
+
     }
 }
 

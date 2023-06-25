@@ -2,7 +2,6 @@ package net.empyrean.item.data
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.serializer
-import net.empyrean.nbt.NbtUtil.inner
 import net.empyrean.nbt.decodeNbt
 import net.empyrean.nbt.encodeNbt
 import net.minecraft.nbt.CompoundTag
@@ -14,6 +13,12 @@ open class ItemDataSchema(internal val bound: ItemStack) {
 
     inline fun <reified T> property(name: String, defaultValue: T): SchemaProperty<T> {
         val prop = SchemaProperty(name, serializer<T>(), defaultValue, null)
+        properties.add(prop)
+        return prop
+    }
+
+    inline fun <reified T> property(serializer: KSerializer<T>, name: String, defaultValue: T): SchemaProperty<T> {
+        val prop = SchemaProperty(name, serializer, defaultValue, null)
         properties.add(prop)
         return prop
     }
@@ -60,13 +65,14 @@ class SchemaProperty<T>(
         }
     }
 
-    @Suppress("UNCHECKED_CAST")
     fun load(from: CompoundTag): T? {
         val tag = from[name] ?: return null
         return if (tag is CompoundTag) {
             decodeNbt(serializer, tag.getCompound(name))
         } else {
-            tag.inner() as? T
+            val inserted = CompoundTag()
+            inserted.put("_value", tag)
+            decodeNbt(serializer, inserted)
         }
     }
 

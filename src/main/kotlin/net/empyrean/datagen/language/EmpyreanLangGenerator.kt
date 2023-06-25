@@ -2,8 +2,10 @@ package net.empyrean.datagen.language
 
 import net.empyrean.block.EmpyreanBlocks
 import net.empyrean.registry.EmpyreanItems
+import net.empyrean.registry.EmpyreanRegistries
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider
+import java.util.*
 
 class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, "en_us") {
     override fun generateTranslations(lang: TranslationBuilder) {
@@ -66,28 +68,41 @@ class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, 
         
         // <editor-fold desc="Stats">
         lang.add("stat.empyrean.damage.generic", "Damage")
-        lang.add("stat.empyrean.damage.melee", "Melee damage")
-        lang.add("stat.empyrean.damage.ranged", "Ranged damage")
-        lang.add("stat.empyrean.damage.magic", "Magic damage")
-        lang.add("stat.empyrean.damage.summon", "Summon damage")
-        lang.add("stat.empyrean.damage.rogue", "Rogue damage")
-        lang.add("stat.empyrean.max_health", "Max health")
-        lang.add("stat.empyrean.max_mana", "Max mana")
-        lang.add("stat.empyrean.mana_regen", "Mana regeneration")
+        lang.add("stat.empyrean.damage.melee", "Melee Damage")
+        lang.add("stat.empyrean.damage.ranged", "Ranged Damage")
+        lang.add("stat.empyrean.damage.magic", "Magic Damage")
+        lang.add("stat.empyrean.damage.summon", "Summon Damage")
+        lang.add("stat.empyrean.damage.rogue", "Rogue Damage")
+        lang.add("stat.empyrean.max_health", "Health")
+        lang.add("stat.empyrean.max_mana", "Mana")
+        lang.add("stat.empyrean.mana_regen", "Mana Regeneration")
         lang.add("stat.empyrean.regen", "Regeneration")
         lang.add("stat.empyrean.defense", "Defense")
-        lang.add("stat.empyrean.movement_speed", "Movement speed")
-        lang.add("stat.empyrean.flight_speed", "Flight speed")
-        lang.add("stat.empyrean.flight_time", "Flight time")
-        lang.add("stat.empyrean.jump_height", "Jump height")
-        lang.add("stat.empyrean.jump_speed", "Jump speed")
+        lang.add("stat.empyrean.movement_speed", "Movement Speed")
+        lang.add("stat.empyrean.flight_speed", "Flight Speed")
+        lang.add("stat.empyrean.flight_time", "Flight Time")
+        lang.add("stat.empyrean.jump_height", "Jump Height")
+        lang.add("stat.empyrean.jump_speed", "Jump Speed")
         lang.add("stat.empyrean.acceleration", "Acceleration")
-        lang.add("stat.empyrean.damage_reduction", "Damage reduction")
+        lang.add("stat.empyrean.damage_reduction", "Damage Reduction")
+        lang.add("stat.empyrean.crit_chance", "Crit Chance")
+        lang.add("stat.empyrean.crit_damage", "Crit Damage")
+        lang.add("stat.empyrean.knockback", "Knockback")
+        lang.add("stat.empyrean.damage_mul", "Damage")
+        lang.add("stat.empyrean.mana_cost_mul", "Mana Cost")
+        lang.add("stat.empyrean.attack_speed", "Attack Speed")
         // </editor-fold>
 
         // <editor-fold desc="Tags">
         lang.add("tag.empyrean.material", "Material")
         lang.add("tag.empyrean.volatile", "Volatile")
+        // </editor-fold>
+
+        // <editor-fold desc="Prefixes">
+        EmpyreanRegistries.PREFIX.keySet().forEach { key ->
+            lang.add("prefix.empyrean.${key.path}",
+                key.path.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
+        }
         // </editor-fold>
     }
     

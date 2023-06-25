@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.level.Level
 
-class MaterialItem(properties: FabricItemSettings, rarity: ItemRarity, empyreanProperties: EmpyreanItemProperties = EmpyreanItemProperties()): AbstractEmpyreanItem(properties, rarity, ItemKind.MATERIAL, empyreanProperties) {
+class MaterialItem(properties: FabricItemSettings, rarity: ItemRarity, empyreanProperties: EmpyreanItemProperties = EmpyreanItemProperties()): AbstractEmpyreanItem(properties, rarity, ItemKind.MATERIAL, empyreanProperties = empyreanProperties) {
     constructor(properties: FabricItemSettings, rarity: ItemRarity): this(properties, rarity, EmpyreanItemProperties())
 
     override fun data(stack: ItemStack): ItemData? {

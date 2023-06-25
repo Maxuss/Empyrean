@@ -17,7 +17,7 @@ data class NbtDecoder(private val reader: CompoundTag) : AbstractDecoder() {
     private val keys = reader.allKeys.toList()
     private var nextIdx = 0
     private val idx get() = nextIdx - 1
-    private val key get() = keys[idx]
+    private val key get() = keys.getOrNull(idx) ?: "_value"
 
     override val serializersModule: SerializersModule
         get() = EmptySerializersModule()

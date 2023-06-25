@@ -1,6 +1,7 @@
 package net.empyrean.item.impl.wings
 
 import net.empyrean.item.rarity.ItemRarity
+import net.empyrean.player.Stats
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings
 
 class FledglingWings: EmpyreanWings(
@@ -40,4 +41,14 @@ class InsaneWings: EmpyreanWings(
         ascensionSpeed = 2f,
         descendSpeed = 2f,
         diveSpeed = 1.6f
-    ))
+    )) {
+    override val stats: Stats
+        get() = Stats.of {
+            maxHealth = 50f
+            knockback = 1.2f
+            acceleration = 2f
+            healthRegen = 0.2f
+            maxMana = 10f
+            acceleration = 0.05f
+        }
+}

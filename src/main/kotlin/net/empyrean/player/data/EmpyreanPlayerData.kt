@@ -7,13 +7,13 @@ import net.empyrean.player.Stats
 data class EmpyreanPlayerData(
     var currentMana: Float = 100f,
     var currentHealth: Float = 0f,
-    var statistics: Stats = Stats.empty()
+    var statistics: Stats = Stats.prefill()
 ) {
     companion object {
         fun default() = EmpyreanPlayerData(
             currentMana = 0f,
             currentHealth = 100f,
-            statistics = Stats.empty()
+            statistics = Stats.prefill()
         )
     }
 }

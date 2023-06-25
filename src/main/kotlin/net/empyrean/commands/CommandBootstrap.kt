@@ -7,5 +7,6 @@ fun bootstrapCommands() {
         dispatcher.register(testCommand())
         dispatcher.register(oreCommand())
         dispatcher.register(gameStateCommand())
+        dispatcher.register(prefixCommand())
     }
 }
