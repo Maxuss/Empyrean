@@ -3,16 +3,13 @@ package net.empyrean.predicate
 import com.mojang.serialization.Codec
 import net.empyrean.game.GameManager
 import net.empyrean.game.state.ProgressionState
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.RandomSource
 import net.minecraft.util.StringRepresentable
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTestType
-
-object EmpyreanPredicates {
-    val GAME_STATE_PREDICATE = RuleTestType.register("empyrean:game_state", GameStateTest.CODEC)
-    val COMPOUND_PREDICATE = RuleTestType.register("empyrean:compound_test", CompoundTest.CODEC)
-}
 
 class CompoundTest(val inner: List<RuleTest>): RuleTest() {
     override fun test(state: BlockState, random: RandomSource): Boolean {
@@ -20,7 +17,7 @@ class CompoundTest(val inner: List<RuleTest>): RuleTest() {
     }
 
     override fun getType(): RuleTestType<*> {
-        return EmpyreanPredicates.COMPOUND_PREDICATE
+        return BuiltInRegistries.RULE_TEST[ResourceLocation("empyrean", "compound_test")]!!
     }
 
     companion object {
@@ -37,7 +34,7 @@ class GameStateTest(val progressionState: ProgressionState): RuleTest() {
     }
 
     override fun getType(): RuleTestType<*> {
-        return EmpyreanPredicates.GAME_STATE_PREDICATE
+        return BuiltInRegistries.RULE_TEST[ResourceLocation("empyrean", "game_state")]!!
     }
 
     companion object {

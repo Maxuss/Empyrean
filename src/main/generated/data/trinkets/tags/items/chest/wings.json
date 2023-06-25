@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
+    "empyrean:angel_wings",
     "empyrean:fledgling_wings",
-    "empyrean:insane_wings",
-    "empyrean:angel_wings"
+    "empyrean:insane_wings"
   ]
 }
