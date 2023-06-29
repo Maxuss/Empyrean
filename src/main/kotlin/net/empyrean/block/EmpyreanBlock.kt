@@ -9,6 +9,6 @@ interface EmpyreanBlock {
     val itemRarity: ItemRarity
 }
 
-class SimpleEmpyreanBlock(properties: Properties, override val itemRarity: ItemRarity): Block(properties), EmpyreanBlock
+open class SimpleEmpyreanBlock(properties: Properties, override val itemRarity: ItemRarity): Block(properties), EmpyreanBlock
 
-class EmpyreanExpBlock(properties: Properties, override val itemRarity: ItemRarity): DropExperienceBlock(properties, UniformInt.of(4, 9)), EmpyreanBlock
+open class EmpyreanExpBlock(properties: Properties, override val itemRarity: ItemRarity): DropExperienceBlock(properties, UniformInt.of(4, 9)), EmpyreanBlock

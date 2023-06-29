@@ -18,9 +18,15 @@ object EmpyreanModClient : ClientModInitializer {
     override fun onInitializeClient() {
         ClientConfig.init()
 
+        preloadNecessaryClasses()
+
         bootstrapClientNetworking()
         bootstrapClientEvents()
         bootstrapClientItems()
         bootstrapClientRegistries()
+    }
+
+    private fun preloadNecessaryClasses() {
+        Class.forName("net.empyrean.gui.screen.EmpyreanScreens")
     }
 }

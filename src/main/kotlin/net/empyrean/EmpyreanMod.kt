@@ -38,5 +38,6 @@ object EmpyreanMod : ModInitializer {
     private fun preloadClasses() {
         Class.forName("net.empyrean.registry.EmpyreanRegistries")
         Class.forName("net.empyrean.item.prefix.EmpyreanPrefixes")
+        Class.forName("net.empyrean.menu.EmpyreanMenu")
     }
 }

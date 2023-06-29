@@ -7,10 +7,13 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.ItemModelGenerators
 import net.minecraft.data.models.model.ModelTemplates
+import net.minecraft.data.models.model.TextureMapping
+import net.minecraft.world.level.block.Blocks
 
 class EmpyreanModelGenerator(generator: FabricDataOutput) : FabricModelProvider(generator) {
     override fun generateBlockStateModels(blocks: BlockModelGenerators) {
         blocks.createTrivialCube(EmpyreanBlocks.GEYSERITE_ORE)
+        blocks.createCraftingTableLike(EmpyreanBlocks.ADVANCED_CRAFTING_TABLE, Blocks.WARPED_PLANKS, TextureMapping::craftingTable) // TODO: replace with actual proper block model
     }
 
     override fun generateItemModels(items: ItemModelGenerators) {

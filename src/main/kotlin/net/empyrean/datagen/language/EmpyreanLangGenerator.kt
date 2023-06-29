@@ -104,6 +104,10 @@ class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, 
                 key.path.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() })
         }
         // </editor-fold>
+
+        // <editor-fold desc="Containers">
+        lang.add("container.empyrean.advanced_crafting_table", "Advanced Crafting Table")
+        // </editor-fold>
     }
     
     private fun generateBlockTranslations(lang: TranslationBuilder) {

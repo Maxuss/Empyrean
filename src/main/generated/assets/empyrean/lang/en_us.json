@@ -14,6 +14,7 @@
   "config.empyrean.option.displayEffectLength.tooltip": "Display effect duration outside of inventory. Recommended to be turned on",
   "config.empyrean.option.enableSingleplayer": "Enable singleplayer",
   "config.empyrean.option.enableSingleplayer.tooltip": "Allows to play Empyrean in singleplayer",
+  "container.empyrean.advanced_crafting_table": "Advanced Crafting Table",
   "effect.minecraft.absorption.description": "Protective health buffer",
   "effect.minecraft.bad_omen.description": "You are feeling ominous presence watching you from away...",
   "effect.minecraft.blindness.description": "Can't see anything!",
