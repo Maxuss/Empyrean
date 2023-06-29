@@ -24,3 +24,6 @@ accessible  method  net/minecraft/client/gui/screens/inventory/tooltip/TooltipRe
 accessible  method  net/minecraft/client/gui/screens/inventory/tooltip/TooltipRenderUtil  renderVerticalLineGradient  (Lnet/minecraft/client/gui/GuiGraphics;IIIIII)V
 
 accessible  field  net/minecraft/world/entity/Entity  wasTouchingWater Z
+
+accessible  class  net/minecraft/world/item/crafting/Ingredient$Value
+accessible  method  net/minecraft/world/item/crafting/RecipeManager  byType  (Lnet/minecraft/world/item/crafting/RecipeType;)Ljava/util/Map;

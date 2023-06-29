@@ -6,8 +6,14 @@ import net.empyrean.events.bootstrapEvents
 import net.empyrean.game.GameManager
 import net.empyrean.item.bootstrapItems
 import net.empyrean.network.bootstrapNetworking
+import net.empyrean.recipe.AdvancedShapedRecipe
+import net.empyrean.recipe.AdvancedShapelessRecipe
+import net.empyrean.recipe.ser.StackedIngredientSerializer
 import net.empyrean.worldgen.bootstrapOrePlacement
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredientSerializer
+import net.minecraft.core.Registry
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.util.RandomSource
 import org.slf4j.LoggerFactory
 import java.util.concurrent.ThreadLocalRandom
@@ -21,6 +27,13 @@ object EmpyreanMod : ModInitializer {
 
     override fun onInitialize() {
         preloadClasses()
+
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, "empyrean:advanced_shaped",
+            AdvancedShapedRecipe.Serializer)
+        Registry.register(BuiltInRegistries.RECIPE_SERIALIZER, "empyrean:advanced_shapeless",
+            AdvancedShapelessRecipe.Serializer)
+
+        CustomIngredientSerializer.register(StackedIngredientSerializer)
 
         bootstrapItems()
         bootstrapBlocks()

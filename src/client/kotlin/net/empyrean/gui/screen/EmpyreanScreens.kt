@@ -5,7 +5,7 @@ import net.empyrean.menu.EmpyreanMenu
 import net.minecraft.client.gui.screens.MenuScreens
 
 object EmpyreanScreens {
-    val BOX_SCREEN = MenuScreens.register(EmpyreanMenu.ADVANCED_CRAFTING_TABLE) { handler, inv, title ->
+    val ADVANCED_CRAFTING_TABLE = MenuScreens.register(EmpyreanMenu.ADVANCED_CRAFTING_TABLE) { handler, inv, title ->
         ACTScreen(handler, inv, title)
     }
 }

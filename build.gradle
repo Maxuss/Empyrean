@@ -21,6 +21,7 @@ repositories {
 	maven { url 'https://maven.terraformersmc.com/' }
 	maven { url "https://maven.isxander.dev/releases" }
 	maven { url "https://maven.parchmentmc.org" }
+	maven { url "https://maven.shedaniel.me/" }
 }
 
 loom {
@@ -89,6 +90,11 @@ dependencies {
 	// Config + ModMenu integration
 	modApi "dev.isxander.yacl:yet-another-config-lib-fabric:${project.yacl_version}"
 	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
+
+	// REI integration
+	modRuntimeOnly "me.shedaniel:RoughlyEnoughItems-fabric:$rei_version"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:$rei_version"
+	modCompileOnly "me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:$rei_version"
 
 	// Fabric
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"

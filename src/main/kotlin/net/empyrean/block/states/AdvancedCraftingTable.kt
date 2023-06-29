@@ -39,7 +39,6 @@ class AdvancedCraftingTable: SimpleEmpyreanBlock(
 
     override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos): MenuProvider {
         return SimpleMenuProvider({ i, inv, _ ->
-            println("RETURNING MENU PROVIDER")
             ACTMenuHandler(i, inv, ContainerLevelAccess.create(level, pos))
         }, TITLE)
     }

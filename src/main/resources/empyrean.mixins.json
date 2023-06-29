@@ -6,6 +6,7 @@
     "CommandContextAccessorMixin",
     "RuleTestTypeMixin",
     "ServerBrandMixin",
+    "craft.ResultSlotMixin",
     "item.ItemEntityMixin",
     "item.ItemStackMixin",
     "movement.EntityPitchMixin",
