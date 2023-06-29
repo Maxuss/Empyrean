@@ -39,7 +39,6 @@ public class ResultSlotMixin {
         }
     }
 
-    @SuppressWarnings({"ConstantValue", "UnstableApiUsage"}) // idc that its unstable, i need to use it :3
     @Inject(
             method = "onTake",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/core/NonNullList;size()I", shift = At.Shift.BEFORE),

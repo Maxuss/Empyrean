@@ -33,7 +33,7 @@ class ACTMenuHandler(syncId: Int, inv: Inventory, cla: ContainerLevelAccess): Ab
     private val player: Player = inv.player
 
     init {
-        this.addSlot(ResultSlot(inv.player, this.craftSlots, this.resultSlots, 0, 124, 35));
+        this.addSlot(ResultSlot(inv.player, this.craftSlots, this.resultSlots, 0, 124, 35))
         // actual grid
         for(j in 0 until 3) {
             for(k in 0 until 3) {

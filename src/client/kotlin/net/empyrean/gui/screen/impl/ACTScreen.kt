@@ -7,8 +7,6 @@ import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
-import net.minecraft.world.inventory.ClickType
-import net.minecraft.world.inventory.Slot
 
 // pretty much just CraftingScreen
 class ACTScreen(handler: ACTMenuHandler, inv: Inventory, title: Component): AbstractContainerScreen<ACTMenuHandler>(handler, inv, title) {
@@ -21,7 +19,7 @@ class ACTScreen(handler: ACTMenuHandler, inv: Inventory, title: Component): Abst
     override fun init() {
         super.init()
         widthTooNarrow = width < 379
-        leftPos = (width - imageWidth) / 2;
+        leftPos = (width - imageWidth) / 2
         titleLabelX = 29
     }
 
@@ -73,9 +71,5 @@ class ACTScreen(handler: ACTMenuHandler, inv: Inventory, title: Component): Abst
         mouseButton: Int
     ): Boolean {
         return mouseX < guiLeft.toDouble() || mouseY < guiTop.toDouble() || mouseX >= (guiLeft + imageWidth).toDouble() || mouseY >= (guiTop + imageHeight).toDouble()
-    }
-
-    override fun slotClicked(slot: Slot?, slotId: Int, mouseButton: Int, type: ClickType?) {
-        super.slotClicked(slot, slotId, mouseButton, type)
     }
 }

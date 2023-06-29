@@ -37,6 +37,7 @@ class AdvancedShapedRecipe(
         return Serializer
     }
 
+    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS") // we can safely pass null here actually
     object Serializer: ShapedRecipe.Serializer() {
         override fun fromJson(recipeId: ResourceLocation, json: JsonObject): ShapedRecipe {
             val it = super.fromJson(recipeId, json)
