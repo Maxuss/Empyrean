@@ -40,7 +40,7 @@
       "net.empyrean.components.EmpyreanComponents"
     ],
     "rei_client": [
-      "net.empyrean.interop.REIIntegration"
+      "net.empyrean.interop.EmpyreanReiPlugin"
     ]
   },
   "mixins": [

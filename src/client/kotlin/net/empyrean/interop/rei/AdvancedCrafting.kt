@@ -7,31 +7,26 @@ import me.shedaniel.rei.plugin.client.categories.crafting.DefaultCraftingCategor
 import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCraftingDisplay
 import me.shedaniel.rei.plugin.common.displays.crafting.DefaultShapedDisplay
 import me.shedaniel.rei.plugin.common.displays.crafting.DefaultShapelessDisplay
-import net.empyrean.EmpyreanModClient
 import net.empyrean.block.EmpyreanBlocks
 import net.empyrean.recipe.AdvancedShapedRecipe
 import net.empyrean.recipe.AdvancedShapelessRecipe
 import net.minecraft.network.chat.Component
 
-object Displays {
-    @JvmField
-    val ADVANCED_CRAFTING = CategoryIdentifier.of<DefaultCraftingDisplay<*>>(EmpyreanModClient.MODID, "advanced_crafting")
-}
-
 class AdvancedShapedCraftingDisplay(recipe: AdvancedShapedRecipe): DefaultShapedDisplay(recipe) {
     override fun getCategoryIdentifier(): CategoryIdentifier<*> {
-        return Displays.ADVANCED_CRAFTING
+        return EmpyreanReiIds.ADVANCED_CRAFTING
     }
 }
+
 class AdvancedShapelessCraftingDisplay(recipe: AdvancedShapelessRecipe): DefaultShapelessDisplay(recipe) {
     override fun getCategoryIdentifier(): CategoryIdentifier<*> {
-        return Displays.ADVANCED_CRAFTING
+        return EmpyreanReiIds.ADVANCED_CRAFTING
     }
 }
 
 class AdvancedCraftingCategory: DefaultCraftingCategory() {
     override fun getCategoryIdentifier(): CategoryIdentifier<out DefaultCraftingDisplay<*>> {
-        return Displays.ADVANCED_CRAFTING
+        return EmpyreanReiIds.ADVANCED_CRAFTING
     }
 
     override fun getTitle(): Component {
