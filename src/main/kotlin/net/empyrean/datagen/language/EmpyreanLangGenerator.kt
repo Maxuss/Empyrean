@@ -108,6 +108,10 @@ class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, 
         // <editor-fold desc="Containers">
         lang.add("container.empyrean.advanced_crafting_table", "Advanced Crafting Table")
         // </editor-fold>
+
+        // <editor-fold desc="REI">
+        lang.add("rei.empyrean.advanced_crafting.title", "Advanced Crafting")
+        // </editor-fold>
     }
     
     private fun generateBlockTranslations(lang: TranslationBuilder) {

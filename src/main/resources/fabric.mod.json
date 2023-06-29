@@ -38,6 +38,9 @@
     ],
     "cardinal-components-entity": [
       "net.empyrean.components.EmpyreanComponents"
+    ],
+    "rei_client": [
+      "net.empyrean.interop.REIIntegration"
     ]
   },
   "mixins": [
