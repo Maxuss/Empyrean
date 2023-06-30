@@ -1,0 +1,25 @@
+{
+  "type": "empyrean:advanced_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "fabric:type": "empyrean:stacked",
+      "count": 32,
+      "inner": {
+        "item": "minecraft:diamond"
+      }
+    },
+    "I": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "#",
+    "#",
+    "I"
+  ],
+  "result": {
+    "item": "empyrean:aspect_of_the_end"
+  },
+  "show_notification": false
+}

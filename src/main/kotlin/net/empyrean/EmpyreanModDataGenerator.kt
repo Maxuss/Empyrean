@@ -2,6 +2,7 @@ package net.empyrean
 
 import net.empyrean.datagen.*
 import net.empyrean.datagen.language.EmpyreanLangGenerator
+import net.empyrean.datagen.recipe.EmpyreanRecipeGenerator
 import net.empyrean.datagen.trinkets.TrinketsTagGenerator
 import net.empyrean.datagen.worldgen.EmpyreanWorldGenerator
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
@@ -20,6 +21,7 @@ object EmpyreanModDataGenerator : DataGeneratorEntrypoint {
         pack.addProvider { generator, backingRegistry -> EmpyreanItemTagGenerator(generator as FabricDataOutput, backingRegistry) }
         pack.addProvider { generator, backingRegistry -> EmpyreanWorldGenerator(generator as FabricDataOutput, backingRegistry) }
         pack.addProvider { generator, backingRegistry -> TrinketsTagGenerator(generator as FabricDataOutput, backingRegistry) }
+        pack.addProvider { generator -> EmpyreanRecipeGenerator(generator as FabricDataOutput) }
     }
 
     override fun buildRegistry(registryBuilder: RegistrySetBuilder) {
