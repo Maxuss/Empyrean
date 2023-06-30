@@ -116,6 +116,7 @@ class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, 
     
     private fun generateBlockTranslations(lang: TranslationBuilder) {
         lang.add(EmpyreanBlocks.GEYSERITE_ORE, "Geyserite Ore")
+        lang.add(EmpyreanBlocks.ADVANCED_CRAFTING_TABLE, "Advanced Crafting Table")
     }
     
     private fun generateItemTranslations(lang: TranslationBuilder) {

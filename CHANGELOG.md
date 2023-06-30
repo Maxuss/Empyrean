@@ -36,5 +36,10 @@ copy+paste: ✅
    * Most prefixes from https://calamitymod.wiki.gg/wiki/Modifiers
    * Several others: Mystic, Vigorous and Accurate for accessories; Accelerated, Depressed and Enchanted for weapons
 
-
 =============
+
+9. Added advanced crafting system. You can now demand more than 1 item in a stack for ingredient. Works only in certain workstations - ✅
+10. Added Advanced Crafting Table - ✅
+11. Fixed numerous bugs - ✅
+12. Added general REI support (https://legacy.curseforge.com/minecraft/mc-mods/roughly-enough-items) - ✅
+13. Added REI support for advanced crafting - ✅

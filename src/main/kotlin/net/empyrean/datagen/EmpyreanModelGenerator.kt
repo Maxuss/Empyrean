@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.Blocks
 class EmpyreanModelGenerator(generator: FabricDataOutput) : FabricModelProvider(generator) {
     override fun generateBlockStateModels(blocks: BlockModelGenerators) {
         blocks.createTrivialCube(EmpyreanBlocks.GEYSERITE_ORE)
-        blocks.createCraftingTableLike(EmpyreanBlocks.ADVANCED_CRAFTING_TABLE, Blocks.WARPED_PLANKS, TextureMapping::craftingTable) // TODO: replace with actual proper block model
+        blocks.createCraftingTableLike(EmpyreanBlocks.ADVANCED_CRAFTING_TABLE, Blocks.CRIMSON_PLANKS, TextureMapping::craftingTable)
     }
 
     override fun generateItemModels(items: ItemModelGenerators) {

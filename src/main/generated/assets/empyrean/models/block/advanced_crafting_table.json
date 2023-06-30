@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube",
   "textures": {
-    "down": "minecraft:block/warped_planks",
+    "down": "minecraft:block/crimson_planks",
     "east": "empyrean:block/advanced_crafting_table_side",
     "north": "empyrean:block/advanced_crafting_table_front",
     "particle": "empyrean:block/advanced_crafting_table_front",

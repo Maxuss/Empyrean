@@ -14,10 +14,17 @@ class EmpyreanBlockTagGenerator(output: FabricDataOutput, backingRegistry: Compl
         pickaxe.add(EmpyreanBlocks.GEYSERITE_ORE)
         // </editor-fold>
 
+        // <editor-fold desc="Mineable Axe">
+        val axe = getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_AXE)
+        axe.add(EmpyreanBlocks.ADVANCED_CRAFTING_TABLE)
+        // </editor-fold>
+
         // <editor-fold desc="Requires Tool Levels">
         val diamond = getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
         diamond.add(EmpyreanBlocks.GEYSERITE_ORE)
+
+        val iron = getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
+        iron.add(EmpyreanBlocks.ADVANCED_CRAFTING_TABLE)
         // </editor-fold>
     }
-
 }

@@ -16,5 +16,6 @@ class EmpyreanBlockLootGenerator(output: FabricDataOutput): FabricBlockLootTable
                 EmpyreanItems.RAW_GEYSERITE
             )
         }
+        dropSelf(EmpyreanBlocks.ADVANCED_CRAFTING_TABLE)
     }
 }
