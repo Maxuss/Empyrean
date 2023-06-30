@@ -2,7 +2,7 @@ package net.empyrean.block.states
 
 import net.empyrean.block.SimpleEmpyreanBlock
 import net.empyrean.item.rarity.ItemRarity
-import net.empyrean.menu.handlers.ACTMenuHandler
+import net.empyrean.menu.handlers.AdvancedCraftingTableMenu
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
@@ -39,7 +39,7 @@ class AdvancedCraftingTable: SimpleEmpyreanBlock(
 
     override fun getMenuProvider(state: BlockState, level: Level, pos: BlockPos): MenuProvider {
         return SimpleMenuProvider({ i, inv, _ ->
-            ACTMenuHandler(i, inv, ContainerLevelAccess.create(level, pos))
+            AdvancedCraftingTableMenu(i, inv, ContainerLevelAccess.create(level, pos))
         }, TITLE)
     }
 

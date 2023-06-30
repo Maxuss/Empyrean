@@ -17,16 +17,7 @@ import net.minecraft.world.item.crafting.RecipeType
 import net.minecraft.world.level.Level
 import kotlin.jvm.optionals.getOrNull
 
-class ACTMenuHandler(syncId: Int, inv: Inventory, cla: ContainerLevelAccess): AbstractContainerMenu(EmpyreanMenu.ADVANCED_CRAFTING_TABLE, syncId) {
-    companion object {
-        val RESULT_SLOT = 0
-        val CRAFT_SLOT_START = 1
-        val CRAFT_SLOT_END = 10
-        val INV_SLOT_START = 10
-        val INV_SLOT_END = 37
-        val USE_ROW_SLOT_START = 37
-        val USE_ROW_SLOT_END = 46
-    }
+open class AdvancedCraftingTableMenu(syncId: Int, inv: Inventory, cla: ContainerLevelAccess): AbstractContainerMenu(EmpyreanMenu.ADVANCED_CRAFTING_TABLE, syncId) {
     private val craftSlots: CraftingContainer = AdvancedCraftingContainer(this, 3, 3)
     private val resultSlots = ResultContainer()
     private val access: ContainerLevelAccess = cla
@@ -96,8 +87,8 @@ class ACTMenuHandler(syncId: Int, inv: Inventory, cla: ContainerLevelAccess): Ab
         return itemStack
     }
 
-    @Suppress("USELESS_CAST")
-    protected fun slotChangedCraftingGrid(
+    @Suppress("USELESS_CAST") // dumb plugin again
+    private fun slotChangedCraftingGrid(
         menu: AbstractContainerMenu,
         level: Level,
         player: Player,

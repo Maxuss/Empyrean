@@ -1,19 +1,14 @@
 package net.empyrean.gui.screen.impl
 
-import net.empyrean.menu.handlers.ACTMenuHandler
+import net.empyrean.menu.handlers.AdvancedCraftingTableMenu
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
-import net.minecraft.client.gui.screens.recipebook.RecipeBookComponent
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
 
 // pretty much just CraftingScreen
-class ACTScreen(handler: ACTMenuHandler, inv: Inventory, title: Component): AbstractContainerScreen<ACTMenuHandler>(handler, inv, title) {
-
-    private val CRAFTING_TABLE_LOCATION = ResourceLocation("textures/gui/container/crafting_table.png")
-    private val RECIPE_BUTTON_LOCATION = ResourceLocation("textures/gui/recipe_button.png")
-    private val recipeBookComponent = RecipeBookComponent()
+class AdvancedCraftingTableScreen(handler: AdvancedCraftingTableMenu, inv: Inventory, title: Component): AbstractContainerScreen<AdvancedCraftingTableMenu>(handler, inv, title) {
     private var widthTooNarrow = false
 
     override fun init() {
@@ -71,5 +66,9 @@ class ACTScreen(handler: ACTMenuHandler, inv: Inventory, title: Component): Abst
         mouseButton: Int
     ): Boolean {
         return mouseX < guiLeft.toDouble() || mouseY < guiTop.toDouble() || mouseX >= (guiLeft + imageWidth).toDouble() || mouseY >= (guiTop + imageHeight).toDouble()
+    }
+
+    companion object {
+        private val CRAFTING_TABLE_LOCATION = ResourceLocation("textures/gui/container/crafting_table.png")
     }
 }
