@@ -35,11 +35,23 @@ copy+paste: ✅
    * All prefixes from https://terraria.fandom.com/wiki/Modifiers
    * Most prefixes from https://calamitymod.wiki.gg/wiki/Modifiers
    * Several others: Mystic, Vigorous and Accurate for accessories; Accelerated, Depressed and Enchanted for weapons
-
-=============
-
 9. Added advanced crafting system. You can now demand more than 1 item in a stack for ingredient. Works only in certain workstations - ✅
 10. Added Advanced Crafting Table - ✅
 11. Fixed numerous bugs - ✅
 12. Added general REI support (https://legacy.curseforge.com/minecraft/mc-mods/roughly-enough-items) - ✅
 13. Added REI support for advanced crafting - ✅
+
+
+=============
+
+14. Added texture for advanced crafting table - ✅
+15. Improved recipe generation system - ✅
+16. Fixed a bug where player statistics were not synchronized with client - ✅
+17. Fixed a bug where negative statistics would not format within reforge item tooltip - ✅
+18. Negative statistics are now formatted with red color instead of green within reforge item tooltip - ✅
+19. Player statistics now also include stats from held item, offhand item, armor and trinkets - ✅
+20. Player statistics are now synchronized with client on demand instead of every tick - ✅
+22. Vanilla items now can have their own kind, rarity and stats - ✅
+23. Vanilla items no longer render vanilla tooltip parts - ✅
+24. Prefixes now work on vanilla items - ✅
+25. Moved packets from java to kotlin - ✅

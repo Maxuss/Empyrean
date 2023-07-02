@@ -5,11 +5,13 @@ import net.empyrean.chat.SpecialFormatting
 import net.empyrean.chat.withEmpyreanStyle
 import net.empyrean.commands.api.command
 import net.empyrean.commands.api.suggests
+import net.empyrean.components.data
 import net.empyrean.game.GameManager
 import net.empyrean.game.state.ProgressionState
 import net.empyrean.item.EmpyreanItemStack
 import net.empyrean.network.EmpyreanNetworking
 import net.empyrean.network.packets.clientbound.ClientboundStatusMessagePacket
+import net.empyrean.player.PlayerStat
 import net.empyrean.registry.EmpyreanRegistries
 import net.empyrean.util.pos.pos
 import net.minecraft.core.registries.BuiltInRegistries
@@ -35,6 +37,9 @@ fun testCommand() = command("empyrean") {
                 Component.literal("This is going to be a horrible night...").withStyle(Style.EMPTY.withColor(0xc91c33)), 2
             ))
     }
+    "stats" runs {
+        source.playerOrException.data.rawStats[PlayerStat.DEFENSE] += 10f
+    }
 }
 
 @Suppress("CAST_NEVER_SUCCEEDS")
@@ -42,14 +47,12 @@ fun prefixCommand() = command("prefix") {
     val suggest = suggests { EmpyreanRegistries.PREFIX.keySet().toList() }
     argIdentifier("pfx", suggest) runs { id ->
         val player = source.playerOrException
-        val data = (player.mainHandItem as EmpyreanItemStack).itemData!!
-        data.prefix = EmpyreanRegistries.PREFIX[id()]!!
+        (player.mainHandItem as EmpyreanItemStack).setPrefix(EmpyreanRegistries.PREFIX[id()]!!)
     }
 
     runs {
         val player = source.playerOrException
-        val data = (player.mainHandItem as EmpyreanItemStack).itemData!!
-        data.prefix = EmpyreanRegistries.PREFIX.getRandom(EmpyreanMod.serverRandomSource).get().value()
+        (player.mainHandItem as EmpyreanItemStack).setPrefix(EmpyreanRegistries.PREFIX.getRandom(EmpyreanMod.serverRandomSource).get().value())
     }
 }
 

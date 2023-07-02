@@ -3,6 +3,10 @@ package net.empyrean.event.client
 import net.empyrean.EmpyreanModClient
 import net.empyrean.chat.EmpyreanStyle
 import net.empyrean.chat.SpecialFormatting
+import net.empyrean.components.data
+import net.empyrean.debug.Debug
+import net.empyrean.debug.DebugTextBatch
+import net.empyrean.debug.StatDebugElement
 import net.empyrean.events.EmpyreanTooltipEvent
 import net.empyrean.gui.text.StatusMessageRenderer
 import net.empyrean.gui.text.color.EmpyreanColors
@@ -10,14 +14,17 @@ import net.empyrean.item.EmpyreanItem.Companion.appendComparisonText
 import net.empyrean.item.EmpyreanItem.Companion.appendStats
 import net.empyrean.network.EmpyreanNetworking
 import net.empyrean.network.packets.serverbound.ServerboundLeftClickPacket
+import net.empyrean.player.Stats
 import net.empyrean.render.particle.CrystalSparkleParticle
 import net.empyrean.render.particle.OutlinedParticle
 import net.empyrean.render.particle.ParticleEngine2D
 import net.empyrean.util.general.Ticking
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
 import net.fabricmc.fabric.api.event.client.player.ClientPreAttackCallback
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.Screen
+import net.minecraft.network.chat.Component
 
 fun bootstrapClientEvents() {
     ClientPreAttackCallback.EVENT.register { _, _, clickCount ->
@@ -46,13 +53,31 @@ fun bootstrapClientEvents() {
         StatusMessageRenderer.tick()
     }
     EmpyreanTooltipEvent.CLIENT_ADD_STATS.register { selfStats, _, _, list ->
-        val player = Minecraft.getInstance().player
-        if(!Screen.hasShiftDown() || player?.mainHandItem?.isEmpty == true)
-            appendStats(selfStats, list)
-        else {
-            val selectedItem = player!!.mainHandItem
-            if (selectedItem.isEmpty) return@register
-            appendComparisonText(selectedItem, selfStats, list)
+        handleAddStats(selfStats, list)
+    }
+    EmpyreanTooltipEvent.CLIENT_ADD_STATS_VANILLA.register { selfStats, _, list ->
+        handleAddStats(selfStats, list)
+    }
+    if(Debug.DEBUG_STAT_VALUES) {
+        HudRenderCallback.EVENT.register { graphics, _ ->
+            val playerData = Minecraft.getInstance().player?.data ?: return@register
+            Minecraft.getInstance().profiler.push("debug/stats")
+            val batch = DebugTextBatch(playerData.statistics!!.inner.map {
+                StatDebugElement(it.key, it.value)
+            }.toTypedArray())
+            batch.render(graphics)
+            Minecraft.getInstance().profiler.pop()
         }
+    }
+}
+
+private fun handleAddStats(selfStats: Stats, list: MutableList<Component>) {
+    val player = Minecraft.getInstance().player
+    if(!Screen.hasShiftDown() || player?.mainHandItem?.isEmpty == true)
+        appendStats(selfStats, list)
+    else {
+        val selectedItem = player!!.mainHandItem
+        if (selectedItem.isEmpty) return
+        appendComparisonText(selectedItem, selfStats, list)
     }
 }

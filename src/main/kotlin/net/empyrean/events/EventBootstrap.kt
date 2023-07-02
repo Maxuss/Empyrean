@@ -9,6 +9,7 @@ import net.empyrean.util.schedule.Scheduler
 import net.fabricmc.fabric.api.entity.event.v1.EntityElytraEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.server.level.ServerPlayer
 import kotlin.time.Duration.Companion.seconds
@@ -41,4 +42,7 @@ fun bootstrapEvents() {
     ServerLifecycleEvents.SERVER_STOPPING.register { _ ->
         GameManager.gameData.save(FabricLoader.getInstance().gameDir)
     }
+
+    ServerLifecycleEvents.SERVER_STARTED.register(GameManager)
+    ServerTickEvents.END_SERVER_TICK.register(GameManager)
 }

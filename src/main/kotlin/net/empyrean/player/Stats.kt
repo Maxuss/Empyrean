@@ -68,9 +68,8 @@ enum class PlayerStat(
     val componentKey: String = "stat.empyrean.${translationKey ?: name.lowercase()}"
 }
 
-@JvmInline
 @Serializable(with = StatsSerializer::class)
-value class Stats(val inner: EnumMap<PlayerStat, Float>) {
+data class Stats(val inner: EnumMap<PlayerStat, Float>) {
     companion object {
         fun prefill() = Stats(EnumMap(PlayerStat.values().associateWith { it.defaultValue }))
         fun empty() = Stats(EnumMap(PlayerStat::class.java))
@@ -119,6 +118,23 @@ value class Stats(val inner: EnumMap<PlayerStat, Float>) {
             selfClone.merge(key, value) { current, new -> current + new }
         }
         return Stats(selfClone)
+    }
+
+    fun mergeMany(iterable: Iterable<Stats>): Stats {
+        val selfClone = this.inner.clone()
+        for(stat in iterable) {
+            if(stat.isEmpty())
+                continue
+            stat.inner.forEach { (key, value) ->
+                selfClone.merge(key, value) { current, new -> current + new }
+            }
+        }
+        return Stats(selfClone)
+    }
+
+    fun mergeMany(vararg many: Stats): Stats {
+        val list = many.toList().iterator()
+        return this.mergeMany(Iterable { list })
     }
 
     operator fun times(by: Float): Stats {
@@ -189,13 +205,21 @@ object StatsSerializer : KSerializer<Stats> {
         val outMap = EnumMap<PlayerStat, Float>(PlayerStat::class.java)
         decoder.decodeStructure(descriptor) {
             val expectedSize = PlayerStat.values().size
-            for (single in 0 until expectedSize) {
-                val idx = decodeElementIndex(descriptor)
-                if (idx == CompositeDecoder.DECODE_DONE)
-                    break
-                val stat = PlayerStat.values()[idx]
-                val value = decodeFloatElement(descriptor, idx)
-                outMap[stat] = value
+            if(decodeSequentially()) {
+                for(single in 0 until expectedSize) {
+                    val stat = PlayerStat.values()[single]
+                    val value = decodeFloatElement(descriptor, single)
+                    outMap[stat] = value
+                }
+            } else {
+                for (single in 0 until expectedSize) {
+                    val idx = decodeElementIndex(descriptor)
+                    if (idx == CompositeDecoder.DECODE_DONE)
+                        break
+                    val stat = PlayerStat.values()[idx]
+                    val value = decodeFloatElement(descriptor, idx)
+                    outMap[stat] = value
+                }
             }
             PlayerStat.values().forEach {
                 outMap.putIfAbsent(it, it.defaultValue)
@@ -311,14 +335,12 @@ object StatsFormatter {
     }
 
     fun formatExplicit(map: Map<PlayerStat, Float>): List<Component> {
-        return map.mapNotNull { (key, value) ->
-            if(key.shouldFormat(value)) {
-                if(key.percentage) {
-                    Component.translatable(key.componentKey).append(Component.literal(": ${if(value > 0f) "+" else ""}${(value * 100f).roundToInt()}%")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))
-                } else {
-                    Component.translatable(key.componentKey).append(Component.literal(": ${if(value > 0f) "+" else ""}${value.roundToInt()}")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))
-                }
-            } else null
+        return map.map { (key, value) ->
+            if(key.percentage) {
+                Component.translatable(key.componentKey).append(Component.literal(": ${if(value > 0f) "+" else ""}${(value * 100f).roundToInt()}%")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))
+            } else {
+                Component.translatable(key.componentKey).append(Component.literal(": ${if(value > 0f) "+" else ""}${value.roundToInt()}")).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY))
+            }
         }
     }
 

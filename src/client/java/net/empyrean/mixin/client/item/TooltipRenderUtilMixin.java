@@ -2,6 +2,8 @@ package net.empyrean.mixin.client.item;
 
 import net.empyrean.gui.text.color.EmpyreanColor;
 import net.empyrean.item.EmpyreanItem;
+import net.empyrean.util.general.CachedDataHolder;
+import net.empyrean.util.item.ItemCachedData;
 import net.empyrean.item.rarity.ItemRarity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TooltipRenderUtil.class)
 public class TooltipRenderUtilMixin {
+    @SuppressWarnings("unchecked")
     @Inject(
             method = "renderFrameGradient",
             at = @At("HEAD"),
@@ -33,23 +36,27 @@ public class TooltipRenderUtilMixin {
         if (containerStack.isEmpty()) // how is it possible? catching edge case though
             return;
 
+        int beginColor;
+        int endColor;
+
         if (containerStack.getItem() instanceof EmpyreanItem empyrean) {
             // we can use special colors!
             ItemRarity rarity = empyrean.getItemRarity();
-            int beginColor = ((EmpyreanColor) rarity.getColor()).getAltValue();
-            int endColor = beginColor + (64 << 24);
-            beginColor += (0xFF << 24);
-            TooltipRenderUtil.renderVerticalLineGradient(guiGraphics, x, y, height - 2, z, beginColor, endColor);
-            TooltipRenderUtil.renderVerticalLineGradient(guiGraphics, x + width - 1, y, height - 2, z, beginColor, endColor);
-            TooltipRenderUtil.renderHorizontalLine(guiGraphics, x, y - 1, width, z, beginColor);
-            TooltipRenderUtil.renderHorizontalLine(guiGraphics, x, y - 1 + height - 1, width, z, endColor);
+            beginColor = ((EmpyreanColor) rarity.getColor()).getAltValue();
         } else {
-            // using default border colors
-            TooltipRenderUtil.renderVerticalLineGradient(guiGraphics, x, y, height - 2, z, providedStartColor, providedEndColor);
-            TooltipRenderUtil.renderVerticalLineGradient(guiGraphics, x + width - 1, y, height - 2, z, providedStartColor, providedEndColor);
-            TooltipRenderUtil.renderHorizontalLine(guiGraphics, x, y - 1, width, z, providedStartColor);
-            TooltipRenderUtil.renderHorizontalLine(guiGraphics, x, y - 1 + height - 1, width, z, providedEndColor);
+            ItemCachedData cachedData = ((CachedDataHolder<ItemCachedData>) (Object) containerStack).getOrCalculate();
+            ItemRarity rarity = cachedData.rarity();
+            beginColor = ((EmpyreanColor) rarity.getColor()).getAltValue();
         }
+
+        endColor = beginColor + (64 << 24); // fading out
+        beginColor += (0xFF << 24); // fading in
+
+        TooltipRenderUtil.renderVerticalLineGradient(guiGraphics, x, y, height - 2, z, beginColor, endColor);
+        TooltipRenderUtil.renderVerticalLineGradient(guiGraphics, x + width - 1, y, height - 2, z, beginColor, endColor);
+        TooltipRenderUtil.renderHorizontalLine(guiGraphics, x, y - 1, width, z, beginColor);
+        TooltipRenderUtil.renderHorizontalLine(guiGraphics, x, y - 1 + height - 1, width, z, endColor);
+
         ci.cancel();
     }
 }
