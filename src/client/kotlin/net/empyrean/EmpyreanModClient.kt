@@ -1,5 +1,6 @@
 package net.empyrean
 
+import net.empyrean.commands.bootstrapClientCommands
 import net.empyrean.config.ClientConfig
 import net.empyrean.event.client.bootstrapClientEvents
 import net.empyrean.item.client.bootstrapClientItems
@@ -24,6 +25,7 @@ object EmpyreanModClient : ClientModInitializer {
         bootstrapClientEvents()
         bootstrapClientItems()
         bootstrapClientRegistries()
+        bootstrapClientCommands()
     }
 
     private fun preloadNecessaryClasses() {

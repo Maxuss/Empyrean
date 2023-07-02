@@ -15,6 +15,7 @@ import net.empyrean.item.EmpyreanItem.Companion.appendStats
 import net.empyrean.network.EmpyreanNetworking
 import net.empyrean.network.packets.serverbound.ServerboundLeftClickPacket
 import net.empyrean.player.Stats
+import net.empyrean.render.RenderManager
 import net.empyrean.render.particle.CrystalSparkleParticle
 import net.empyrean.render.particle.OutlinedParticle
 import net.empyrean.render.particle.ParticleEngine2D
@@ -69,6 +70,8 @@ fun bootstrapClientEvents() {
             Minecraft.getInstance().profiler.pop()
         }
     }
+    ClientTickEvents.END_CLIENT_TICK.register(RenderManager)
+    HudRenderCallback.EVENT.register(RenderManager)
 }
 
 private fun handleAddStats(selfStats: Stats, list: MutableList<Component>) {
