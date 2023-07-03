@@ -3,6 +3,8 @@ package net.empyrean.game
 import dev.emi.trinkets.api.TrinketsApi
 import net.empyrean.components.EmpyreanComponents
 import net.empyrean.components.PlayerDataComponent
+import net.empyrean.components.data
+import net.empyrean.player.PlayerStat
 import net.empyrean.player.Stats
 import net.empyrean.util.merged
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
@@ -11,7 +13,9 @@ import net.fabricmc.fabric.api.networking.v1.PlayerLookup
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.world.entity.ai.attributes.Attributes
 import kotlin.jvm.optionals.getOrDefault
+import kotlin.math.min
 
 object GameManager: ServerLifecycleEvents.ServerStarted, ServerTickEvents.EndTick {
     var gameData: GameData = GameData.default()
@@ -21,11 +25,21 @@ object GameManager: ServerLifecycleEvents.ServerStarted, ServerTickEvents.EndTic
         gameData = GameData.load(FabricLoader.getInstance().gameDir)
     }
 
-    private fun recalculatePlayerStats() {
+    private fun operatePlayers() {
         for(player in PlayerLookup.all(server)) {
             val data = EmpyreanComponents.PLAYER_DATA[player]
             recalculateSinglePlayerStats(player, data)
+            tickSinglePlayer(player)
         }
+    }
+
+    private fun tickSinglePlayer(player: ServerPlayer) {
+        val maxMana = player.data.statistics[PlayerStat.MAX_MANA]
+        val manaRegen = player.data.statistics[PlayerStat.MANA_REGEN]
+        val curMana = player.data.currentMana
+        if(curMana == maxMana)
+            return
+        player.data.currentMana = min(curMana + manaRegen / 20f, maxMana)
     }
 
     private fun recalculateSinglePlayerStats(player: ServerPlayer, data: PlayerDataComponent) {
@@ -39,6 +53,8 @@ object GameManager: ServerLifecycleEvents.ServerStarted, ServerTickEvents.EndTic
         val merged = playerStats.merge(itemStats)
         if(merged != data.statistics)
             data.statistics = merged
+        val movSpeed = player.getAttribute(Attributes.MOVEMENT_SPEED)
+        movSpeed!!.baseValue = data.statistics[PlayerStat.MOVEMENT_SPEED].toDouble()
     }
 
     override fun onServerStarted(server: MinecraftServer) {
@@ -46,6 +62,6 @@ object GameManager: ServerLifecycleEvents.ServerStarted, ServerTickEvents.EndTic
     }
 
     override fun onEndTick(server: MinecraftServer) {
-        recalculatePlayerStats()
+        operatePlayers()
     }
 }

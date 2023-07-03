@@ -8,6 +8,7 @@
     "MinecraftClientMixin",
     "effects.EffectRenderingScreenMixin",
     "effects.EffectsGuiMixin",
+    "hud.HudMixin",
     "item.PlayerRendererMixin",
     "item.TooltipRenderUtilMixin",
     "menu.LogoRendererMixin",

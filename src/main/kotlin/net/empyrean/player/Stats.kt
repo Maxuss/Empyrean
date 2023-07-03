@@ -43,7 +43,7 @@ enum class PlayerStat(
     // TODO: test regen capabilities might need balancing
     MANA_REGEN(0.5f, ChatFormatting.BLUE.modern, percentage = false, modNames = StatsFormatter.regenModNames), // mana/tick
     HEALTH_REGEN(0.2f, ChatFormatting.RED.modern, translationKey = "regen", percentage = false, modNames = StatsFormatter.regenModNames), // health/tick
-    MOVEMENT_SPEED(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),
+    MOVEMENT_SPEED(0.12f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),
     FLIGHT_SPEED(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.flightModNames),
     FLIGHT_TIME(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.flightModNames),
     JUMP_HEIGHT(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),

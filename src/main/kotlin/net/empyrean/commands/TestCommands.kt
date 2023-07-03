@@ -40,6 +40,20 @@ fun testCommand() = command("empyrean") {
     "stats" runs {
         source.playerOrException.data.rawStats[PlayerStat.DEFENSE] += 10f
     }
+    "modStat" {
+        argString("stat") { stat ->
+            argFloat("value") runs { value ->
+                source.playerOrException.data.rawStats[PlayerStat.valueOf(stat())] = value()
+                source.playerOrException.data.sync()
+            }
+        }
+    }
+    "mana" {
+        argFloat("mana") runs { mana ->
+            source.playerOrException.data.currentMana = mana()
+            source.playerOrException.data.sync()
+        }
+    }
 }
 
 @Suppress("CAST_NEVER_SUCCEEDS")

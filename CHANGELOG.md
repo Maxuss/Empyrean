@@ -40,10 +40,6 @@ copy+paste: ✅
 11. Fixed numerous bugs - ✅
 12. Added general REI support (https://legacy.curseforge.com/minecraft/mc-mods/roughly-enough-items) - ✅
 13. Added REI support for advanced crafting - ✅
-
-
-=============
-
 14. Added texture for advanced crafting table - ✅
 15. Improved recipe generation system - ✅
 16. Fixed a bug where player statistics were not synchronized with client - ✅
@@ -55,3 +51,4 @@ copy+paste: ✅
 23. Vanilla items no longer render vanilla tooltip parts - ✅
 24. Prefixes now work on vanilla items - ✅
 25. Moved packets from java to kotlin - ✅
+26. Added actual functionality to following stats: jump height, jump speed, movement speed - ✅
