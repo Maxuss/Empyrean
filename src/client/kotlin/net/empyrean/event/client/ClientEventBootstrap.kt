@@ -4,10 +4,13 @@ import net.empyrean.EmpyreanModClient
 import net.empyrean.chat.EmpyreanStyle
 import net.empyrean.chat.SpecialFormatting
 import net.empyrean.components.data
+import net.empyrean.debug.AdrenalineDebugElement
 import net.empyrean.debug.Debug
 import net.empyrean.debug.DebugTextBatch
 import net.empyrean.debug.StatDebugElement
+import net.empyrean.events.EmpyreanDamageEvents
 import net.empyrean.events.EmpyreanTooltipEvent
+import net.empyrean.feature.adrenaline.AdrenalineManager
 import net.empyrean.gui.text.StatusMessageRenderer
 import net.empyrean.gui.text.color.EmpyreanColors
 import net.empyrean.item.EmpyreanItem.Companion.appendComparisonText
@@ -59,19 +62,32 @@ fun bootstrapClientEvents() {
     EmpyreanTooltipEvent.CLIENT_ADD_STATS_VANILLA.register { selfStats, _, list ->
         handleAddStats(selfStats, list)
     }
+
     if(Debug.DEBUG_STAT_VALUES) {
         HudRenderCallback.EVENT.register { graphics, _ ->
             val playerData = Minecraft.getInstance().player?.data ?: return@register
             Minecraft.getInstance().profiler.push("debug/stats")
-            val batch = DebugTextBatch(playerData.statistics!!.inner.map {
+            val batch = DebugTextBatch(playerData.statistics.inner.map {
                 StatDebugElement(it.key, it.value)
             }.toTypedArray())
             batch.render(graphics)
             Minecraft.getInstance().profiler.pop()
         }
     }
+    if(Debug.DEBUG_ADRENALINE) {
+        HudRenderCallback.EVENT.register { graphics, _ ->
+            val playerData = Minecraft.getInstance().player?.data ?: return@register
+            Minecraft.getInstance().profiler.push("debug/adrenaline")
+            val batch = DebugTextBatch(arrayOf(AdrenalineDebugElement(playerData.adrenalineLevel)))
+            batch.render(graphics)
+            Minecraft.getInstance().profiler.pop()
+        }
+    }
+
     ClientTickEvents.END_CLIENT_TICK.register(RenderManager)
     HudRenderCallback.EVENT.register(RenderManager)
+
+    EmpyreanDamageEvents.CLIENT_PLAYER_DAMAGED.register(AdrenalineManager)
 }
 
 private fun handleAddStats(selfStats: Stats, list: MutableList<Component>) {

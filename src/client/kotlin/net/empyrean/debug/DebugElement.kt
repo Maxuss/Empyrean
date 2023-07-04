@@ -17,3 +17,11 @@ data class StatDebugElement(val stat: PlayerStat, val value: Float): DebugElemen
 
     override val color: TextColor = stat.color
 }
+
+data class AdrenalineDebugElement(val amount: Float): DebugElement {
+    override fun asString(): Component {
+        return Component.literal("Adrenaline: $amount")
+    }
+
+    override val color: TextColor = TextColor.fromLegacyFormat(ChatFormatting.GREEN)!!
+}

@@ -1,6 +1,7 @@
 package net.empyrean.events
 
 import dev.emi.trinkets.api.TrinketsApi
+import net.empyrean.feature.adrenaline.AdrenalineManager
 import net.empyrean.game.GameManager
 import net.empyrean.item.impl.wings.EmpyreanWings
 import net.empyrean.network.EmpyreanNetworking
@@ -45,4 +46,6 @@ fun bootstrapEvents() {
 
     ServerLifecycleEvents.SERVER_STARTED.register(GameManager)
     ServerTickEvents.END_SERVER_TICK.register(GameManager)
+
+    EmpyreanDamageEvents.SERVER_PLAYER_DAMAGED.register(AdrenalineManager)
 }

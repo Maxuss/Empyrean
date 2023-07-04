@@ -22,6 +22,7 @@ class PlayerDataComponent(val provider: Player) : PlayerComponent<Component>, Au
     var currentHealth: Float by autosync(100f)
     var rawStats: Stats by autosync(Stats.prefill())
     var statistics: Stats by autosync(Stats.prefill())
+    var adrenalineLevel: Float by autosync(0f)
 
     override fun readFromNbt(tag: CompoundTag) {
         if (tag.isEmpty)
@@ -37,11 +38,11 @@ class PlayerDataComponent(val provider: Player) : PlayerComponent<Component>, Au
     }
 
     override fun writeToNbt(tag: CompoundTag) {
-        encodeNbtTo(PlayerDataHolder(currentMana, currentHealth, rawStats, statistics), tag)
+        encodeNbtTo(PlayerDataHolder(currentMana, currentHealth, rawStats, statistics, adrenalineLevel), tag)
     }
 
     override fun writeSyncPacket(buf: FriendlyByteBuf, recipient: ServerPlayer?) {
-        encodePacket(PlayerDataHolder(currentMana, currentHealth, rawStats, statistics), buf)
+        encodePacket(PlayerDataHolder(currentMana, currentHealth, rawStats, statistics, adrenalineLevel), buf)
     }
 
     override fun applySyncPacket(buf: FriendlyByteBuf) {
@@ -54,6 +55,7 @@ class PlayerDataComponent(val provider: Player) : PlayerComponent<Component>, Au
         currentHealth = holder.currentHealth
         rawStats = holder.rawStats
         statistics = holder.statistics
+        adrenalineLevel = holder.adrenalineLevel
     }
 
     override fun shouldSyncWith(player: ServerPlayer?): Boolean {
@@ -75,6 +77,7 @@ data class PlayerDataHolder(
     val currentHealth: Float,
     val rawStats: Stats,
     val statistics: Stats,
+    val adrenalineLevel: Float = 0f
 )
 
 data class AutoSyncProperty<T>(

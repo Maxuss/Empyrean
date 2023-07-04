@@ -11,6 +11,7 @@
     "item.ItemStackMixin",
     "movement.EntityPitchMixin",
     "movement.PlayerGlideMixin",
+    "player.PlayerMixin",
     "stat.LivingEntityMixin",
     "stat.PlayerMixin",
     "text.StyleMixin",
