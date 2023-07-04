@@ -1,5 +1,6 @@
 package net.empyrean.player
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -201,6 +202,7 @@ object StatsSerializer : KSerializer<Stats> {
             }
         }
 
+    @OptIn(ExperimentalSerializationApi::class)
     override fun deserialize(decoder: Decoder): Stats {
         val outMap = EnumMap<PlayerStat, Float>(PlayerStat::class.java)
         decoder.decodeStructure(descriptor) {

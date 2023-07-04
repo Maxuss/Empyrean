@@ -9,15 +9,17 @@ import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.client.player.LocalPlayer
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.Mth
-import java.util.concurrent.ThreadLocalRandom
+import net.minecraft.util.RandomSource
 import kotlin.math.roundToInt
 
 
 object ManaRenderer {
-    val MANA_STAR_LOCATION = ResourceLocation(EmpyreanModClient.MODID, "textures/gui/hud/mana_stars.png")
+    private val MANA_STAR_LOCATION = ResourceLocation(EmpyreanModClient.MODID, "textures/gui/hud/mana_stars.png")
+    private val random = RandomSource.createNewThreadLocalInstance()
 
     @JvmStatic
     fun renderMana(ticks: Int, player: LocalPlayer, graphics: GuiGraphics, startX: Int, startY: Int) {
+        // TODO: mana star blinking when it regenerates
         Minecraft.getInstance().profiler.push("mana")
         val maxMana = player.data.statistics[PlayerStat.MAX_MANA]
         val currentMana = Mth.clamp(player.mana, 0f, maxMana)
@@ -27,9 +29,9 @@ object ManaRenderer {
             var individualY = startY
             val individualX = x
             if(manaRatio <= 0.05f) {
-                individualY -= ThreadLocalRandom.current().nextInt(2)
+                individualY = random.nextInt(2)
             } else if(manaRatio < 0.6f && ticks % ((manaRatio * 8).roundToInt() * 15 + 2) == 0) {
-                individualY += ThreadLocalRandom.current().nextInt(4) - 1
+                individualY += random.nextInt(4) - 1
             }
             if(manaIdx + 1 <= manaRatio * 8) {
                 renderSingleStar(graphics, individualX, individualY, ManaStarState.FULL)
