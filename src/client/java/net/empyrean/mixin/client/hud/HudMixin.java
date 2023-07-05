@@ -4,7 +4,6 @@ import net.empyrean.gui.hud.AdrenalineRenderer;
 import net.empyrean.gui.hud.ManaRenderer;
 import net.empyrean.util.JInterop;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -27,8 +26,6 @@ public abstract class HudMixin {
     @Shadow private int tickCount;
 
     @Shadow @Final private Minecraft minecraft;
-
-    @Shadow public abstract Font getFont();
 
     @Redirect(
             method = "renderPlayerHealth",
