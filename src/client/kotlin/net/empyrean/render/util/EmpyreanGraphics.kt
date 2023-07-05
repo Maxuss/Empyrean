@@ -2,10 +2,35 @@ package net.empyrean.render.util
 
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.VertexConsumer
+import net.empyrean.gui.text.color.EmpyreanColor
+import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
+import net.minecraft.network.chat.TextColor
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.FastColor
 import org.joml.Matrix4f
+
+val TextColor.empyrean: EmpyreanColor get() = this as EmpyreanColor
+
+fun GuiGraphics.drawBorderedText(
+    text: String,
+    x: Int,
+    y: Int,
+    innerColor: EmpyreanColor,
+    borderColor: EmpyreanColor,
+    borderWidth: Int = 1,
+    centered: Boolean = false
+) {
+    val font = Minecraft.getInstance().font
+    val inner = innerColor.colorValue
+    val border = borderColor.colorValue
+    val actualX = if(centered) x - (font.width(text) / 2) else x
+    drawString(font, text, actualX + borderWidth, y, border, false)
+    drawString(font, text, actualX - borderWidth, y, border, false)
+    drawString(font, text, actualX, y + borderWidth, border, false)
+    drawString(font, text, actualX, y - borderWidth, border, false)
+    drawString(font, text, actualX, y, inner, false)
+}
 
 fun GuiGraphics.drawTexture(
     texture: ResourceLocation,

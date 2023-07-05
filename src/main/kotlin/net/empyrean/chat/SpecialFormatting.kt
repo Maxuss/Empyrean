@@ -14,6 +14,7 @@ enum class SpecialFormatting(
     EMPYREAN_L_STARLIKE(EmpyreanColors.STARLIKE, EmpyreanColors.STARLIKE, true), // Empyrean Lerping color Nautical
     EMPYREAN_L_EXPERT(EmpyreanColors.EXPERT, EmpyreanColors.EXPERT, false),
     EMPYREAN_L_CINDER(EmpyreanColors.CINDER, EmpyreanColors.CINDER, true),
+    EMPYREAN_L_ADRENALINE(EmpyreanColors.ADRENALINE, EmpyreanColors.ADRENALINE, false)
     ;
 
     fun merge(with: SpecialFormatting): SpecialFormatting {

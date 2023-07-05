@@ -48,4 +48,6 @@ fun bootstrapEvents() {
     ServerTickEvents.END_SERVER_TICK.register(GameManager)
 
     EmpyreanDamageEvents.SERVER_PLAYER_DAMAGED.register(AdrenalineManager)
+
+    EmpyreanPlayerEvents.PLAYER_TICK.register(AdrenalineManager)
 }

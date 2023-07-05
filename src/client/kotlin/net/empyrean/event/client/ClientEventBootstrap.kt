@@ -11,6 +11,7 @@ import net.empyrean.debug.StatDebugElement
 import net.empyrean.events.EmpyreanDamageEvents
 import net.empyrean.events.EmpyreanTooltipEvent
 import net.empyrean.feature.adrenaline.AdrenalineManager
+import net.empyrean.gui.hud.AdrenalineRenderer
 import net.empyrean.gui.text.StatusMessageRenderer
 import net.empyrean.gui.text.color.EmpyreanColors
 import net.empyrean.item.EmpyreanItem.Companion.appendComparisonText
@@ -85,6 +86,8 @@ fun bootstrapClientEvents() {
     }
 
     ClientTickEvents.END_CLIENT_TICK.register(RenderManager)
+    ClientTickEvents.END_CLIENT_TICK.register(AdrenalineRenderer)
+
     HudRenderCallback.EVENT.register(RenderManager)
 
     EmpyreanDamageEvents.CLIENT_PLAYER_DAMAGED.register(AdrenalineManager)

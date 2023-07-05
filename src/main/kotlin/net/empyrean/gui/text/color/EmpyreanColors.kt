@@ -46,6 +46,17 @@ object EmpyreanColors {
         )
     )
 
+    @JvmField
+    val ADRENALINE = addColor(
+        "ADRENALINE", LerpingColor(
+            "ADRENALINE", ImmutableList.of(
+                0x7a3af2,
+                0x7114e2,
+                0x923ef9
+            )
+        )
+    )
+
     @Suppress("SameParameterValue")
     private fun <T : EmpyreanColor> addColor(name: String, color: T): T {
         colors[name] = color

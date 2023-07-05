@@ -12,6 +12,7 @@
     "movement.EntityPitchMixin",
     "movement.PlayerGlideMixin",
     "player.PlayerMixin",
+    "player.ServerPlayerMixin",
     "stat.LivingEntityMixin",
     "stat.PlayerMixin",
     "text.StyleMixin",
