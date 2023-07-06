@@ -7,6 +7,7 @@ import net.minecraft.world.effect.MobEffect;
 
 public class EmpyreanEffects implements AutoRegistryContainer<MobEffect> {
     public static final EmpyreanEffect BOSS_PRESENCE = new BossPresenceEffect();
+    public static final EmpyreanEffect ADRENALINE = new AdrenalineEffect();
 
     @Override
     public Registry<MobEffect> getRegistry() {

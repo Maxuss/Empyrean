@@ -16,13 +16,13 @@ class TexturedAnimation(
     }
 
     fun hasRendered(): Boolean {
-        return frame >= frameCount
+        return frame + 1 >= frameCount
     }
 
     fun render(to: GuiGraphics, ticks: Int, x: Int, y: Int) {
         if(hasRendered())
             return
-        val currentFrame = if(ticks % (frameTime) != 0) frame else ticks % frameCount
+        val currentFrame = if(ticks % (frameTime * 2) == 0) frame else ticks % frameCount
         val baseOffset = (frameHeight * currentFrame).toFloat()
         to.blit(
             location,

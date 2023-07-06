@@ -30,5 +30,6 @@ object EmpyreanModClient : ClientModInitializer {
 
     private fun preloadNecessaryClasses() {
         Class.forName("net.empyrean.gui.screen.EmpyreanScreens")
+        Class.forName("net.empyrean.key.EmpyreanKeybinds")
     }
 }

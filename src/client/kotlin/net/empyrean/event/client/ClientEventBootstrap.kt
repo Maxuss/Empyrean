@@ -16,8 +16,9 @@ import net.empyrean.gui.text.StatusMessageRenderer
 import net.empyrean.gui.text.color.EmpyreanColors
 import net.empyrean.item.EmpyreanItem.Companion.appendComparisonText
 import net.empyrean.item.EmpyreanItem.Companion.appendStats
+import net.empyrean.key.EmpyreanKeybinds
 import net.empyrean.network.EmpyreanNetworking
-import net.empyrean.network.packets.serverbound.ServerboundLeftClickPacket
+import net.empyrean.network.packets.serverbound.ServerboundPlayerActionPacket
 import net.empyrean.player.Stats
 import net.empyrean.render.RenderManager
 import net.empyrean.render.particle.CrystalSparkleParticle
@@ -34,7 +35,7 @@ import net.minecraft.network.chat.Component
 fun bootstrapClientEvents() {
     ClientPreAttackCallback.EVENT.register { _, _, clickCount ->
         if (clickCount != 0) // ensure client just pressed the button
-            EmpyreanNetworking.EMPYREAN_CHANNEL.clientHandle().send(ServerboundLeftClickPacket())
+            EmpyreanNetworking.EMPYREAN_CHANNEL.clientHandle().send(ServerboundPlayerActionPacket(ServerboundPlayerActionPacket.Action.LEFT_CLICK))
         false
     }
     ComponentRenderEvent.POST.register { style, _, rd ->
@@ -87,6 +88,7 @@ fun bootstrapClientEvents() {
 
     ClientTickEvents.END_CLIENT_TICK.register(RenderManager)
     ClientTickEvents.END_CLIENT_TICK.register(AdrenalineRenderer)
+    ClientTickEvents.END_CLIENT_TICK.register(EmpyreanKeybinds)
 
     HudRenderCallback.EVENT.register(RenderManager)
 
