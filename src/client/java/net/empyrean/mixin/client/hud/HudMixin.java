@@ -73,7 +73,7 @@ public abstract class HudMixin {
     public void renderExperienceBar(GuiGraphics graphics, int x, CallbackInfo ci) {
         boolean renderBar = AdrenalineRenderer.shouldRender();
         if(renderBar) {
-            AdrenalineRenderer.renderAdrenaline(JInterop.getPlayerData(minecraft.player).getAdrenalineLevel(), graphics, x);
+            AdrenalineRenderer.renderAdrenaline(tickCount, JInterop.getPlayerData(minecraft.player).getAdrenalineLevel(), graphics, x);
             ci.cancel();
         }
     }

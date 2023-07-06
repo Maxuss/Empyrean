@@ -29,7 +29,7 @@ object ManaRenderer {
             var individualY = startY
             val individualX = x
             if(manaRatio <= 0.05f) {
-                individualY = random.nextInt(2)
+                individualY += random.nextInt(2)
             } else if(manaRatio < 0.6f && ticks % ((manaRatio * 8).roundToInt() * 15 + 2) == 0) {
                 individualY += random.nextInt(4) - 1
             }
