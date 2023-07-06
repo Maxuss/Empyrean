@@ -1,5 +1,6 @@
 package net.empyrean
 
+import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
 import net.empyrean.block.bootstrapBlocks
 import net.empyrean.commands.bootstrapCommands
 import net.empyrean.effect.bootstrapEffects
@@ -10,6 +11,7 @@ import net.empyrean.network.bootstrapNetworking
 import net.empyrean.recipe.AdvancedShapedRecipe
 import net.empyrean.recipe.AdvancedShapelessRecipe
 import net.empyrean.recipe.ser.StackedIngredientSerializer
+import net.empyrean.sound.EmpyreanSounds
 import net.empyrean.worldgen.bootstrapOrePlacement
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.recipe.v1.ingredient.CustomIngredientSerializer
@@ -24,7 +26,7 @@ object EmpyreanMod : ModInitializer {
     const val modId: String = "empyrean"
 
     val serverRandom = kotlin.random.Random(ThreadLocalRandom.current().nextInt())
-    val serverRandomSource = RandomSource.create(serverRandom.nextLong())
+    val serverRandomSource = RandomSource.createNewThreadLocalInstance()
 
     override fun onInitialize() {
         preloadClasses()
@@ -35,6 +37,8 @@ object EmpyreanMod : ModInitializer {
             AdvancedShapelessRecipe.Serializer)
 
         CustomIngredientSerializer.register(StackedIngredientSerializer)
+
+        FieldRegistrationHandler.register(EmpyreanSounds::class.java, modId, true)
 
         bootstrapItems()
         bootstrapBlocks()

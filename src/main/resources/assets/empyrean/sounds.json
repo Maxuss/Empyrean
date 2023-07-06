@@ -1,0 +1,14 @@
+{
+  "adrenaline_activate": {
+    "subtitle": "subtitles.empyrean.adrenaline_activate",
+    "sounds": [
+      "empyrean:adrenaline_activate"
+    ]
+  },
+  "adrenaline_full": {
+    "subtitle": "subtitles.empyrean.adrenaline_full",
+    "sounds": [
+      "empyrean:adrenaline_full"
+    ]
+  }
+}

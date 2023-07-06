@@ -5,7 +5,9 @@ import net.empyrean.components.data
 import net.empyrean.effect.EmpyreanEffects
 import net.empyrean.events.EmpyreanDamageEvents
 import net.empyrean.events.EmpyreanPlayerEvents
+import net.empyrean.sound.EmpyreanSounds
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.sounds.SoundSource
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.player.Player
@@ -20,6 +22,14 @@ object AdrenalineManager: EmpyreanDamageEvents.ServerPlayerDamaged, EmpyreanDama
         if(player.wasAdrenalineActivated())
             return
         player.addEffect(MobEffectInstance(EmpyreanEffects.ADRENALINE, 140, 1))
+        player.level().playSound(
+            null,
+            player.blockPosition(),
+            EmpyreanSounds.ADRENALINE_ACTIVATE,
+            SoundSource.PLAYERS,
+            4f,
+            1f
+        )
     }
 
     override fun onDamage(player: ServerPlayer, damage: Float, source: DamageSource) {
