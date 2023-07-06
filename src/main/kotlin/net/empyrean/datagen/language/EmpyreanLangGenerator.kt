@@ -33,6 +33,7 @@ class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, 
         // </editor-fold>
         
         // <editor-fold desc="Effect descriptions">
+        // vanilla
         lang.add("effect.minecraft.speed.description", "Movement speed increased")
         lang.add("effect.minecraft.slowness.description", "Movement speed decreased")
         lang.add("effect.minecraft.haste.description", "Digging speed increased vastly")
@@ -64,6 +65,12 @@ class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, 
         lang.add("effect.minecraft.conduit_power.description", "Conduit transports you nautical energy")
         lang.add("effect.minecraft.dolphins_grace.description", "Underwater movement speed increased")
         lang.add("effect.minecraft.bad_omen.description", "You are feeling ominous presence watching you from away...")
+
+        // empyrean
+        lang.add("effect.empyrean.boss_presence", "Boss Presence")
+        lang.add("effect.empyrean.boss_presence.description", "Nearby powerful enemy is affecting your physical state")
+        lang.add("effect.empyrean.adrenaline", "Adrenaline")
+        lang.add("effect.empyrean.adrenaline.description", "Massive offensive and defensive boosts")
         // </editor-fold>
         
         // <editor-fold desc="Stats">
@@ -111,6 +118,16 @@ class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, 
 
         // <editor-fold desc="REI">
         lang.add("rei.empyrean.advanced_crafting.title", "Advanced Crafting")
+        // </editor-fold>
+
+        // <editor-fold desc="Subtitles">
+        lang.add("subtitles.empyrean.adrenaline_full", "Adrenaline Full")
+        lang.add("subtitles.empyrean.adrenaline_activate", "Adrenaline Discharged")
+        // </editor-fold>
+
+        // <editor-fold desc="Keybindings">
+        lang.add("key.empyrean.adrenaline_discharge", "Discharge Adrenaline")
+        lang.add("category.empyrean.keybinds", "Empyrean")
         // </editor-fold>
     }
     
