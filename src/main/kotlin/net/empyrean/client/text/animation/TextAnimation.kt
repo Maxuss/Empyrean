@@ -6,7 +6,7 @@ import net.minecraft.util.Mth
 import net.minecraft.world.phys.Vec2
 
 
-private val RANDOM_SHAKE_DIRECTIONS = Util.make(arrayOfNulls<Vec2>(30)) { accum ->
+private val RANDOM_SHAKE_DIRECTIONS = Util.make(arrayOfNulls<Vec2>(60)) { accum ->
     val step = (Math.PI * 2 / accum.size).toFloat()
     for (i in accum.indices) {
         val rad = step * i
@@ -24,9 +24,9 @@ enum class TextAnimation: EmpyreanTextAnimation {
     },
     SHAKE {
         override fun apply(to: CharRenderContext) {
-            val shift = RANDOM_SHAKE_DIRECTIONS[(Util.getMillis() * .01f + to.index).toInt() % RANDOM_SHAKE_DIRECTIONS.size]!!
-            to.yOffset += shift.y * .6f
+            val shift = RANDOM_SHAKE_DIRECTIONS[(Util.getMillis() * .034f + to.index).toInt() % RANDOM_SHAKE_DIRECTIONS.size]!!
             to.xOffset += shift.x * .6f
+            to.yOffset += shift.y * .6f
         }
     },
 

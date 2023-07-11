@@ -41,7 +41,7 @@ public abstract class StyleSerializerMixin {
             return;
         SpecialFormatting special = ((EmpyreanStyle) style).getSpecialFormat();
         TextAnimation animation = ((EmpyreanStyle) style).getAnimation();
-        if (special != SpecialFormatting.NONE) {
+        if (special != SpecialFormatting.NONE || animation != TextAnimation.NONE) {
             JsonObject obj = returnValue.getAsJsonObject();
             obj.addProperty("empyreanFormat", special.ordinal());
             obj.addProperty("animation", animation.ordinal());

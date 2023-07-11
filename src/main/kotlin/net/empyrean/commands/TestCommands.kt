@@ -2,7 +2,9 @@ package net.empyrean.commands
 
 import net.empyrean.EmpyreanMod
 import net.empyrean.chat.SpecialFormatting
+import net.empyrean.chat.withAnimation
 import net.empyrean.chat.withEmpyreanStyle
+import net.empyrean.client.text.animation.TextAnimation
 import net.empyrean.commands.api.command
 import net.empyrean.commands.api.suggests
 import net.empyrean.components.data
@@ -34,7 +36,7 @@ fun testCommand() = command("empyrean") {
         EmpyreanNetworking.EMPYREAN_CHANNEL
             .serverHandle(source.player!!)
             .send(ClientboundStatusMessagePacket(
-                Component.literal("This is going to be a horrible night...").withStyle(Style.EMPTY.withColor(0xc91c33)), 2
+                Component.literal("This is going to be a horrible night...").withStyle(Style.EMPTY.withColor(0xc91c33)).withAnimation(TextAnimation.SHAKE), 2
             ))
     }
     "stats" runs {
@@ -53,6 +55,12 @@ fun testCommand() = command("empyrean") {
             source.playerOrException.data.currentMana = mana()
             source.playerOrException.data.sync()
         }
+    }
+    "text" runs {
+        source.playerOrException.sendSystemMessage(Component.literal("shaking").withAnimation(TextAnimation.SHAKE))
+        source.playerOrException.sendSystemMessage(Component.literal("woooooo").withAnimation(TextAnimation.WAVE))
+        source.playerOrException.sendSystemMessage(Component.literal("wobblyyy").withAnimation(TextAnimation.WOBBLE))
+
     }
 }
 
