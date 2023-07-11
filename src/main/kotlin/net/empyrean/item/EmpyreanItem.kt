@@ -4,7 +4,7 @@ package net.empyrean.item
 
 import net.empyrean.chat.withColor
 import net.empyrean.events.EmpyreanTooltipEvent
-import net.empyrean.gui.text.color.EmpyreanColor
+import net.empyrean.client.text.color.EmpyreanColor
 import net.empyrean.item.data.ItemData
 import net.empyrean.item.kind.ItemKind
 import net.empyrean.item.properties.EmpyreanItemProperties

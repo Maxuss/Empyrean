@@ -1,4 +1,4 @@
-package net.empyrean.gui.text.color
+package net.empyrean.client.text.color
 
 import com.google.common.collect.ImmutableList
 

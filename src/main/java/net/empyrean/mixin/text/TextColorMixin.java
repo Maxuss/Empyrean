@@ -1,7 +1,7 @@
 package net.empyrean.mixin.text;
 
-import net.empyrean.gui.text.color.EmpyreanColor;
-import net.empyrean.gui.text.color.LerpingColor;
+import net.empyrean.client.text.color.EmpyreanColor;
+import net.empyrean.client.text.color.LerpingColor;
 import net.minecraft.network.chat.TextColor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

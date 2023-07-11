@@ -1,6 +1,6 @@
 package net.empyrean.chat
 
-import net.empyrean.gui.text.color.EmpyreanColor
+import net.empyrean.client.text.color.EmpyreanColor
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.network.chat.Style
 

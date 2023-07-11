@@ -1,8 +1,8 @@
 package net.empyrean.chat
 
-import net.empyrean.gui.text.color.EmpyreanColor
-import net.empyrean.gui.text.color.EmpyreanColors
-import net.empyrean.gui.text.color.LerpingColor
+import net.empyrean.client.text.color.EmpyreanColor
+import net.empyrean.client.text.color.EmpyreanColors
+import net.empyrean.client.text.color.LerpingColor
 import net.minecraft.network.chat.TextColor
 
 enum class SpecialFormatting(

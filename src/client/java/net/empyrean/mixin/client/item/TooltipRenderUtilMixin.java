@@ -1,6 +1,6 @@
 package net.empyrean.mixin.client.item;
 
-import net.empyrean.gui.text.color.EmpyreanColor;
+import net.empyrean.client.text.color.EmpyreanColor;
 import net.empyrean.item.EmpyreanItem;
 import net.empyrean.util.general.CachedDataHolder;
 import net.empyrean.util.item.ItemCachedData;

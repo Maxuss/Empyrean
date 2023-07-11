@@ -2,7 +2,7 @@ package net.empyrean.render.util
 
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.VertexConsumer
-import net.empyrean.gui.text.color.EmpyreanColor
+import net.empyrean.client.text.color.EmpyreanColor
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiGraphics
 import net.minecraft.network.chat.TextColor

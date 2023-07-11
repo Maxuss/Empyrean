@@ -13,7 +13,7 @@ import net.empyrean.events.EmpyreanTooltipEvent
 import net.empyrean.feature.adrenaline.AdrenalineManager
 import net.empyrean.gui.hud.AdrenalineRenderer
 import net.empyrean.gui.text.StatusMessageRenderer
-import net.empyrean.gui.text.color.EmpyreanColors
+import net.empyrean.client.text.color.EmpyreanColors
 import net.empyrean.item.EmpyreanItem.Companion.appendComparisonText
 import net.empyrean.item.EmpyreanItem.Companion.appendStats
 import net.empyrean.key.EmpyreanKeybinds
