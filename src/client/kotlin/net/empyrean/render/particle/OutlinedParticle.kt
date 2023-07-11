@@ -1,7 +1,7 @@
 package net.empyrean.render.particle
 
 import net.empyrean.EmpyreanModClient
-import net.empyrean.gui.text.color.EmpyreanColors
+import net.empyrean.client.text.color.EmpyreanColors
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.util.FastColor
 import kotlin.math.max

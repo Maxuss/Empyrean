@@ -3,8 +3,8 @@ package net.empyrean.gui.hud
 import net.empyrean.EmpyreanModClient
 import net.empyrean.components.data
 import net.empyrean.effect.EmpyreanEffects
-import net.empyrean.gui.text.color.EmpyreanColor
-import net.empyrean.gui.text.color.EmpyreanColors
+import net.empyrean.client.text.color.EmpyreanColor
+import net.empyrean.client.text.color.EmpyreanColors
 import net.empyrean.gui.util.TexturedAnimation
 import net.empyrean.render.util.drawBorderedText
 import net.empyrean.render.util.drawTexture

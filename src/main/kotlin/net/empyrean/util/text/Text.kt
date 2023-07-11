@@ -1,6 +1,6 @@
 package net.empyrean.util.text
 
-import net.empyrean.gui.text.color.EmpyreanColor
+import net.empyrean.client.text.color.EmpyreanColor
 import net.empyrean.network.EmpyreanNetworking
 import net.empyrean.network.packets.clientbound.ClientboundStatusMessagePacket
 import net.minecraft.network.chat.Component

@@ -1,7 +1,7 @@
 package net.empyrean.item.rarity
 
 import kotlinx.serialization.Serializable
-import net.empyrean.gui.text.color.EmpyreanColors
+import net.empyrean.client.text.color.EmpyreanColors
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.TextColor
 
