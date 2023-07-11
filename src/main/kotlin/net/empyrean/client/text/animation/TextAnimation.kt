@@ -17,6 +17,11 @@ private val RANDOM_SHAKE_DIRECTIONS = Util.make(arrayOfNulls<Vec2>(30)) { accum 
 
 @Serializable
 enum class TextAnimation: EmpyreanTextAnimation {
+    NONE {
+        override fun apply(to: CharRenderContext) {
+            return // no logic by default
+        }
+    },
     SHAKE {
         override fun apply(to: CharRenderContext) {
             val shift = RANDOM_SHAKE_DIRECTIONS[(Util.getMillis() * .01f + to.index).toInt() % RANDOM_SHAKE_DIRECTIONS.size]!!

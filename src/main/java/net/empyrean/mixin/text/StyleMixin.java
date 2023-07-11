@@ -2,6 +2,7 @@ package net.empyrean.mixin.text;
 
 import net.empyrean.chat.EmpyreanStyle;
 import net.empyrean.chat.SpecialFormatting;
+import net.empyrean.client.text.animation.TextAnimation;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Style;
 import org.jetbrains.annotations.NotNull;
@@ -19,6 +20,21 @@ public abstract class StyleMixin implements EmpyreanStyle {
     @Final
     @Nullable Boolean bold;
     private SpecialFormatting empyreanFormatting = SpecialFormatting.NONE;
+    private TextAnimation animation = TextAnimation.NONE;
+
+    @NotNull
+    @Override
+    public Style withAnim(@NotNull TextAnimation anim) {
+        Style clone = this.withBold(this.bold);
+        ((StyleMixin) (Object) clone).animation = anim;
+        return clone;
+    }
+
+    @NotNull
+    @Override
+    public TextAnimation getAnimation() {
+        return animation;
+    }
 
     @Shadow
     public abstract Style withBold(@Nullable Boolean bool);
@@ -28,6 +44,15 @@ public abstract class StyleMixin implements EmpyreanStyle {
     public Style withSpecial(@NotNull SpecialFormatting fmt) {
         Style clone = this.withBold(this.bold);
         ((StyleMixin) (Object) clone).empyreanFormatting = fmt;
+        return clone;
+    }
+
+    @NotNull
+    @Override
+    public Style withSpecAnim(@NotNull SpecialFormatting fmt, @NotNull TextAnimation anim) {
+        Style clone = this.withBold(this.bold);
+        ((StyleMixin) (Object) clone).empyreanFormatting = fmt;
+        ((StyleMixin) (Object) clone).animation = anim;
         return clone;
     }
 
@@ -55,7 +80,7 @@ public abstract class StyleMixin implements EmpyreanStyle {
         // Applying
         SpecialFormatting other = ((EmpyreanStyle) style).getSpecialFormat();
         SpecialFormatting self = empyreanFormatting;
-        cir.setReturnValue(((EmpyreanStyle) cir.getReturnValue()).withSpecial(self.merge(other))); // applying merged formatting as well
+        cir.setReturnValue(((EmpyreanStyle) cir.getReturnValue()).withSpecAnim(self.merge(other), animation)); // applying merged formatting as well
     }
 
     @Inject(
@@ -64,7 +89,7 @@ public abstract class StyleMixin implements EmpyreanStyle {
             cancellable = true
     )
     public void overrideApply2(ChatFormatting formatting, CallbackInfoReturnable<Style> cir) {
-        cir.setReturnValue(((EmpyreanStyle) cir.getReturnValue()).withSpecial(empyreanFormatting));
+        cir.setReturnValue(((EmpyreanStyle) cir.getReturnValue()).withSpecAnim(empyreanFormatting, animation));
     }
 
     @Inject(
@@ -73,7 +98,7 @@ public abstract class StyleMixin implements EmpyreanStyle {
             cancellable = true
     )
     public void overrideApply3(ChatFormatting formatting, CallbackInfoReturnable<Style> cir) {
-        cir.setReturnValue(((EmpyreanStyle) cir.getReturnValue()).withSpecial(empyreanFormatting));
+        cir.setReturnValue(((EmpyreanStyle) cir.getReturnValue()).withSpecAnim(empyreanFormatting, animation));
     }
 
     @Inject(
@@ -82,6 +107,6 @@ public abstract class StyleMixin implements EmpyreanStyle {
             cancellable = true
     )
     public void overrideApply4(ChatFormatting formatting, CallbackInfoReturnable<Style> cir) {
-        cir.setReturnValue(((EmpyreanStyle) cir.getReturnValue()).withSpecial(empyreanFormatting));
+        cir.setReturnValue(((EmpyreanStyle) cir.getReturnValue()).withSpecAnim(empyreanFormatting, animation));
     }
 }

@@ -3,6 +3,8 @@ package net.empyrean.mixin.client.text;
 import com.mojang.blaze3d.font.GlyphInfo;
 import net.empyrean.chat.EmpyreanStyle;
 import net.empyrean.chat.SpecialFormatting;
+import net.empyrean.client.text.animation.CharRenderContext;
+import net.empyrean.client.text.animation.TextAnimation;
 import net.empyrean.render.effects.EmpyreanEffectRenderer;
 import net.empyrean.render.effects.OutlinedFontRenderer;
 import net.empyrean.util.text.ARGBColor;
@@ -29,7 +31,6 @@ import java.util.Objects;
 public class StringRenderOutputMixin {
     @Shadow
     public float x;
-
     @Shadow
     public float y;
     @Shadow
@@ -64,7 +65,7 @@ public class StringRenderOutputMixin {
             cancellable = true
     )
     public void renderOutlined(
-            int i,
+            int index,
             Style style,
             int charCode,
             CallbackInfoReturnable<Boolean> cir,
@@ -81,6 +82,14 @@ public class StringRenderOutputMixin {
             float shadowOffset) {
         EmpyreanStyle empyrean = (EmpyreanStyle) style;
         SpecialFormatting special = empyrean.getSpecialFormat();
+        float xOffset = 0;
+        float yOffset = 0;
+        if(empyrean.getAnimation() != TextAnimation.NONE) {
+            CharRenderContext ctx = new CharRenderContext(index, dropShadow, xOffset, yOffset);
+            empyrean.getAnimation().apply(ctx);
+            xOffset = ctx.getXOffset();
+            yOffset = ctx.getYOffset();
+        }
         if (special != SpecialFormatting.NONE) {
             // Injecting custom Empyrean character rendering here
             if (special.getDrawOutlined()) {
@@ -89,16 +98,17 @@ public class StringRenderOutputMixin {
                         TextColor.fromRgb(Text.multiplyColor(special.getSelfColor().getColorValue(), 0.06f, false))
                 ) // prev. 0x071138
                         .renderChar(new EmpyreanEffectRenderer.EffectRenderPayload(
-                                x, y, fontSet, style, charCode, glyphInfo, bakedGlyph, baseColor, pose, bufferSource, alpha
+                                x + xOffset, y + yOffset, fontSet, style, charCode, glyphInfo, bakedGlyph, baseColor, pose, bufferSource, alpha
                         ));
             } else {
                 int color = special.getSelfColor().getColorValue();
                 ARGBColor extracted = Text.extractARGB(color);
+
                 Minecraft.getInstance().font.renderChar(
                         bakedGlyph,
                         style.isBold(), style.isItalic(),
                         style.isBold() ? glyphInfo.getBoldOffset() : 0f,
-                        x + shadowOffset, y + shadowOffset,
+                        x + shadowOffset + xOffset, y + shadowOffset + yOffset,
                         pose, bufferSource.getBuffer(bakedGlyph.renderType(mode)),
                         (extracted.getRed() / 255f) * dimFactor, (extracted.getGreen() / 255f) * dimFactor, (extracted.getBlue() / 255f) * dimFactor, alpha * dimFactor,
                         packedLightCoords
@@ -108,7 +118,7 @@ public class StringRenderOutputMixin {
                             bakedGlyph,
                             style.isBold(), style.isItalic(),
                             style.isBold() ? glyphInfo.getBoldOffset() : 0f,
-                            x + shadowOffset, y + shadowOffset,
+                            x + shadowOffset + xOffset, y + shadowOffset + yOffset,
                             pose, bufferSource.getBuffer(bakedGlyph.renderType(mode)),
                             (extracted.getRed() / 255f) * dimFactor, (extracted.getGreen() / 255f) * dimFactor, (extracted.getBlue() / 255f) * dimFactor, alpha * dimFactor,
                             packedLightCoords
@@ -116,6 +126,30 @@ public class StringRenderOutputMixin {
             }
             float advance = glyphInfo.getAdvance(isBold);
             x += advance;
+            cir.setReturnValue(true);
+        } else {
+            Minecraft.getInstance().font.renderChar(
+                    bakedGlyph,
+                    style.isBold(), style.isItalic(),
+                    style.isBold() ? glyphInfo.getBoldOffset() : 0f,
+                    x + shadowOffset + xOffset, y + shadowOffset + yOffset,
+                    pose, bufferSource.getBuffer(bakedGlyph.renderType(mode)),
+                    r * dimFactor, g * dimFactor, b * dimFactor, alpha * dimFactor,
+                    packedLightCoords
+            );
+            if (dropShadow)
+                Minecraft.getInstance().font.renderChar(
+                        bakedGlyph,
+                        style.isBold(), style.isItalic(),
+                        style.isBold() ? glyphInfo.getBoldOffset() : 0f,
+                        x + shadowOffset + xOffset, y + shadowOffset + yOffset,
+                        pose, bufferSource.getBuffer(bakedGlyph.renderType(mode)),
+                        r * dimFactor, g * dimFactor, b * dimFactor, alpha * dimFactor,
+                        packedLightCoords
+                );
+            float advance = glyphInfo.getAdvance(isBold);
+            x += advance;
+
             cir.setReturnValue(true);
         }
     }

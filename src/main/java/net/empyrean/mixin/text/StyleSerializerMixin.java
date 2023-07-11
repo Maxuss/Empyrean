@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import net.empyrean.chat.EmpyreanStyle;
 import net.empyrean.chat.SpecialFormatting;
+import net.empyrean.client.text.animation.TextAnimation;
 import net.minecraft.network.chat.Style;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,8 +25,9 @@ public abstract class StyleSerializerMixin {
     public void getEmpyreanStyling(JsonElement jsonElement, Type type, JsonDeserializationContext ctx, CallbackInfoReturnable<Style> cir) {
         JsonObject obj = jsonElement.getAsJsonObject();
         SpecialFormatting special = obj.has("empyreanFormat") ? SpecialFormatting.values()[obj.get("empyreanFormat").getAsInt()] : SpecialFormatting.NONE;
+        TextAnimation animation = obj.has("animation") ? TextAnimation.values()[obj.get("animation").getAsInt()] : TextAnimation.NONE;
         Style returnValue = cir.getReturnValue();
-        Style ret = ((EmpyreanStyle) returnValue).withSpecial(special);
+        Style ret = ((EmpyreanStyle) returnValue).withSpecAnim(special, animation);
         cir.setReturnValue(ret);
     }
 
@@ -38,9 +40,11 @@ public abstract class StyleSerializerMixin {
         if (returnValue == null)
             return;
         SpecialFormatting special = ((EmpyreanStyle) style).getSpecialFormat();
+        TextAnimation animation = ((EmpyreanStyle) style).getAnimation();
         if (special != SpecialFormatting.NONE) {
             JsonObject obj = returnValue.getAsJsonObject();
             obj.addProperty("empyreanFormat", special.ordinal());
+            obj.addProperty("animation", animation.ordinal());
         }
     }
 }
