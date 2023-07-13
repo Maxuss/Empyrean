@@ -4,8 +4,10 @@ import net.empyrean.gui.hud.AdrenalineRenderer;
 import net.empyrean.gui.hud.ManaRenderer;
 import net.empyrean.util.JInterop;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +29,7 @@ public abstract class HudMixin {
 
     @Shadow @Final private Minecraft minecraft;
 
+    //region Offset air position
     @Redirect(
             method = "renderPlayerHealth",
             at = @At(
@@ -51,6 +54,9 @@ public abstract class HudMixin {
         instance.blit(resourceLocation, x, y - 9, k, l, m, n);
     }
 
+    //endregion
+
+    //region Render Health
     @Inject(
             method = "renderPlayerHealth",
             at = @At("TAIL")
@@ -60,11 +66,9 @@ public abstract class HudMixin {
         int yBegin = screenHeight - 39 - 10;
         ManaRenderer.renderMana(tickCount, Objects.requireNonNull(Minecraft.getInstance().player), graphics, xBegin, yBegin);
     }
+    //endregion
 
-    /**
-     * @author maxus
-     * @reason Render adrenaline bar alongside the experience bar
-     */
+    //region Adrenaline bar
     @Inject(
             method = "renderExperienceBar",
             at = @At("HEAD"),
@@ -77,4 +81,35 @@ public abstract class HudMixin {
             ci.cancel();
         }
     }
+    //endregion
+
+    //region Offset item name position
+    @Redirect(
+            method = "renderSelectedItemName",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V"
+            )
+    )
+    public void injectRenderSelectedItemName$0(GuiGraphics instance, int x, int y, int k, int l, int m) {
+        if(Objects.requireNonNull(minecraft.player).getMaxHealth() > 20f)
+            instance.fill(x, y - 9, k, l, m);
+        else
+            instance.fill(x, y, k, l, m);
+    }
+
+    @Redirect(
+            method = "renderSelectedItemName",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)I"
+            )
+    )
+    public int injectRenderSelectedItemName$1(GuiGraphics instance, Font font, Component component, int x, int y, int k) {
+        if(Objects.requireNonNull(minecraft.player).getMaxHealth() > 20f)
+            return instance.drawString(font, component, x, y - 9, k);
+        else
+            return instance.drawString(font, component, x, y, k);
+    }
+    //endregion
 }

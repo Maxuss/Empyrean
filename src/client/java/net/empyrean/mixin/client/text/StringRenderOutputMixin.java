@@ -110,7 +110,7 @@ public class StringRenderOutputMixin {
                         style.isBold() ? glyphInfo.getBoldOffset() : 0f,
                         x + shadowOffset + xOffset, y + shadowOffset + yOffset,
                         pose, bufferSource.getBuffer(bakedGlyph.renderType(mode)),
-                        (extracted.getRed() / 255f) * dimFactor, (extracted.getGreen() / 255f) * dimFactor, (extracted.getBlue() / 255f) * dimFactor, alpha * dimFactor,
+                        (extracted.getRed() / 255f) * dimFactor, (extracted.getGreen() / 255f) * dimFactor, (extracted.getBlue() / 255f) * dimFactor, alpha,
                         packedLightCoords
                 );
                 if (dropShadow)
@@ -144,7 +144,7 @@ public class StringRenderOutputMixin {
                         style.isBold() ? glyphInfo.getBoldOffset() : 0f,
                         x + shadowOffset + xOffset, y + shadowOffset + yOffset,
                         pose, bufferSource.getBuffer(bakedGlyph.renderType(mode)),
-                        r * dimFactor, g * dimFactor, b * dimFactor, alpha * dimFactor,
+                        r * dimFactor, g * dimFactor, b * dimFactor, alpha,
                         packedLightCoords
                 );
             float advance = glyphInfo.getAdvance(isBold);
