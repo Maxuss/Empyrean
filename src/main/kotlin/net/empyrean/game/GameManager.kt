@@ -4,6 +4,7 @@ import dev.emi.trinkets.api.TrinketsApi
 import net.empyrean.components.EmpyreanComponents
 import net.empyrean.components.PlayerDataComponent
 import net.empyrean.components.data
+import net.empyrean.events.EmpyreanPlayerEvents
 import net.empyrean.player.PlayerStat
 import net.empyrean.player.Stats
 import net.empyrean.util.merged
@@ -34,12 +35,20 @@ object GameManager: ServerLifecycleEvents.ServerStarted, ServerTickEvents.EndTic
     }
 
     private fun tickSinglePlayer(player: ServerPlayer) {
+        // tick mana
         val maxMana = player.data.statistics[PlayerStat.MAX_MANA]
         val manaRegen = player.data.statistics[PlayerStat.MANA_REGEN]
         val curMana = player.data.currentMana
-        if(curMana == maxMana)
-            return
-        player.data.currentMana = min(curMana + manaRegen / 20f, maxMana)
+        if(curMana != maxMana)
+            player.data.currentMana = min(curMana + manaRegen / 20f, maxMana)
+
+        // tick health
+        val maxHealth = player.data.statistics[PlayerStat.MAX_HEALTH]
+        val healthRegen = player.data.statistics[PlayerStat.HEALTH_REGEN]
+        val curHealth = player.data.currentHealth
+        player.data.currentHealth = min(curHealth + healthRegen / 20f, maxHealth)
+        player.getAttribute(Attributes.MAX_HEALTH)!!.baseValue = maxHealth.toDouble()
+        player.health = player.data.currentHealth
     }
 
     private fun recalculateSinglePlayerStats(player: ServerPlayer, data: PlayerDataComponent) {
@@ -51,8 +60,9 @@ object GameManager: ServerLifecycleEvents.ServerStarted, ServerTickEvents.EndTic
         val itemStats = mainHand.mergeMany(offHand, armor, trinkets)
         val playerStats = data.rawStats
         val merged = playerStats.merge(itemStats)
-        if(merged != data.statistics)
-            data.statistics = merged
+        EmpyreanPlayerEvents.PLAYER_CALCULATE_STATS.invoker().processStats(merged)
+        if(data.statistics != merged)
+            data.statistics = merged // only send sync packet if data has changed
         val movSpeed = player.getAttribute(Attributes.MOVEMENT_SPEED)
         movSpeed!!.baseValue = data.statistics[PlayerStat.MOVEMENT_SPEED].toDouble()
     }

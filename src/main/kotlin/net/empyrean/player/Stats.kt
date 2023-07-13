@@ -42,8 +42,8 @@ enum class PlayerStat(
     DEFENSE(0f, ChatFormatting.WHITE.modern, formatKeyValue = true, percentage = false),
     ATTACK_SPEED(0.05f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames), // yes its movement, don't ask why
     // TODO: test regen capabilities might need balancing
-    MANA_REGEN(0.5f, ChatFormatting.BLUE.modern, percentage = false, modNames = StatsFormatter.regenModNames), // mana/tick
-    HEALTH_REGEN(0.2f, ChatFormatting.RED.modern, translationKey = "regen", percentage = false, modNames = StatsFormatter.regenModNames), // health/tick
+    MANA_REGEN(2f, ChatFormatting.BLUE.modern, percentage = false, modNames = StatsFormatter.regenModNames), // mana/s
+    HEALTH_REGEN(2f, ChatFormatting.RED.modern, translationKey = "regen", percentage = false, modNames = StatsFormatter.regenModNames), // health/s
     MOVEMENT_SPEED(0.12f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),
     FLIGHT_SPEED(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.flightModNames),
     FLIGHT_TIME(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.flightModNames),

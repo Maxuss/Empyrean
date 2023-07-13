@@ -19,7 +19,7 @@ import kotlin.reflect.KProperty1
 @Suppress("UnstableApiUsage")
 class PlayerDataComponent(val provider: Player) : PlayerComponent<Component>, AutoSyncedComponent {
     var currentMana: Float by autosync(100f)
-    var currentHealth: Float by autosync(100f)
+    var currentHealth: Float by autosync(20f)
     var rawStats: Stats by autosync(Stats.prefill())
     var statistics: Stats by autosync(Stats.prefill())
     var adrenalineLevel: Float by autosync(0f)
