@@ -47,7 +47,7 @@ enum class PlayerStat(
     MOVEMENT_SPEED(0.12f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),
     FLIGHT_SPEED(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.flightModNames),
     FLIGHT_TIME(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.flightModNames),
-    JUMP_HEIGHT(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),
+    JUMP_HEIGHT(0.05f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),
     JUMP_SPEED(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),
     ACCELERATION(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),
     DAMAGE_REDUCTION(0f, ChatFormatting.WHITE.modern, modNames = StatsFormatter.movementModNames),
@@ -72,7 +72,7 @@ enum class PlayerStat(
 @Serializable(with = StatsSerializer::class)
 data class Stats(val inner: EnumMap<PlayerStat, Float>) {
     companion object {
-        fun prefill() = Stats(EnumMap(PlayerStat.values().associateWith { it.defaultValue }))
+        fun prefill() = Stats(EnumMap(PlayerStat.entries.associateWith { it.defaultValue }))
         fun empty() = Stats(EnumMap(PlayerStat::class.java))
         fun of(builder: StatBuilder.() -> Unit) = StatBuilder(empty()).apply(builder).inner
     }
@@ -197,7 +197,7 @@ data class StatBuilder(val inner: Stats) {
 object StatsSerializer : KSerializer<Stats> {
     override val descriptor: SerialDescriptor
         get() = buildClassSerialDescriptor("net.empyrean.player.Stats") {
-            PlayerStat.values().forEach {
+            PlayerStat.entries.forEach {
                 element(it.name.lowercase(), serialDescriptor<Float>().nullable)
             }
         }
@@ -206,10 +206,10 @@ object StatsSerializer : KSerializer<Stats> {
     override fun deserialize(decoder: Decoder): Stats {
         val outMap = EnumMap<PlayerStat, Float>(PlayerStat::class.java)
         decoder.decodeStructure(descriptor) {
-            val expectedSize = PlayerStat.values().size
+            val expectedSize = PlayerStat.entries.size
             if(decodeSequentially()) {
                 for(single in 0 until expectedSize) {
-                    val stat = PlayerStat.values()[single]
+                    val stat = PlayerStat.entries[single]
                     val value = decodeFloatElement(descriptor, single)
                     outMap[stat] = value
                 }
@@ -218,12 +218,12 @@ object StatsSerializer : KSerializer<Stats> {
                     val idx = decodeElementIndex(descriptor)
                     if (idx == CompositeDecoder.DECODE_DONE)
                         break
-                    val stat = PlayerStat.values()[idx]
+                    val stat = PlayerStat.entries[idx]
                     val value = decodeFloatElement(descriptor, idx)
                     outMap[stat] = value
                 }
             }
-            PlayerStat.values().forEach {
+            PlayerStat.entries.forEach {
                 outMap.putIfAbsent(it, it.defaultValue)
             }
         }

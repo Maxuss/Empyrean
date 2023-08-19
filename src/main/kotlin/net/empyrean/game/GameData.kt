@@ -15,6 +15,7 @@ class GameData(
         val GAME_DATA_STORAGE_PATH = "empyrean.dat"
 
         fun default(): GameData {
+
             return GameData(ProgressionState.PRE_BOSS)
         }
 
