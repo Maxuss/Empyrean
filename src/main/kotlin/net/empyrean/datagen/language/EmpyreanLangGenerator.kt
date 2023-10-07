@@ -100,6 +100,19 @@ class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, 
         lang.add("stat.empyrean.attack_speed", "Attack Speed")
         // </editor-fold>
 
+        // <editor-fold desc="Special abilities stuff">
+        lang.add("ability.class.melee", "\uD83D\uDD31 Melee Ability")
+        lang.add("ability.class.ranged", "\uD83C\uDFF9 Ranged Ability")
+        lang.add("ability.class.rogue", "\uD83D\uDDE1 Rogue Ability")
+        lang.add("ability.class.mage", "\uD83D\uDD25 Mage Ability")
+        lang.add("ability.class.summoner", "\uD83D\uDD31 Summoner Ability")
+
+        lang.add("ability.class.requires_token", "Requires %s Class Token")
+        lang.add("ability.use.right_click", "(Right Click)")
+        lang.add("ability.use.left_click", "(Left Click)")
+        lang.add("ability.use.sneak_right_click", "(Sneak + Right Click)")
+        // </editor-fold>
+
         // <editor-fold desc="Tags">
         lang.add("tag.empyrean.material", "Material")
         lang.add("tag.empyrean.volatile", "Volatile")
@@ -151,6 +164,7 @@ class EmpyreanLangGenerator(out: FabricDataOutput): FabricLanguageProvider(out, 
 
         // <editor-fold desc="Weapons">
         lang.add(EmpyreanItems.ASPECT_OF_THE_END, "Aspect of the End")
+        lang.add(EmpyreanItems.METASTATIC_AXE, "Metastatic Axe")
         // </editor-fold>
     }
 }

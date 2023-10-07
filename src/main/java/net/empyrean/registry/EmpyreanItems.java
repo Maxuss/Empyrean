@@ -3,6 +3,7 @@ package net.empyrean.registry;
 import io.wispforest.owo.registration.reflect.ItemRegistryContainer;
 import net.empyrean.item.impl.material.MaterialItem;
 import net.empyrean.item.impl.weapon.AspectOfTheEnd;
+import net.empyrean.item.impl.weapon.MetastaticAxe;
 import net.empyrean.item.impl.wings.AngelWings;
 import net.empyrean.item.impl.wings.FledglingWings;
 import net.empyrean.item.impl.wings.InsaneWings;
@@ -16,6 +17,7 @@ public class EmpyreanItems implements ItemRegistryContainer {
 
     // <editor-fold desc="Weapons">
     public static final Item ASPECT_OF_THE_END = new AspectOfTheEnd();
+    public static final Item METASTATIC_AXE = new MetastaticAxe();
     // </editor-fold>
 
     // <editor-fold desc="Wings">

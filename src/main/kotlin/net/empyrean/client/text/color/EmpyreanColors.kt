@@ -47,6 +47,66 @@ object EmpyreanColors {
     )
 
     @JvmField
+    val MELEE_ABILITY = addColor(
+        "MELEE_ABILITY", LerpingColor(
+            "MELEE_ABILITY", ImmutableList.of(
+                0xf47b46,
+                0xf46346,
+                0xf2cb71,
+                0xf7a042
+            ), 60f
+        )
+    )
+
+    @JvmField
+    val RANGED_ABILITY = addColor(
+        "RANGED_ABILITY", LerpingColor(
+            "RANGED_ABILITY", ImmutableList.of(
+                0xc3ef81,
+                0x81ef91,
+                0x94fccd,
+            ), 60f
+        )
+    )
+
+    @JvmField
+    val SUMMONER_ABILITY = addColor(
+        "SUMMONER_ABILITY", LerpingColor(
+            "SUMMONER_ABILITY", ImmutableList.of(
+                0x94e9fc,
+                0x62c6fc,
+                0x629dfc,
+                0x6274fc
+            ), 60f
+        )
+    )
+
+    @JvmField
+    val MAGE_ABILITY = addColor(
+        "MAGE_ABILITY", LerpingColor(
+            "MAGE_ABILITY", ImmutableList.of(
+                0xec90f4,
+                0xeebff2,
+                0xf9b8ea,
+                0xf9b8cf,
+                0xf9ccb8
+            ), 60f
+        )
+    )
+
+    @JvmField
+    val ROGUE_ABILITY = addColor(
+        "ROGUE_ABILITY", LerpingColor(
+            "ROGUE_ABILITY", ImmutableList.of(
+                0x7f79f7,
+                0x6b5afc,
+                0x8875f4,
+                0x895ffc
+            ), 60f
+        )
+    )
+
+    @JvmField
     val ADRENALINE = addColor(
         "ADRENALINE", LerpingColor(
             "ADRENALINE", ImmutableList.of(

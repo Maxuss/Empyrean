@@ -1,8 +1,11 @@
 package net.empyrean.util.text
 
+import net.empyrean.chat.withColor
 import net.empyrean.client.text.color.EmpyreanColor
+import net.empyrean.client.text.color.EmpyreanColors
 import net.empyrean.network.EmpyreanNetworking
 import net.empyrean.network.packets.clientbound.ClientboundStatusMessagePacket
+import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import net.minecraft.network.chat.MutableComponent
 import net.minecraft.server.level.ServerPlayer
@@ -54,6 +57,22 @@ object Text {
     operator fun EmpyreanColor.times(other: Float): Int {
         return multiplyColor(colorValue, other)
     }
+
+    fun concat(vararg components: Component): Component = components.fold(Component.empty()) { acc, next -> acc.append(next).append(" ") }
+}
+
+object CommonComponents {
+    val MELEE_ABILITY = Component.translatable("ability.class.melee").withColor(EmpyreanColors.MELEE_ABILITY)
+    val RANGED_ABILITY = Component.translatable("ability.class.ranged").withColor(EmpyreanColors.RANGED_ABILITY)
+    val MAGE_ABILITY = Component.translatable("ability.class.mage").withColor(EmpyreanColors.MAGE_ABILITY)
+    val SUMMONER_ABILITY = Component.translatable("ability.class.summoner").withColor(EmpyreanColors.SUMMONER_ABILITY)
+    val ROGUE_ABILITY = Component.translatable("ability.class.rogue").withColor(EmpyreanColors.ROGUE_ABILITY)
+
+    val RIGHT_CLICK = Component.translatable("ability.use.right_click").withStyle(ChatFormatting.DARK_GRAY)
+    val LEFT_CLICK = Component.translatable("ability.use.right_click").withStyle(ChatFormatting.DARK_GRAY)
+    val SNEAK_RIGHT_CLICK = Component.translatable("ability.use.right_click").withStyle(ChatFormatting.DARK_GRAY)
+
+    fun abilityRequiresToken(className: String) = Component.translatable("ability.class.requires_token", className).withStyle(ChatFormatting.DARK_GRAY)
 }
 
 data class ARGBColor(
